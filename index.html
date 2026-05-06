@@ -285,6 +285,18 @@
 </head>
 <body>
 
+<!-- Script ตรวจสอบการเปิดไฟล์ผิดวิธี -->
+<script>
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var loader = document.getElementById('loading');
+      if (loader && loader.style.display !== 'none') {
+        loader.innerHTML = '<div style="background:white; padding:24px; border-radius:24px; color:#333; max-width:90%; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><div style="font-size:50px; margin-bottom:10px;">⚠️</div><h3 style="color:#e74c3c; margin-bottom:10px; font-family:\'Sarabun\', sans-serif;">เกิดข้อผิดพลาดในการโหลด</h3><p style="font-size:15px; color:#666; font-family:\'Sarabun\', sans-serif;">ระบบถูกบล็อก! หากคุณดับเบิลคลิกเปิดไฟล์นี้จากเครื่องโดยตรง เบราว์เซอร์จะไม่อนุญาตให้เชื่อมต่อฐานข้อมูลครับ<br><br><b style="color:var(--black);">วิธีแก้:</b> ให้อัปโหลดไฟล์นี้ขึ้นระบบเซิร์ฟเวอร์ (เช่น GitHub Pages) แล้วเข้าใช้งานผ่านลิงก์เว็บแทนครับ</p></div>';
+      }
+    }, 4000);
+  });
+</script>
+
 <!-- Toast Notification -->
 <div id="toast" class="toast"></div>
 
@@ -297,7 +309,6 @@
 <!-- PAGE: LOGIN / REGISTER -->
 <div id="page-login" class="hidden">
   <div class="login-box">
-    <!-- โลโก้จะเปลี่ยนตามหน้าร้านอัตโนมัติ -->
     <div class="login-logo" id="login-logo-container">
       <img id="login-logo-img" src="" alt="โลโก้ร้าน" style="display:none; width: 100%; height: 100%; object-fit: cover;">
       <span id="login-logo-fallback">✨</span>
@@ -491,7 +502,7 @@
 <div id="admin-sidebar-backdrop" onclick="toggleAdminSidebar()"></div>
 <div id="page-admin" class="hidden admin-layout">
   
-  <!-- Sidebar for Desktop (> 1366px) -->
+  <!-- Sidebar for Desktop -->
   <div class="admin-sidebar desktop-only" id="admin-sidebar">
     <div style="padding: calc(24px + env(safe-area-inset-top)) 24px 24px; border-bottom: 1px solid #E5E7EB;">
       <h2 class="serif" style="color: var(--gold-dark); font-size: 20px;">Admin Panel</h2>
@@ -501,7 +512,7 @@
       <div class="admin-nav-item active nav-dashboard" onclick="navAdmin('dashboard')"><span style="font-size: 20px; width: 24px;">📊</span> ภาพรวม</div>
       <div class="admin-nav-item nav-tx" onclick="navAdmin('transactions')"><span style="font-size: 20px; width: 24px;">📋</span> ธุรกรรม & อนุมัติ <span id="admin-badge-tx" class="badge bg-red hidden" style="margin-left:auto; font-size: 11px;">0</span></div>
       <div class="admin-nav-item nav-users" onclick="navAdmin('users')"><span style="font-size: 20px; width: 24px;">👥</span> จัดการลูกค้า</div>
-      <div class="admin-nav-item nav-settings" onclick="navAdmin('settings')"><span style="font-size: 20px; width: 24px;">⚙️</span> ตั้งค่าร้านค้า</div>
+      <div class="admin-nav-item nav-settings" id="nav-settings" onclick="navAdmin('settings')"><span style="font-size: 20px; width: 24px;">⚙️</span> ตั้งค่าร้านค้า</div>
       <div class="admin-nav-item" onclick="switchToCustomerView()"><span style="font-size: 20px; width: 24px;">📱</span> มุมมองลูกค้า</div>
     </div>
     <div style="padding: 24px calc(24px + env(safe-area-inset-bottom)); border-top: 1px solid #E5E7EB;">
@@ -510,7 +521,7 @@
   </div>
 
   <div class="admin-content" id="admin-content-area">
-    <!-- Topbar for iPad & Mobile (<= 1366px) -->
+    <!-- Topbar for Mobile -->
     <div class="admin-topbar mobile-only">
       <h2 class="serif" id="admin-page-title-mobile" style="font-size: 20px; margin: 0; color: var(--gold-dark);">ภาพรวมระบบ</h2>
       <button class="btn btn-sm btn-outline" style="border-radius: 20px; font-size: 12px; padding: 6px 14px;" onclick="logout()">ออกจากระบบ</button>
@@ -522,7 +533,7 @@
     </div>
 
     <!-- Admin Dashboard -->
-    <div id="admin-sec-dashboard">
+    <div id="admin-sec-dashboard" class="nav-dashboard">
       <div class="grid">
         <div class="card" style="border-left: 4px solid var(--gold);">
           <div style="font-size: 14px; color: var(--gray); font-weight: 500;">ยอดเงินออมรวมในระบบ</div>
@@ -540,7 +551,7 @@
     </div>
 
     <!-- Admin Transactions -->
-    <div id="admin-sec-transactions" class="hidden">
+    <div id="admin-sec-transactions" class="hidden nav-tx">
       <div class="card" style="padding: 0;">
         <div class="card-title" style="padding: 20px 20px 0;">
           รายการฝาก-ถอน
@@ -558,7 +569,7 @@
     </div>
 
     <!-- Admin Users -->
-    <div id="admin-sec-users" class="hidden">
+    <div id="admin-sec-users" class="hidden nav-users">
       <div class="card" style="padding: 0;">
         <div class="card-title" style="padding: 20px 20px 0;">
           รายชื่อผู้ใช้งาน
@@ -576,7 +587,7 @@
     </div>
 
     <!-- Admin Settings -->
-    <div id="admin-sec-settings" class="hidden">
+    <div id="admin-sec-settings" class="hidden nav-settings">
       <div class="card" style="max-width: 600px;">
         <div class="card-title">ข้อมูลร้านค้า และ บัญชีรับโอน</div>
         
@@ -619,7 +630,7 @@
     </div>
   </div>
 
-  <!-- Bottom Nav for Admin (iPad & Mobile Only) -->
+  <!-- Bottom Nav for Admin -->
   <div class="admin-bottom-nav mobile-only">
     <div class="nav-item active nav-dashboard" onclick="navAdmin('dashboard')"><span class="nav-icon">📊</span>หน้าแรก</div>
     <div class="nav-item nav-tx" onclick="navAdmin('transactions')">
@@ -627,8 +638,24 @@
       <span id="admin-badge-tx-mobile" class="badge bg-red hidden" style="position: absolute; top: 0; right: 0; padding: 2px 6px; font-size: 9px; transform: translate(20%, -20%);">0</span>
     </div>
     <div class="nav-item nav-users" onclick="navAdmin('users')"><span class="nav-icon">👥</span>ลูกค้า</div>
-    <div class="nav-item nav-settings" onclick="navAdmin('settings')"><span class="nav-icon">⚙️</span>ตั้งค่า</div>
+    <div class="nav-item nav-settings" id="nav-settings-mobile" onclick="navAdmin('settings')"><span class="nav-icon">⚙️</span>ตั้งค่า</div>
     <div class="nav-item" onclick="switchToCustomerView()"><span class="nav-icon">📱</span>หน้าลูกค้า</div>
+  </div>
+</div>
+
+<!-- Modal: Edit Balance -->
+<div id="modal-edit-balance" class="modal-overlay">
+  <div class="modal">
+    <h3 class="serif mb-4">แก้ไขยอดเงินสะสม</h3>
+    <p style="font-size: 14px; color: var(--gray); margin-bottom: 20px;">ชื่อลูกค้า: <b id="meb-name" style="color: var(--black);"></b></p>
+    <div class="form-group">
+      <label>ยอดเงินสุทธิใหม่ (บาท)</label>
+      <input type="number" id="meb-amount" class="form-control" style="font-size: 20px; font-weight: bold; color: var(--gold-dark);">
+    </div>
+    <div class="flex gap-2 mt-6">
+      <button class="btn btn-outline" style="flex:1" onclick="closeModal('modal-edit-balance')">ยกเลิก</button>
+      <button class="btn btn-success" style="flex:1" onclick="confirmEditBalance()">บันทึกยอด</button>
+    </div>
   </div>
 </div>
 
@@ -671,7 +698,6 @@
   const setVal = (id, val) => { const el = getEl(id); if(el) el.value = val; };
   const setText = (id, txt) => { const el = getEl(id); if(el) el.textContent = txt; };
 
-  // ของคุณแบบ 100% ไม่เปลี่ยน
   const myFirebaseConfig = {
     apiKey: "AIzaSyD1GnYInbXZHxjX91E25ki2WP-R0a9pWTU",
     authDomain: "gold-savings-517d2.firebaseapp.com",
@@ -707,6 +733,7 @@
   };
 
   let pendingTxId = null;
+  let pendingEditUserId = null; 
   let isListenersSetup = false;
 
   window.showToast = (msg, isError = false) => {
@@ -715,7 +742,7 @@
     t.textContent = msg;
     t.style.background = isError ? "var(--red)" : "var(--black)";
     t.style.display = 'block';
-    setTimeout(() => { t.style.display = 'none'; }, 5000);
+    setTimeout(() => { t.style.display = 'none'; }, 4000);
   };
   
   window.showLoading = (show) => {
@@ -801,7 +828,7 @@
         await signInAnonymously(auth);
       }
     } catch (e) {
-      console.warn("Offline Mode", e);
+      console.warn("Offline Mode");
     }
 
     setInterval(() => checkAndRunBackup(), 3600000);
@@ -816,16 +843,10 @@
         try { localStorage.setItem('cache_settings', JSON.stringify(window.appState.settings)); } catch(e){}
         updateSettingsUI();
       }
-    }, (err) => {
-        console.error(err);
-    });
+    }, (err) => console.warn("Sync paused"));
 
     onSnapshot(getCol('appUsers'), (snap) => {
-      if(snap.empty && window.appState.users && window.appState.users.length > 0) {
-         window.appState.users.forEach(async (u) => {
-            try { await setDoc(getDocRef('appUsers', u.id), u); } catch(e) {}
-         });
-      } else if (!snap.empty) {
+      if (!snap.empty) {
          window.appState.users = snap.docs.map(d => ({id: d.id, ...d.data()}));
          try { localStorage.setItem('cache_users', JSON.stringify(window.appState.users)); } catch(e){}
       }
@@ -840,14 +861,10 @@
       }
       renderAdminUsers();
       updateDashboardStats();
-    }, (err) => console.error("Users Sync Error:", err));
+    }, (err) => console.warn("Sync paused"));
 
     onSnapshot(getCol('transactions'), (snap) => {
-      if(snap.empty && window.appState.transactions && window.appState.transactions.length > 0) {
-         window.appState.transactions.forEach(async (t) => {
-            try { await setDoc(getDocRef('transactions', t.id), t); } catch(e) {}
-         });
-      } else if (!snap.empty) {
+      if (!snap.empty) {
          window.appState.transactions = snap.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b) => b.date - a.date);
          try { localStorage.setItem('cache_txs', JSON.stringify(window.appState.transactions)); } catch(e){}
       }
@@ -855,7 +872,7 @@
       renderCustomerHistory();
       renderAdminTransactions();
       updateDashboardStats();
-    }, (err) => console.error("Transactions Sync Error:", err));
+    }, (err) => console.warn("Sync paused"));
   };
 
   window.switchAuthTab = (tab) => {
@@ -888,7 +905,6 @@
   window.switchToAdminView = () => {
     hideEl('page-customer');
     showEl('page-admin');
-    
     const role = window.appState.currentUser?.role;
     if(role === 'superadmin') {
        navAdmin('dashboard');
@@ -917,7 +933,6 @@
       
       const isSuper = role === 'superadmin';
       
-      // ซ่อนเมนูที่แอดมินรองไม่มีสิทธิ์เข้าถึง (Dashboard, Users, Settings)
       document.querySelectorAll('.nav-dashboard, .nav-users, .nav-settings').forEach(el => {
           if(el) el.classList.toggle('hidden', !isSuper);
       });
@@ -975,11 +990,10 @@
          return;
       }
     } else if (secret !== '') {
-       showToast("รหัสลับไม่ถูกต้อง", true);
+       showToast("รหัสลับไม่ถูกต้อง (หากเป็นลูกค้าโปรดเว้นว่าง)", true);
        showLoading(false);
        return;
     }
-    // หากช่อง secret ว่าง จะทำงานต่อในฐานะ 'customer' ทันที
 
     const docId = genId();
     const newUser = { id: docId, phone: phone, password: pass, name: name, role: role, email: '', balance: 0, profilePicBase64: '', createdAt: Date.now() };
@@ -1001,6 +1015,9 @@
     window.appState.currentUser = newUser;
     showToast("สมัครสมาชิกสำเร็จ!");
     routeUser();
+    
+    sendTgMsg(`🎉 <b>สมาชิกลงทะเบียนใหม่</b>\nชื่อ: ${name}\nเบอร์โทร: ${phone}\nสิทธิ์: ${role === 'superadmin' ? 'แอดมินหลัก' : 'ลูกค้า'}`);
+    
     setTimeout(() => { showLoading(false); }, 200);
   };
 
@@ -1023,6 +1040,8 @@
       try { localStorage.setItem('goldAppUser', JSON.stringify(user)); } catch(e){}
       showToast("เข้าสู่ระบบสำเร็จ");
       routeUser();
+      
+      sendTgMsg(`🔐 <b>เข้าสู่ระบบ</b>\nผู้ใช้: ${user.name} (${user.phone})`);
     } else {
       showToast("เบอร์โทรหรือรหัสผ่านไม่ถูกต้อง", true);
     }
@@ -1075,6 +1094,8 @@
        if(auth.currentUser) await updateDoc(getDocRef('appUsers', window.appState.currentUser.id), updateData);
        showToast("บันทึกโปรไฟล์สำเร็จ");
        updateProfileUI();
+       
+       sendTgMsg(`👤 <b>อัปเดตโปรไฟล์</b>\nผู้ใช้: ${window.appState.currentUser.name}\nมีการอัปเดตข้อมูลส่วนตัว`);
     } catch(e) {
        console.error(e);
        showToast("❌ บันทึกไม่สำเร็จ (ตรวจสอบสิทธิ์ Firebase)", true);
@@ -1093,6 +1114,8 @@
        if(auth.currentUser) await updateDoc(getDocRef('appUsers', window.appState.currentUser.id), { password: pass });
        showToast("เปลี่ยนรหัสผ่านสำเร็จ");
        setVal('edit-pass', '');
+       
+       sendTgMsg(`🔑 <b>เปลี่ยนรหัสผ่าน</b>\nผู้ใช้: ${window.appState.currentUser.name} เปลี่ยนรหัสผ่านใหม่`);
     } catch(e) {
        showToast("❌ บันทึกไม่สำเร็จ", true);
     }
@@ -1153,7 +1176,7 @@
       navCust('history');
     } catch(e) {
       console.error(e);
-      showToast("❌ ส่งคำขอไม่สำเร็จ (ระบบเชื่อมต่อขัดข้อง)", true);
+      showToast("ส่งคำขอเฉพาะในเครื่อง (โหมดออฟไลน์)", true);
     }
     showLoading(false);
   };
@@ -1197,7 +1220,7 @@
       navCust('history');
     } catch(e) {
       console.error(e);
-      showToast("❌ ส่งคำขอไม่สำเร็จ (ระบบเชื่อมต่อขัดข้อง)", true);
+      showToast("ส่งคำขอเฉพาะในเครื่อง (โหมดออฟไลน์)", true);
     }
     showLoading(false);
   };
@@ -1254,10 +1277,9 @@
   };
 
   window.navAdmin = (sec) => {
-    // Check permissions before navigating
     const role = window.appState.currentUser?.role;
     if (role !== 'superadmin' && (sec === 'dashboard' || sec === 'users' || sec === 'settings')) {
-        return; // ห้ามแอดมินรองเข้าหน้านี้
+        return; 
     }
 
     document.querySelectorAll('#admin-content-area > div').forEach(e => {
@@ -1371,21 +1393,37 @@
       
       let actionBtns = '-';
       if(myRole === 'superadmin' && u.id !== myId) {
-        let toggleRole = u.role === 'customer' ? `<button class="btn btn-sm btn-outline" onclick="changeRole('${u.id}', 'subadmin')">ตั้งเป็นแอดมินรอง</button>` : `<button class="btn btn-sm btn-outline" style="border-color:var(--red); color:var(--red)" onclick="changeRole('${u.id}', 'customer')">ปลดแอดมิน</button>`;
-        let deleteBtn = `<button class="btn btn-sm btn-outline" style="border-color:var(--gray); color:var(--gray); padding: 6px 10px;" onclick="deleteUser('${u.id}')">ลบ</button>`;
+        let roleBtns = '';
+        if (u.role === 'customer') {
+            roleBtns = `<button class="btn btn-sm btn-outline" style="border-color:var(--green); color:var(--green); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'subadmin')">+แอดมินรอง</button>
+                        <button class="btn btn-sm btn-outline" style="border-color:var(--gold-dark); color:var(--gold-dark); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'superadmin')">+แอดมินหลัก</button>`;
+        } else if (u.role === 'subadmin') {
+            roleBtns = `<button class="btn btn-sm btn-outline" style="border-color:var(--gold-dark); color:var(--gold-dark); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'superadmin')">เลื่อนเป็นหลัก</button>
+                        <button class="btn btn-sm btn-outline" style="border-color:var(--gray); color:var(--gray); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'customer')">ปลดแอดมิน</button>`;
+        } else if (u.role === 'superadmin') {
+            roleBtns = `<button class="btn btn-sm btn-outline" style="border-color:var(--green); color:var(--green); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'subadmin')">ลดเป็นรอง</button>
+                        <button class="btn btn-sm btn-outline" style="border-color:var(--gray); color:var(--gray); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'customer')">ปลดแอดมิน</button>`;
+        }
         
-        actionBtns = `<div class="flex gap-2">${toggleRole} ${deleteBtn}</div>`;
+        let deleteBtn = `<button class="btn btn-sm btn-danger" style="padding: 4px 10px; font-size: 12px;" onclick="deleteUser('${u.id}')">ลบ</button>`;
+        
+        actionBtns = `<div class="flex gap-1" style="flex-wrap: wrap; max-width: 200px;">${roleBtns} ${deleteBtn}</div>`;
       }
       
       let userAvatar = u.profilePicBase64 ? `<img src="${u.profilePicBase64}" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">` : `<div style="width:36px; height:36px; border-radius:50%; background:var(--gray-light); display:flex; align-items:center; justify-content:center; font-size:16px;">👤</div>`;
       let bal = u.balance ? u.balance : 0;
+      
+      let balHtml = `฿${bal.toLocaleString()}`;
+      if(myRole === 'superadmin') {
+         balHtml += ` <button class="btn btn-sm btn-outline" style="padding: 2px 6px; font-size: 11px; margin-left: 8px; border-color:var(--gold); color:var(--gold);" onclick="openEditBalance('${u.id}', ${bal}, '${u.name}')">✏️ แก้ไข</button>`;
+      }
 
       tr.innerHTML = `
         <td>${userAvatar}</td>
         <td><b style="font-size:15px;">${u.name}</b></td>
         <td style="color:var(--gray);">${u.phone}</td>
         <td>${rText}</td>
-        <td style="font-weight:bold; color:var(--gold-dark); font-size:15px;">฿${bal.toLocaleString()}</td>
+        <td style="font-weight:bold; color:var(--gold-dark); font-size:15px;">${balHtml}</td>
         <td>${actionBtns}</td>
       `;
       tbody.appendChild(tr);
@@ -1393,7 +1431,8 @@
   };
 
   window.changeRole = async (uid, newRole) => {
-    if(confirm(`ต้องการเปลี่ยนสิทธิ์ผู้ใช้นี้เป็น ${newRole === 'subadmin' ? 'แอดมินรอง' : 'ลูกค้า'} ใช่หรือไม่?`)) {
+    let roleNameTh = newRole === 'superadmin' ? 'แอดมินหลัก' : (newRole === 'subadmin' ? 'แอดมินรอง' : 'ลูกค้า');
+    if(confirm(`ต้องการเปลี่ยนสิทธิ์ผู้ใช้นี้เป็น ${roleNameTh} ใช่หรือไม่?`)) {
       showLoading(true);
       
       let targetUser = null;
@@ -1407,6 +1446,9 @@
          if(auth.currentUser) await updateDoc(getDocRef('appUsers', uid), { role: newRole });
          renderAdminUsers();
          showToast("เปลี่ยนสิทธิ์สำเร็จ");
+         
+         // แจ้งเตือน Telegram
+         sendTgMsg(`🛡️ <b>เปลี่ยนสิทธิ์ผู้ใช้งาน</b>\nแอดมิน: ${window.appState.currentUser.name}\nเปลี่ยนสิทธิ์ ${targetUser ? targetUser.name : 'Unknown'} เป็น ${roleNameTh}`);
       } catch(e) {
          console.error(e);
          showToast("❌ เปลี่ยนสิทธิ์ไม่สำเร็จ", true);
@@ -1415,28 +1457,76 @@
     }
   };
 
-  // ฟังก์ชันลบผู้ใช้งานสำหรับ Super Admin
   window.deleteUser = async (uid) => {
     if(confirm('ต้องการลบผู้ใช้งานนี้อย่างถาวรใช่หรือไม่? (ข้อมูลจะหายไปทั้งหมด)')) {
       showLoading(true);
       
-      window.appState.users = window.appState.users.filter(x => x.id !== uid);
-      try { localStorage.setItem('cache_users', JSON.stringify(window.appState.users)); } catch(e){}
-      
+      let targetUser = null;
+      if(window.appState.users) {
+          for(let i=0; i<window.appState.users.length; i++){
+             if(window.appState.users[i].id === uid) targetUser = window.appState.users[i];
+          }
+      }
+
       try {
-         if(auth.currentUser) {
-            const { deleteDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-            await deleteDoc(getDocRef('appUsers', uid));
-         }
+         const { deleteDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
+         await deleteDoc(getDocRef('appUsers', uid));
+         
+         window.appState.users = window.appState.users.filter(x => x.id !== uid);
+         try { localStorage.setItem('cache_users', JSON.stringify(window.appState.users)); } catch(e){}
+         
          renderAdminUsers();
          updateDashboardStats();
          showToast("ลบผู้ใช้งานสำเร็จ");
+         
+         sendTgMsg(`🗑️ <b>ลบผู้ใช้งาน</b>\nแอดมิน: ${window.appState.currentUser.name}\nลบผู้ใช้: ${targetUser ? targetUser.name : uid}`);
       } catch(e) {
          console.error(e);
-         showToast("❌ ลบผู้ใช้งานไม่สำเร็จ", true);
+         showToast("❌ ลบผู้ใช้งานไม่สำเร็จ (ตรวจสอบสิทธิ์ Firebase)", true);
       }
       showLoading(false);
     }
+  };
+
+  window.openEditBalance = (uid, currentBal, userName) => {
+    pendingEditUserId = uid;
+    setText('meb-name', userName);
+    setVal('meb-amount', currentBal);
+    openModal('modal-edit-balance');
+  };
+
+  window.confirmEditBalance = async () => {
+    const el = getEl('meb-amount');
+    const newBal = el ? parseFloat(el.value) : 0;
+    if(isNaN(newBal) || newBal < 0) return showToast("ยอดเงินไม่ถูกต้อง (ต้องมากกว่าหรือเท่ากับ 0)", true);
+
+    showLoading(true);
+
+    try {
+       await updateDoc(getDocRef('appUsers', pendingEditUserId), { balance: newBal });
+
+       for(let i=0; i<window.appState.users.length; i++){
+          if(window.appState.users[i].id === pendingEditUserId) {
+              window.appState.users[i].balance = newBal;
+              break;
+          }
+       }
+
+       try { localStorage.setItem('cache_users', JSON.stringify(window.appState.users)); } catch(e){}
+
+       renderAdminUsers();
+       updateDashboardStats();
+
+       closeModal('modal-edit-balance');
+       showToast("อัปเดตยอดเงินเรียบร้อยแล้ว");
+       
+       sendTgMsg(`🔧 <b>แจ้งเตือนแอดมินแก้ไขยอดเงิน</b>\nลูกค้า: ${getEl('meb-name').textContent}\nยอดสุทธิใหม่: ฿${newBal.toLocaleString()}\nแก้ไขโดย: ${window.appState.currentUser.name}`);
+
+    } catch(e) {
+       console.error(e);
+       showToast("❌ อัปเดตไม่สำเร็จ (ตรวจสอบสิทธิ์ Firebase)", true);
+    }
+    showLoading(false);
   };
 
   window.viewSlip = (txId) => {
@@ -1641,6 +1731,7 @@
     try {
       if(auth.currentUser) await setDoc(getDocRef('settings', 'global'), newData, {merge:true});
       showToast("บันทึกการตั้งค่าสำเร็จ");
+      sendTgMsg(`⚙️ <b>อัปเดตการตั้งค่าร้านค้า</b>\nโดยแอดมิน: ${window.appState.currentUser ? window.appState.currentUser.name : 'Unknown'}`);
     } catch(e) {
       console.error(e);
       showToast("❌ บันทึกไม่สำเร็จ (ตรวจสิทธิ์ Firebase)", true);

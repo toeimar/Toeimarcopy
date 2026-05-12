@@ -2,1827 +2,2031 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>ออมทองพรีเมียม - ระบบออมเงินเพื่อรับทอง</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KidSport - ระบบจองคลาส</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold: #D4AF37;
-    --gold-light: #F4E5B3;
-    --gold-dark: #AA8B2B;
-    --black: #1A1A1A;
-    --gray-dark: #4A4A4A;
-    --gray: #8A8A8A;
-    --gray-light: #F3F4F6;
-    --bg-color: #FAFAFB;
-    --white: #FFFFFF;
-    --red: #EF4444;
-    --green: #10B981;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-    --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
-    --radius: 16px;
-  }
+:root {
+  --blue:#1E6FD9;--blue-dark:#1455B0;--blue-light:#3D8EF0;
+  --orange:#F47C20;--orange-dark:#D4660F;--orange-light:#FF9A45;
+  --navy:#0D2B5E;--white:#FFFFFF;--gray-50:#F8FAFF;
+  --gray-100:#EEF2FF;--gray-200:#D4DDEE;--gray-400:#8A99BB;
+  --gray-600:#4A5A7A;--gray-800:#1E2D4D;--success:#22C55E;
+  --danger:#EF4444;--shadow-sm:0 2px 8px rgba(30,111,217,0.10);
+  --shadow-md:0 8px 32px rgba(30,111,217,0.15);--radius:16px;--radius-sm:8px;--radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Prompt',sans-serif;background:var(--gray-50);color:var(--gray-800);min-height:100vh;}
+.hidden{display:none!important;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:50px;border:none;cursor:pointer;font-family:'Prompt',sans-serif;font-size:14px;font-weight:600;transition:all .2s;}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 4px 16px rgba(30,111,217,.3);}
+.btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px);}
+.btn-orange{background:var(--orange);color:#fff;box-shadow:0 4px 16px rgba(244,124,32,.3);}
+.btn-orange:hover{background:var(--orange-dark);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--blue);border:2px solid var(--blue);}
+.btn-outline:hover{background:var(--blue);color:#fff;}
+.btn-sm{padding:6px 16px;font-size:12px;}
+.btn-danger{background:var(--danger);color:#fff;}
+.btn-success{background:var(--success);color:#fff;}
+.badge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:600;}
+.badge-blue{background:#EEF2FF;color:var(--blue);}
+.badge-orange{background:#FFF3E8;color:var(--orange);}
+.badge-green{background:#ECFDF5;color:#16A34A;}
+.badge-red{background:#FEF2F2;color:var(--danger);}
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:24px;border:1px solid var(--gray-100);}
 
-  * { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    font-family: 'Sarabun', sans-serif; 
-    -webkit-tap-highlight-color: transparent; 
-  }
-  
-  body { 
-    background: var(--bg-color); 
-    color: var(--black); 
-    overflow-x: hidden;
-    overscroll-behavior-y: none;
-  }
-  h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
-  
-  .hidden { display: none !important; }
-  .flex { display: flex; }
-  .grid { display: grid; }
-  .items-center { align-items: center; }
-  .justify-between { justify-content: space-between; }
-  .justify-center { justify-content: center; }
-  .gap-2 { gap: 8px; } .gap-4 { gap: 16px; }
-  .mt-4 { margin-top: 16px; } .mb-4 { margin-bottom: 16px; }
-  .text-center { text-align: center; }
-  
-  /* Buttons - Touch Friendly */
-  .btn { 
-    padding: 14px 20px; 
-    border-radius: 14px; 
-    border: none; 
-    font-weight: 600; 
-    font-size: 15px; 
-    cursor: pointer; 
-    transition: all 0.2s; 
-    display: inline-flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 8px;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-  .btn-primary { background: var(--gold); color: white; box-shadow: 0 4px 12px rgba(212,175,55,0.3); }
-  .btn-primary:active { transform: scale(0.96); opacity: 0.9; } 
-  .btn-outline { background: white; border: 1.5px solid var(--gold); color: var(--gold); }
-  .btn-outline:active { transform: scale(0.96); background: var(--gold-light); }
-  .btn-danger { background: var(--red); color: white; }
-  .btn-danger:active { transform: scale(0.96); opacity: 0.9; }
-  .btn-success { background: var(--green); color: white; }
-  .btn-success:active { transform: scale(0.96); opacity: 0.9; }
-  .btn-sm { padding: 10px 16px; font-size: 13px; border-radius: 10px; }
-  
-  /* Inputs */
-  .form-group { margin-bottom: 20px; text-align: left; }
-  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--gray-dark); margin-bottom: 8px; }
-  .form-control { 
-    width: 100%; 
-    padding: 14px 16px; 
-    border: 1.5px solid #E5E7EB; 
-    border-radius: 14px; 
-    font-size: 16px; 
-    outline: none; 
-    transition: 0.2s; 
-    background: white; 
-    appearance: none;
-  }
-  .form-control:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-light); }
-  .form-control:disabled, .form-control[readonly] { background: var(--gray-light); color: var(--gray); cursor: not-allowed; }
-  
-  /* Cards */
-  .card { 
-    background: white; 
-    border-radius: var(--radius); 
-    padding: 20px; 
-    box-shadow: var(--shadow-sm); 
-    margin-bottom: 20px; 
-    border: 1px solid #F3F4F6; 
-  }
-  .card-title { font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
-  
-  /* Badges */
-  .badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
-  .bg-green { background: #D1FAE5; color: #065F46; }
-  .bg-red { background: #FEE2E2; color: #991B1B; }
-  .bg-yellow { background: #FEF3C7; color: #92400E; }
-  .bg-gold { background: var(--gold-light); color: var(--gold-dark); }
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px;transition:opacity .4s;}
+.loader-logo{font-size:36px;font-weight:900;color:#fff;}
+.loader-logo span{color:var(--orange);}
+.loader-bar{width:200px;height:4px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden;}
+.loader-fill{height:100%;background:linear-gradient(90deg,var(--blue-light),var(--orange));border-radius:4px;animation:loadFill 1.2s ease forwards;}
+@keyframes loadFill{from{width:0}to{width:100%}}
 
-  /* Login Page */
-  #page-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; background: linear-gradient(135deg, #FAFAFB 0%, var(--gold-light) 100%); }
-  .login-box { width: 100%; max-width: 400px; background: white; padding: 40px 30px; border-radius: 24px; box-shadow: var(--shadow-md); text-align: center; }
-  .login-logo { width: 80px; height: 80px; background: var(--gold-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 20px; overflow: hidden; box-shadow: var(--shadow-sm); }
-  
-  /* Customer Nav Elements */
-  .app-header { 
-    background: rgba(255,255,255,0.85); 
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); 
-    padding: calc(16px + env(safe-area-inset-top)) 20px 16px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    box-shadow: 0 1px 0 rgba(0,0,0,0.05); 
-    position: sticky; 
-    top: 0; 
-    z-index: 50; 
-  }
-  .app-container { padding: 20px; padding-bottom: 140px; max-width: 600px; margin: 0 auto; }
-  
-  /* Shared Bottom Nav Styles */
-  .bottom-nav, .admin-bottom-nav { 
-    position: fixed; 
-    bottom: 0; 
-    left: 0; 
-    right: 0; 
-    background: rgba(255,255,255,0.9); 
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); 
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.04); 
-    display: flex; 
-    justify-content: space-around; 
-    padding: 12px 10px calc(16px + env(safe-area-inset-bottom)); 
-    border-top-left-radius: 24px; 
-    border-top-right-radius: 24px; 
-    z-index: 100; 
-    max-width: 600px; 
-    margin: 0 auto; 
-    border-top: 1px solid rgba(0,0,0,0.05);
-  }
-  .nav-item { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    color: var(--gray); 
-    font-size: 11px; 
-    font-weight: 600; 
-    gap: 4px; 
-    cursor: pointer; 
-    transition: 0.2s; 
-    padding: 8px;
-    border-radius: 12px;
-    user-select: none;
-    -webkit-user-select: none;
-    position: relative;
-    flex: 1;
-  }
-  .nav-item:active { transform: scale(0.9); background: rgba(0,0,0,0.03); }
-  .nav-item.active { color: var(--gold); }
-  .nav-icon { font-size: 24px; margin-bottom: 2px; }
+/* TOPBAR */
+#topbar{position:fixed;top:38px;left:0;right:0;z-index:100;background:var(--navy);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;box-shadow:0 4px 20px rgba(0,0,0,.25);}
+.topbar-logo{font-size:20px;font-weight:900;color:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;}
+.topbar-logo img{height:36px;border-radius:6px;}
+.topbar-logo span{color:var(--orange);}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.topbar-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue-light),var(--orange));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;overflow:hidden;cursor:pointer;}
+.topbar-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.topbar-role{font-size:10px;color:var(--orange-light);font-weight:500;}
+.points-badge{background:linear-gradient(135deg,#FFD700,#F47C20);color:#fff;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold;}
 
-  /* Device Specific Displays */
-  .desktop-only { display: block; }
-  .mobile-only { display: none !important; }
+/* CONTACT BAR */
+.contact-bar{background:var(--navy);color:white;padding:8px 24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;position:fixed;top:0;left:0;right:0;z-index:101;border-bottom:1px solid rgba(255,255,255,.1);}
+.contact-bar a{color:var(--orange-light);text-decoration:none;font-weight:bold;}
 
-  /* Admin Layout Base */
-  .admin-layout { display: flex; min-height: 100vh; }
-  .admin-sidebar { 
-    width: 280px; 
-    background: white; 
-    border-right: 1px solid #E5E7EB; 
-    display: flex; 
-    flex-direction: column; 
-    position: fixed; 
-    height: 100vh; 
-    z-index: 1001; 
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-  }
-  .admin-content { flex: 1; margin-left: 280px; padding: 32px; max-width: 1200px; padding-bottom: 60px; }
-  .admin-nav-item { 
-    padding: 16px 24px; 
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
-    color: var(--gray-dark); 
-    font-weight: 500; 
-    cursor: pointer; 
-    border-left: 4px solid transparent; 
-    user-select: none;
-  }
-  .admin-nav-item:active { background: var(--gray-light); }
-  .admin-nav-item.active { background: var(--gold-light); color: var(--gold-dark); border-left-color: var(--gold); }
-  
-  /* Tables */
-  .table-responsive { 
-    overflow-x: auto; 
-    -webkit-overflow-scrolling: touch; 
-    width: 100%; 
-    padding-bottom: 10px; 
-  }
-  .table-responsive::-webkit-scrollbar { height: 6px; }
-  .table-responsive::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 8px; }
-  .table-responsive::-webkit-scrollbar-thumb { background: #ddd; border-radius: 8px; }
-  
-  table { width: 100%; border-collapse: collapse; min-width: 650px; }
-  th, td { padding: 16px; text-align: left; border-bottom: 1px solid #E5E7EB; white-space: nowrap; vertical-align: middle; }
-  th { font-size: 13px; color: var(--gray); font-weight: 600; text-transform: uppercase; background: #F9FAFB; position: sticky; top: 0; }
-  td { font-size: 14px; }
-  
-  /* Slips & Images */
-  .img-preview { width: 100%; max-height: 250px; object-fit: contain; border-radius: 16px; border: 1px dashed var(--gray); margin-top: 10px; background: #f9f9f9; }
-  .avatar-preview { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-light); margin-top: 10px; }
-  .qr-box { background: var(--gray-light); padding: 24px; border-radius: 20px; text-align: center; margin-bottom: 24px; }
-  .qr-box img { max-width: 100%; height: auto; max-height: 250px; border-radius: 12px; margin-bottom: 12px; object-fit: contain; }
-  
-  /* Utilities */
-  .balance-card { 
-    background: linear-gradient(135deg, var(--gold), var(--gold-dark)); 
-    color: white; 
-    padding: 36px 24px; 
-    border-radius: 28px; 
-    text-align: center; 
-    margin-bottom: 24px; 
-    box-shadow: 0 12px 32px rgba(212,175,55,0.4); 
-    position: relative; 
-    overflow: hidden; 
-  }
-  .balance-card::after { content: '✨'; position: absolute; right: -10px; top: -10px; font-size: 100px; opacity: 0.1; }
-  .toast { position: fixed; top: env(safe-area-inset-top, 20px); left: 50%; transform: translateX(-50%); background: var(--black); color: white; padding: 14px 28px; border-radius: 30px; font-size: 14px; font-weight: 500; z-index: 9999; display: none; box-shadow: var(--shadow-md); text-align: center; white-space: normal; line-height: 1.5; max-width: 90%; }
+/* SIDEBAR */
+#sidebar{position:fixed;left:0;top:98px;bottom:0;width:230px;background:var(--navy);padding:20px 0;overflow-y:auto;z-index:90;}
+.sidebar-section{padding:6px 16px 4px;font-size:10px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:11px 20px;color:rgba(255,255,255,.7);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;border-left:3px solid transparent;}
+.sidebar-item:hover{background:rgba(255,255,255,.07);color:#fff;}
+.sidebar-item.active{background:rgba(30,111,217,.25);color:var(--blue-light);border-left-color:var(--blue-light);}
+.sidebar-item .icon{font-size:18px;width:22px;text-align:center;}
 
-  /* --- MOBILE & IPAD RESPONSIVE OVERRIDES --- */
-  @media (max-width: 1400px) {
-    .desktop-only { display: none !important; }
-    .mobile-only { display: flex !important; } 
+/* MAIN */
+#main{margin-left:230px;margin-top:98px;padding:28px;min-height:calc(100vh - 98px);}
+.page-title{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.page-sub{font-size:13px;color:var(--gray-400);margin-bottom:24px;}
 
-    .admin-layout { flex-direction: column; }
-    .admin-sidebar { display: none !important; } 
-    
-    .admin-content { margin-left: 0; padding: 16px; padding-bottom: 120px; max-width: 100%; }
-    
-    .admin-topbar { 
-      position: sticky; 
-      top: 0; 
-      background: rgba(255,255,255,0.95); 
-      backdrop-filter: blur(10px); 
-      -webkit-backdrop-filter: blur(10px); 
-      padding: calc(16px + env(safe-area-inset-top)) 20px 16px; 
-      margin: -16px -16px 20px -16px; 
-      z-index: 900; 
-      border-bottom: 1px solid rgba(0,0,0,0.05); 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .grid { grid-template-columns: 1fr 1fr; gap: 16px; } 
-    @media (max-width: 600px) {
-      .grid { grid-template-columns: 1fr; } 
-    }
-    .card { padding: 16px; }
-    
-    .tx-item-history { flex-wrap: wrap; }
-    .tx-amount-col { text-align: right; min-width: 90px; }
-  }
+/* LOGIN */
+#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy) 0%,#1a3a6e 50%,#0d2040 100%);position:relative;overflow:hidden;}
+#loginPage::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(30,111,217,.3) 0%,transparent 60%),radial-gradient(circle at 80% 20%,rgba(244,124,32,.2) 0%,transparent 50%);}
+.login-circles{position:absolute;inset:0;pointer-events:none;}
+.login-circles span{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.05);animation:spin 20s linear infinite;}
+.login-circles span:nth-child(1){width:500px;height:500px;top:-200px;left:-100px;}
+.login-circles span:nth-child(2){width:300px;height:300px;bottom:-100px;right:-50px;animation-duration:15s;animation-direction:reverse;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.login-box{position:relative;z-index:2;background:rgba(255,255,255,.97);border-radius:28px;padding:40px 36px;width:420px;max-width:95vw;box-shadow:0 40px 80px rgba(0,0,0,.4);}
+.login-logo{text-align:center;margin-bottom:28px;}
+.login-logo h1{font-size:28px;font-weight:900;color:var(--navy);display:flex;align-items:center;justify-content:center;gap:10px;}
+.login-logo h1 img{height:44px;border-radius:10px;}
+.login-logo h1 span{color:var(--orange);}
+.login-logo p{font-size:12px;color:var(--gray-400);margin-top:4px;letter-spacing:1px;text-transform:uppercase;}
+.form-group{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--gray-600);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.form-input{width:100%;padding:11px 14px;border-radius:12px;border:2px solid var(--gray-200);font-family:'Prompt',sans-serif;font-size:14px;color:var(--gray-800);transition:border-color .2s;outline:none;background:var(--gray-50);}
+.form-input:focus{border-color:var(--blue);background:#fff;}
+.login-tabs{display:flex;gap:8px;margin-bottom:20px;}
+.login-tab{flex:1;padding:10px;border-radius:10px;border:2px solid var(--gray-200);background:transparent;font-family:'Prompt',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--gray-600);}
+.login-tab.active{border-color:var(--blue);background:var(--blue);color:#fff;}
 
-  /* Modal */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
-  .modal { background: white; width: 100%; max-width: 400px; border-radius: 28px; padding: 28px; animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 90vh; overflow-y: auto; }
-  @keyframes pop { from { transform: scale(0.85) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.stat-card{background:#fff;border-radius:var(--radius);padding:20px;border:1px solid var(--gray-100);position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.stat-card.blue::before{background:linear-gradient(90deg,var(--blue),var(--blue-light));}
+.stat-card.orange::before{background:linear-gradient(90deg,var(--orange),var(--orange-light));}
+.stat-card.green::before{background:linear-gradient(90deg,#16A34A,#4ADE80);}
+.stat-card.purple::before{background:linear-gradient(90deg,#7C3AED,#A78BFA);}
+.stat-icon{font-size:28px;margin-bottom:8px;}
+.stat-value{font-size:28px;font-weight:800;color:var(--navy);line-height:1;}
+.stat-label{font-size:12px;color:var(--gray-400);margin-top:4px;}
 
+/* MEMBERSHIP CARD */
+.membership-card{width:100%;max-width:420px;height:220px;border-radius:20px;padding:22px;color:white;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,.15);margin-bottom:24px;transition:transform .3s;}
+.membership-card:hover{transform:translateY(-4px);}
+.membership-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.12) 0%,transparent 60%);pointer-events:none;}
+.card-level-Basic{background:linear-gradient(135deg,var(--blue),var(--blue-light));}
+.card-level-Gold{background:linear-gradient(135deg,#F47C20,#FFD700);color:#000;}
+.card-level-Diamond{background:linear-gradient(135deg,#0D2B5E,#1a3a6e,#7C3AED);}
+.card-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;}
+.card-logo-txt{font-size:15px;font-weight:900;letter-spacing:1px;}
+.card-level-badge{padding:4px 12px;border-radius:50px;font-size:11px;font-weight:800;background:rgba(255,255,255,.2);text-transform:uppercase;}
+.card-avatar-wrap{position:relative;z-index:2;display:flex;align-items:center;gap:12px;margin:8px 0;}
+.card-avatar{width:48px;height:48px;border-radius:50%;border:2px solid rgba(255,255,255,.5);overflow:hidden;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;}
+.card-avatar img{width:100%;height:100%;object-fit:cover;}
+.card-points{font-size:26px;font-weight:900;line-height:1;}
+.card-points span{font-size:13px;font-weight:500;opacity:.8;}
+.card-bottom{display:flex;justify-content:space-between;align-items:flex-end;position:relative;z-index:2;}
+.card-name{font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.card-id{font-size:11px;font-family:monospace;opacity:.7;}
+
+/* CALENDAR */
+.calendar-wrapper{display:grid;grid-template-columns:1fr 360px;gap:20px;}
+.calendar-card{background:#fff;border-radius:var(--radius);padding:24px;border:1px solid var(--gray-100);}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.cal-month{font-size:18px;font-weight:800;color:var(--navy);}
+.cal-nav{display:flex;gap:8px;}
+.cal-nav button{width:34px;height:34px;border-radius:50%;border:2px solid var(--gray-200);background:transparent;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.cal-nav button:hover{border-color:var(--blue);color:var(--blue);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-dow{text-align:center;font-size:11px;font-weight:700;color:var(--gray-400);padding:6px 0;}
+.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;position:relative;gap:2px;}
+.cal-day:hover{background:var(--gray-100);}
+.cal-day.today{background:var(--navy);color:#fff;font-weight:700;}
+.cal-day.selected{background:var(--blue);color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(30,111,217,.35);}
+.cal-day.has-class::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--orange);}
+.cal-day.selected::after{background:rgba(255,255,255,.8);}
+.time-slots{margin-top:20px;}
+.time-slots h3{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;}
+.time-slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.time-slot{padding:10px 8px;border-radius:10px;border:2px solid var(--gray-200);text-align:center;cursor:pointer;transition:all .15s;font-size:12px;font-weight:600;color:var(--gray-600);}
+.time-slot:hover{border-color:var(--blue);color:var(--blue);}
+.time-slot.selected{border-color:var(--blue);background:var(--blue);color:#fff;}
+
+/* BOOKING PANEL */
+.booking-panel h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:16px;}
+.booking-summary{background:var(--gray-50);border-radius:12px;padding:16px;margin-bottom:16px;}
+.booking-item{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:13px;}
+.booking-item:last-child{border:none;}
+.booking-item-label{color:var(--gray-400);font-size:12px;}
+.booking-item-val{font-weight:600;color:var(--navy);font-size:12px;text-align:right;}
+.price-breakdown{background:#fff;border-radius:12px;padding:16px;border:1px solid var(--gray-200);margin-bottom:16px;}
+.price-row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:var(--gray-600);}
+.price-row.total{font-weight:800;font-size:16px;color:var(--navy);border-top:2px solid var(--gray-200);padding-top:8px;margin-top:4px;}
+.class-type-selector{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.class-type-btn{padding:12px 8px;border-radius:12px;border:2px solid var(--gray-200);background:transparent;cursor:pointer;text-align:center;font-family:'Prompt',sans-serif;transition:all .2s;}
+.class-type-btn .type-icon{font-size:22px;display:block;margin-bottom:4px;}
+.class-type-btn .type-name{font-size:12px;font-weight:700;color:var(--gray-600);display:block;}
+.class-type-btn .type-price{font-size:11px;color:var(--orange);font-weight:600;display:block;}
+.class-type-btn.selected{border-color:var(--blue);background:linear-gradient(135deg,#EEF2FF,#E8F0FF);}
+
+/* PAYMENT */
+.payment-methods{display:grid;gap:8px;}
+.payment-method{display:flex;align-items:center;gap:12px;padding:14px 16px;border:2px solid var(--gray-200);border-radius:12px;cursor:pointer;transition:all .2s;}
+.payment-method:hover,.payment-method.selected{border-color:var(--blue);background:#EEF2FF;}
+.payment-method .pm-icon{font-size:24px;}
+.payment-method .pm-name{font-size:13px;font-weight:600;color:var(--navy);}
+.payment-method .pm-radio{margin-left:auto;width:18px;height:18px;border-radius:50%;border:2px solid var(--gray-300);display:flex;align-items:center;justify-content:center;}
+.payment-method.selected .pm-radio{border-color:var(--blue);}
+.payment-method.selected .pm-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--blue);}
+.qr-box{background:var(--gray-50);border-radius:16px;padding:20px;text-align:center;margin-top:16px;}
+.qr-placeholder{width:150px;height:150px;margin:0 auto 10px;background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:50px;overflow:hidden;}
+.qr-placeholder img{width:100%;height:100%;object-fit:cover;}
+.slip-img{max-width:100%;max-height:400px;border-radius:8px;object-fit:contain;}
+
+/* TABLES */
+.table-wrapper{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--gray-100);}
+table{width:100%;border-collapse:collapse;background:#fff;}
+th{background:var(--gray-50);padding:12px 16px;text-align:left;font-size:11px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--gray-100);}
+td{padding:12px 16px;font-size:13px;color:var(--gray-800);border-bottom:1px solid var(--gray-50);}
+tr:last-child td{border:none;}
+tr:hover td{background:var(--gray-50);}
+.member-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;overflow:hidden;}
+.member-avatar img{width:100%;height:100%;object-fit:cover;}
+
+/* ADMIN TABS / SETTINGS */
+.settings-tabs{display:flex;gap:4px;background:var(--gray-100);border-radius:12px;padding:4px;margin-bottom:24px;flex-wrap:wrap;}
+.settings-tab{padding:8px 16px;border-radius:8px;border:none;background:transparent;font-family:'Prompt',sans-serif;font-size:13px;font-weight:600;cursor:pointer;color:var(--gray-600);transition:all .2s;}
+.settings-tab.active{background:#fff;color:var(--blue);box-shadow:var(--shadow-sm);}
+.promo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.class-setup-grid{display:grid;gap:16px;}
+.class-row{display:flex;align-items:center;gap:12px;padding:16px;background:var(--gray-50);border-radius:12px;}
+.class-info{flex:1;}
+.class-info h4{font-size:14px;font-weight:700;color:var(--navy);}
+.class-info p{font-size:12px;color:var(--gray-400);}
+.section-divider{height:1px;background:var(--gray-100);margin:16px 0;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.toggle{position:relative;display:inline-block;width:44px;height:24px;}
+.toggle input{display:none;}
+.toggle-slider{position:absolute;inset:0;border-radius:50px;background:var(--gray-200);cursor:pointer;transition:.3s;}
+.toggle-slider::before{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.3s;}
+.toggle input:checked+.toggle-slider{background:var(--blue);}
+.toggle input:checked+.toggle-slider::before{transform:translateX(20px);}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(13,43,94,.6);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);animation:fadeIn .2s;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border-radius:24px;padding:32px;width:480px;max-width:95vw;box-shadow:0 40px 80px rgba(0,0,0,.25);animation:slideUp .25s;max-height:90vh;overflow-y:auto;}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.modal-title{font-size:18px;font-weight:800;color:var(--navy);}
+.modal-close{width:34px;height:34px;border-radius:50%;border:none;background:var(--gray-100);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;}
+
+/* TOAST */
+#toastContainer{position:fixed;top:80px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px;}
+.toast{background:var(--navy);color:#fff;padding:14px 20px;border-radius:14px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.25);animation:toastIn .3s;border-left:4px solid var(--blue-light);}
+.toast.success{border-left-color:var(--success);}
+.toast.error{border-left-color:var(--danger);}
+@keyframes toastIn{from{transform:translateX(60px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* HISTORY */
+.history-list{display:flex;flex-direction:column;gap:12px;}
+.history-item{display:flex;align-items:center;gap:16px;padding:16px;background:var(--gray-50);border-radius:12px;border:1px solid var(--gray-100);}
+.history-dot{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.history-dot.blue{background:#EEF2FF;}
+.history-dot.orange{background:#FFF3E8;}
+.history-dot.green{background:#ECFDF5;}
+.history-info{flex:1;}
+.history-info h4{font-size:13px;font-weight:700;color:var(--navy);}
+.history-info p{font-size:11px;color:var(--gray-400);margin-top:2px;}
+
+/* PROFILE */
+.profile-header{background:linear-gradient(135deg,var(--navy),#1a3a6e);border-radius:var(--radius-lg);padding:32px;color:#fff;margin-bottom:24px;position:relative;overflow:hidden;}
+.profile-header::before{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:rgba(30,111,217,.2);}
+.profile-avatar-wrap{position:relative;display:inline-block;margin-bottom:12px;}
+.profile-avatar-lg{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--blue-light),var(--orange));display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;color:#fff;border:3px solid rgba(255,255,255,.4);overflow:hidden;}
+.profile-avatar-lg img{width:100%;height:100%;object-fit:cover;}
+.avatar-edit-btn{position:absolute;bottom:0;right:0;width:26px;height:26px;border-radius:50%;background:var(--orange);border:2px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;}
+.profile-name{font-size:22px;font-weight:800;}
+.profile-membership{display:inline-flex;align-items:center;gap:6px;background:rgba(244,124,32,.25);border:1px solid rgba(244,124,32,.4);color:var(--orange-light);padding:4px 12px;border-radius:50px;font-size:12px;font-weight:600;margin-top:8px;}
+
+/* REWARDS */
+.rewards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.reward-card{background:#fff;border-radius:16px;padding:16px;border:1px solid var(--gray-200);text-align:center;}
+.reward-img{width:100%;height:100px;background:var(--gray-100);border-radius:8px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:40px;}
+
+/* PACKAGES */
+.packages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+.pkg-card{border-radius:var(--radius);padding:24px;border:2px solid var(--gray-100);background:#fff;transition:all .2s;cursor:pointer;}
+.pkg-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.pkg-card.featured{border-color:var(--blue);background:linear-gradient(160deg,#EEF2FF,#fff);}
+.pkg-name{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.pkg-price{font-size:26px;font-weight:900;color:var(--navy);}
+.pkg-price span{font-size:13px;font-weight:400;color:var(--gray-400);}
+.pkg-features{margin:14px 0;display:flex;flex-direction:column;gap:7px;}
+.pkg-feature{font-size:12px;color:var(--gray-600);display:flex;gap:8px;align-items:center;}
+.pkg-feature::before{content:'✓';color:var(--success);font-weight:700;flex-shrink:0;}
+
+/* PAYMENT CONFIRM (Admin) */
+.pay-confirm-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--gray-50);border-radius:12px;border:1px solid var(--gray-200);margin-bottom:10px;}
+.pay-confirm-info{flex:1;}
+.pay-confirm-info h4{font-size:13px;font-weight:700;color:var(--navy);}
+.pay-confirm-info p{font-size:11px;color:var(--gray-400);margin-top:2px;}
+.pay-confirm-actions{display:flex;gap:6px;flex-shrink:0;align-items:center;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,1fr);}.calendar-wrapper{grid-template-columns:1fr;}.packages-grid{grid-template-columns:1fr 1fr;}.promo-grid{grid-template-columns:1fr;}}
+@media(max-width:768px){
+  #sidebar{transform:none!important;top:auto!important;bottom:0!important;width:100%!important;height:64px!important;padding:0!important;display:flex!important;flex-direction:row!important;overflow-x:auto;overflow-y:hidden;-ms-overflow-style:none;scrollbar-width:none;}
+  #sidebar::-webkit-scrollbar{display:none;}
+  #userMenu,#adminMenu{display:flex;flex-direction:row;width:max-content;}
+  .sidebar-section{display:none;}
+  .sidebar-item{flex-direction:column;padding:8px 10px;font-size:10px;border-left:none;border-bottom:3px solid transparent;min-width:72px;text-align:center;justify-content:center;white-space:nowrap;flex-shrink:0;}
+  .sidebar-item.active{border-left-color:transparent;border-bottom-color:var(--blue-light);background:rgba(30,111,217,.1);}
+  .sidebar-item .icon{font-size:20px;margin-bottom:2px;width:auto;}
+  #main{margin-left:0;padding:16px;margin-bottom:74px!important;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .contact-bar{flex-direction:column;gap:4px;text-align:center;font-size:11px;}
+  #topbar{top:50px;}
+  #sidebar{top:auto;}
+  #main{margin-top:110px;}
+}
 </style>
 </head>
 <body>
 
-<!-- Script ตรวจสอบการเปิดไฟล์ผิดวิธี -->
-<script>
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      var loader = document.getElementById('loading');
-      if (loader && loader.style.display !== 'none') {
-        loader.innerHTML = '<div style="background:white; padding:24px; border-radius:24px; color:#333; max-width:90%; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><div style="font-size:50px; margin-bottom:10px;">⚠️</div><h3 style="color:#e74c3c; margin-bottom:10px; font-family:\'Sarabun\', sans-serif;">เกิดข้อผิดพลาดในการโหลด</h3><p style="font-size:15px; color:#666; font-family:\'Sarabun\', sans-serif;">ระบบถูกบล็อก! หากคุณดับเบิลคลิกเปิดไฟล์นี้จากเครื่องโดยตรง เบราว์เซอร์จะไม่อนุญาตให้เชื่อมต่อฐานข้อมูลครับ<br><br><b style="color:var(--black);">วิธีแก้:</b> ให้อัปโหลดไฟล์นี้ขึ้นระบบเซิร์ฟเวอร์ (เช่น GitHub Pages) แล้วเข้าใช้งานผ่านลิงก์เว็บแทนครับ</p></div>';
-      }
-    }, 4000);
-  });
-</script>
-
-<!-- Toast Notification -->
-<div id="toast" class="toast"></div>
-
-<!-- Loading Overlay -->
-<div id="loading" class="modal-overlay" style="z-index: 9999; flex-direction: column; display: flex;">
-  <div style="font-size: 48px; animation: spin 1s linear infinite;">⏳</div>
-  <div style="color: white; margin-top: 16px; font-weight: 600; letter-spacing: 1px;" id="loading-text">กำลังเชื่อมต่อระบบ...</div>
+<div id="loader">
+  <div class="loader-logo">KID <span>SPORT</span></div>
+  <div style="font-size:11px;color:rgba(255,255,255,.5);letter-spacing:2px;">STRONG BODY · BRIGHT FUTURE</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
 
-<!-- PAGE: LOGIN / REGISTER -->
-<div id="page-login" class="hidden">
+<div id="toastContainer"></div>
+
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="login-circles"><span></span><span></span></div>
   <div class="login-box">
-    <div class="login-logo" id="login-logo-container">
-      <img id="login-logo-img" src="" alt="โลโก้ร้าน" style="display:none; width: 100%; height: 100%; object-fit: cover;">
-      <span id="login-logo-fallback">✨</span>
+    <div class="login-logo" id="dispLoginLogo">
+      <h1>KID <span>SPORT</span></h1>
+      <p>Strong Body · Bright Future</p>
     </div>
-    <h1 class="serif" style="margin-bottom: 8px;" id="login-shop-name">พรีเมียมออมทอง</h1>
-    <p style="color: var(--gray); margin-bottom: 24px; font-size: 14px;">ระบบสะสมเงินออมเพื่อรับทองคำ</p>
-    
-    <div class="flex gap-2 mb-4" style="background: var(--gray-light); padding: 4px; border-radius: 14px;">
-      <button class="btn btn-sm" style="flex: 1; background: white; box-shadow: var(--shadow-sm); border-radius: 10px;" id="tab-login" onclick="switchAuthTab('login')">เข้าสู่ระบบ</button>
-      <button class="btn btn-sm" style="flex: 1; background: transparent; color: var(--gray); border-radius: 10px;" id="tab-register" onclick="switchAuthTab('register')">สมัครสมาชิก</button>
+    <div class="login-tabs">
+      <button class="login-tab active" onclick="setLoginTab('user')">👤 เข้าสู่ระบบ</button>
+      <button class="login-tab" onclick="setLoginTab('register')">✨ สมัครสมาชิก</button>
     </div>
-
-    <!-- Login Form -->
-    <div id="form-login">
-      <div class="form-group">
-        <label>เบอร์โทรศัพท์</label>
-        <input type="tel" id="login-phone" class="form-control" placeholder="08x-xxx-xxxx">
-      </div>
-      <div class="form-group">
-        <label>รหัสผ่าน</label>
-        <input type="password" id="login-pass" class="form-control" placeholder="••••••">
-      </div>
-      <button class="btn btn-primary" style="width: 100%; margin-top: 8px;" onclick="handleLogin()">เข้าสู่ระบบ</button>
+    <div id="loginForm">
+      <div class="form-group"><label class="form-label">อีเมล / เบอร์โทร</label><input class="form-input" id="loginEmail" placeholder="กรอกอีเมล หรือ เบอร์โทร"></div>
+      <div class="form-group"><label class="form-label">รหัสผ่าน</label><input class="form-input" type="password" id="loginPass" placeholder="กรอกรหัสผ่าน"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;" onclick="doLogin()">🚀 เข้าสู่ระบบ</button>
     </div>
-
-    <!-- Register Form -->
-    <div id="form-register" class="hidden">
-      <div class="form-group">
-        <label>ชื่อ - นามสกุล</label>
-        <input type="text" id="reg-name" class="form-control" placeholder="ชื่อ นามสกุล">
+    <div id="registerForm" class="hidden">
+      <div class="info-grid">
+        <div class="form-group"><label class="form-label">ชื่อ</label><input class="form-input" id="regFirst" placeholder="ชื่อ"></div>
+        <div class="form-group"><label class="form-label">นามสกุล</label><input class="form-input" id="regLast" placeholder="นามสกุล"></div>
       </div>
-      <div class="form-group">
-        <label>เบอร์โทรศัพท์</label>
-        <input type="tel" id="reg-phone" class="form-control" placeholder="08x-xxx-xxxx">
-      </div>
-      <div class="form-group">
-        <label>รหัสผ่าน</label>
-        <input type="password" id="reg-pass" class="form-control" placeholder="ตั้งรหัสผ่าน">
-      </div>
-      <div class="form-group" id="secret-code-group">
-        <label>รหัสลับ (หากเป็นลูกค้าโปรดเว้นว่างไว้)</label>
-        <input type="text" id="reg-secret" class="form-control" placeholder="ปล่อยว่างหากเป็นลูกค้า">
-      </div>
-      <button class="btn btn-primary" style="width: 100%; margin-top: 8px;" onclick="handleRegister()">ลงทะเบียน</button>
+      <div class="form-group"><label class="form-label">อีเมล</label><input class="form-input" id="regEmail" placeholder="email@example.com"></div>
+      <div class="form-group"><label class="form-label">เบอร์โทร</label><input class="form-input" id="regPhone" placeholder="08x-xxx-xxxx"></div>
+      <div class="form-group"><label class="form-label">รหัสผ่าน</label><input class="form-input" type="password" id="regPass" placeholder="ตั้งรหัสผ่าน"></div>
+      <div class="form-group"><label class="form-label" style="color:var(--orange)">รหัสแอดมิน (ถ้ามี)</label><input class="form-input" id="regAdminCode" placeholder="เว้นว่างถ้าเป็นลูกค้าปกติ"></div>
+      <button class="btn btn-orange" style="width:100%;justify-content:center;" onclick="doRegister()">✨ สมัครสมาชิก</button>
     </div>
   </div>
 </div>
 
-
-<!-- PAGE: CUSTOMER APP -->
-<div id="page-customer" class="hidden">
-  <div class="app-header">
-    <div class="flex items-center gap-3">
-      <img id="cust-header-logo" src="" alt="โลโก้" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); box-shadow: var(--shadow-sm); display: none;">
-      <div id="cust-header-logo-fallback" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display:flex; align-items:center; justify-content:center; color:white; font-size:12px; font-weight: bold; box-shadow: var(--shadow-sm);">ร้าน</div>
-      <h3 class="serif" id="cust-header-name" style="font-size: 18px;">ร้านทองพรีเมียม</h3>
-    </div>
-    <div class="flex gap-2 items-center">
-      <button id="btn-switch-admin" class="btn btn-sm btn-primary hidden" style="border-radius: 20px; font-size: 12px; padding: 6px 14px;" onclick="switchToAdminView()">กลับหน้าแอดมิน</button>
-      <button class="btn btn-sm btn-outline" style="border-radius: 20px; font-size: 12px; padding: 6px 14px;" onclick="logout()">ออกจากระบบ</button>
-    </div>
+<!-- APP SHELL -->
+<div id="appShell" class="hidden">
+  <div class="contact-bar" id="topContactBar">
+    <div>📞 โทร: <span id="dispPhone">080-000-0000</span> &nbsp;|&nbsp; 🟢 Line: <span id="dispLine">@kidsport</span></div>
+    <div>มีข้อสงสัย? <a id="dispLink" href="#" target="_blank">ติดต่อแอดมินที่นี่</a></div>
   </div>
-
-  <!-- Content: Home -->
-  <div class="app-container" id="cust-content-home">
-    <div class="balance-card">
-      <div style="font-size: 15px; opacity: 0.9; font-weight: 500;">ยอดเงินออมสะสมทั้งหมด</div>
-      <div class="serif" style="font-size: 44px; font-weight: 700; margin: 10px 0; letter-spacing: -1px;">฿<span id="cust-balance">0.00</span></div>
-      <div class="badge bg-gold" style="display:inline-block; padding: 6px 14px; font-size: 13px;">พร้อมแลกทอง</div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">
-        <span>รายการล่าสุด</span>
-        <span style="font-size: 14px; color: var(--gold); font-weight: 600; cursor: pointer;" onclick="navCust('history')">ดูทั้งหมด</span>
-      </div>
-      <div id="cust-recent-tx">
-        <!-- Rendered via JS -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Content: Deposit -->
-  <div class="app-container hidden" id="cust-content-deposit">
-    <div class="card text-center">
-      <h3 class="serif mb-4" style="color: var(--gold-dark);">ฝากออมเงิน</h3>
-      <div class="qr-box">
-        <img id="cust-qr-img" src="" alt="QR Code" style="display:none; width: 100%;">
-        <div id="cust-qr-placeholder" style="color: var(--gray); font-size: 14px;">ไม่มีข้อมูล QR Code</div>
-        <div class="mt-4" style="text-align: left; background: white; padding: 16px; border-radius: 16px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
-          <div style="font-size: 12px; color: var(--gray);">ธนาคาร</div>
-          <div class="font-bold" id="cust-bank-name" style="font-size: 15px; margin-bottom: 8px;">-</div>
-          <div style="font-size: 12px; color: var(--gray);">ชื่อบัญชี</div>
-          <div class="font-bold" id="cust-bank-accname" style="font-size: 15px; margin-bottom: 8px;">-</div>
-          <div style="font-size: 12px; color: var(--gray);">เลขบัญชี</div>
-          <div class="font-bold serif" id="cust-bank-accno" style="font-size: 24px; color: var(--gold-dark); letter-spacing: 2px; font-family: 'Sarabun', sans-serif;">-</div>
+  <div id="topbar">
+    <div class="topbar-logo" id="dispStoreName">KID <span>SPORT</span></div>
+    <div class="topbar-right">
+      <button class="btn btn-primary btn-sm hidden" id="btnSwitchView" onclick="toggleAdminViewMode()">👀 ดูมุมมองลูกค้า</button>
+      <div class="points-badge hidden" id="userPointsBadge">🌟 0 แต้ม</div>
+      <div class="topbar-user" style="display:flex;align-items:center;gap:8px;color:#fff;">
+        <div class="topbar-avatar" id="topAvatar" onclick="showPage('profile')" title="แก้ไขโปรไฟล์">U</div>
+        <div>
+          <div id="topName" style="font-size:13px;color:#fff;font-weight:600;">ผู้ใช้งาน</div>
+          <div class="topbar-role" id="topRole">Member</div>
         </div>
       </div>
-      
-      <div class="form-group">
-        <label>จำนวนเงินที่โอน (บาท)</label>
-        <input type="number" id="dep-amount" class="form-control" placeholder="0.00">
-      </div>
-      <div class="form-group">
-        <label>หมายเหตุ</label>
-        <input type="text" id="dep-remark" class="form-control" placeholder="เช่น ออมครั้งที่ 1">
-      </div>
-      <div class="form-group">
-        <label>แนบสลิปโอนเงิน</label>
-        <input type="file" id="dep-slip" class="form-control" accept="image/*" onchange="previewImage(this, 'dep-preview')">
-        <img id="dep-preview" class="img-preview hidden">
-      </div>
-      <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="submitDeposit()">ยืนยันการฝากออม</button>
+      <button class="btn btn-outline btn-sm" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.2);" onclick="doLogout()">ออกจากระบบ</button>
     </div>
   </div>
 
-  <!-- Content: Withdraw -->
-  <div class="app-container hidden" id="cust-content-withdraw">
-    <div class="card">
-      <h3 class="serif mb-4" style="color: var(--gold-dark);">ถอนเงินออม / แลกทอง</h3>
-      <div style="background: var(--gold-light); padding: 20px; border-radius: 16px; margin-bottom: 24px; text-align: center;">
-        <div style="font-size: 14px; color: var(--gold-dark); font-weight: 500;">ยอดเงินที่ใช้ถอนได้สูงสุด</div>
-        <div class="serif" style="font-size: 32px; font-weight: 700; color: var(--gold-dark); margin-top: 4px;">฿<span id="cust-withdraw-max">0.00</span></div>
-      </div>
-      <div class="form-group">
-        <label>จำนวนเงินที่ต้องการนำไปแลก (บาท)</label>
-        <input type="number" id="wit-amount" class="form-control" placeholder="0.00">
-      </div>
-      <div class="form-group">
-        <label>หมายเหตุ</label>
-        <input type="text" id="wit-remark" class="form-control" placeholder="เช่น ต้องการทองแท่ง / มารับหน้าร้าน">
-      </div>
-      
-      <div class="form-group" style="background: #FEF3C7; padding: 20px; border-radius: 16px; margin-top: 24px; text-align:center;">
-        <label style="color: #92400E; font-size: 14px; margin-bottom: 12px; display:block;">📞 ติดต่อร้านทองเพื่อยืนยันการถอน</label>
-        <div id="cust-shop-contact-details" style="font-size: 15px; font-weight: 600; color: #92400E; line-height: 1.8; margin-bottom: 12px;"></div>
-        <div id="cust-shop-contact-btn"></div>
-      </div>
-      
-      <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="submitWithdraw()">ส่งคำขอถอนเงินออม</button>
+  <div id="sidebar">
+    <div id="userMenu">
+      <div class="sidebar-section">เมนูหลัก</div>
+      <div class="sidebar-item active" onclick="showPage('dashboard')"><span class="icon">🏠</span> แดชบอร์ด</div>
+      <div class="sidebar-item" onclick="showPage('booking')"><span class="icon">📅</span> จองคลาส</div>
+      <div class="sidebar-item" onclick="showPage('packages')"><span class="icon">💳</span> แพ็กเกจสมาชิก</div>
+      <div class="sidebar-item" onclick="showPage('crm')"><span class="icon">🎁</span> แลกของรางวัล</div>
+      <div class="sidebar-item" onclick="showPage('profile')"><span class="icon">👤</span> โปรไฟล์ของฉัน</div>
+      <div class="sidebar-item" onclick="showPage('history')"><span class="icon">📋</span> ประวัติสั่งซื้อ</div>
+    </div>
+    <div id="adminMenu" class="hidden">
+      <div class="sidebar-section">เมนูหลัก</div>
+      <div class="sidebar-item active" onclick="showPage('adminDash')"><span class="icon">📊</span> ภาพรวม</div>
+      <div class="sidebar-item" onclick="showPage('adminPayConfirm')"><span class="icon">✅</span> ยืนยันชำระเงิน</div>
+      <div class="sidebar-item" onclick="showPage('adminBookings')"><span class="icon">📅</span> การจองทั้งหมด</div>
+      <div class="sidebar-item" onclick="showPage('adminMembers')"><span class="icon">👥</span> ข้อมูลลูกค้า</div>
+      <div class="sidebar-item" onclick="showPage('adminClasses')"><span class="icon">🏋️</span> จัดการคลาส</div>
+      <div class="sidebar-item" onclick="showPage('adminPackages')"><span class="icon">📦</span> จัดการแพ็กเกจ</div>
+      <div class="sidebar-item" onclick="showPage('adminPromo')"><span class="icon">🎟️</span> โปรโมชั่น</div>
+      <div class="sidebar-item" onclick="showPage('adminCrm')"><span class="icon">🎁</span> ของรางวัล</div>
+      <div class="sidebar-section" style="margin-top:8px;">ตั้งค่าระบบ</div>
+      <div class="sidebar-item" onclick="showPage('adminSettings')"><span class="icon">⚙️</span> ตั้งค่าหลังบ้าน</div>
+      <div class="sidebar-item" onclick="showPage('adminStore')"><span class="icon">🏪</span> จัดการหน้าร้าน</div>
+      <div class="sidebar-item" onclick="showPage('adminPayments')"><span class="icon">💰</span> ตั้งค่าชำระเงิน</div>
     </div>
   </div>
 
-  <!-- Content: History -->
-  <div class="app-container hidden" id="cust-content-history">
-    <h3 class="serif mb-4" style="padding: 0 4px;">ประวัติการทำรายการ</h3>
-    <div class="card" style="padding: 12px 20px;">
-      <div id="cust-all-history"></div>
-    </div>
-  </div>
+  <div id="main">
 
-  <!-- Content: Profile -->
-  <div class="app-container hidden" id="cust-content-profile">
-    <div class="card text-center">
-      <img id="pro-avatar-img" src="" alt="โปรไฟล์" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; box-shadow: var(--shadow-sm); display: none;">
-      <div id="pro-avatar-fallback" style="width: 80px; height: 80px; background: var(--gray-light); border-radius: 50%; display: flex; align-items:center; justify-content:center; font-size:36px; margin: 0 auto 16px;">👤</div>
-      <h3 class="serif" id="pro-name" style="font-size: 22px;">ชื่อ นามสกุล</h3>
-      <div class="badge bg-gold mt-4" id="pro-role" style="padding: 6px 16px; font-size: 13px;">ลูกค้า</div>
-    </div>
-    <div class="card">
-      <div class="card-title">ข้อมูลส่วนตัว</div>
-      <div class="form-group">
-        <label>อัปโหลดรูปโปรไฟล์ใหม่</label>
-        <input type="file" id="edit-profile-pic" class="form-control" accept="image/*" style="padding: 10px;" onchange="previewImage(this, 'profile-preview')">
-        <img id="profile-preview" class="avatar-preview hidden">
-      </div>
-      <div class="form-group"><label>ชื่อ-นามสกุล</label><input type="text" id="edit-name" class="form-control"></div>
-      <div class="form-group"><label>เบอร์โทรศัพท์ (ใช้เข้าระบบ)</label><input type="text" id="edit-phone" class="form-control" disabled style="background: var(--gray-light); color: var(--gray);"></div>
-      <div class="form-group"><label>อีเมล (เพิ่มเติม)</label><input type="email" id="edit-email" class="form-control"></div>
-      <button class="btn btn-primary mt-4" style="width:100%" onclick="updateProfile()">บันทึกข้อมูล</button>
-    </div>
-    <div class="card">
-      <div class="card-title">เปลี่ยนรหัสผ่าน</div>
-      <div class="form-group"><label>รหัสผ่านใหม่</label><input type="password" id="edit-pass" class="form-control"></div>
-      <button class="btn btn-outline" style="width:100%" onclick="updatePassword()">อัปเดตรหัสผ่าน</button>
-    </div>
-  </div>
-
-  <!-- Bottom App Navigation (Customer) -->
-  <div class="bottom-nav">
-    <div class="nav-item active" onclick="navCust('home')"><span class="nav-icon">🏠</span>หน้าแรก</div>
-    <div class="nav-item" onclick="navCust('deposit')"><span class="nav-icon">📥</span>ฝาก</div>
-    <div class="nav-item" onclick="navCust('withdraw')"><span class="nav-icon">📤</span>ถอน</div>
-    <div class="nav-item" onclick="navCust('history')"><span class="nav-icon">📋</span>ประวัติ</div>
-    <div class="nav-item" onclick="navCust('profile')"><span class="nav-icon">👤</span>โปรไฟล์</div>
-  </div>
-</div>
-
-
-<!-- PAGE: ADMIN APP -->
-<div id="admin-sidebar-backdrop" onclick="toggleAdminSidebar()"></div>
-<div id="page-admin" class="hidden admin-layout">
-  
-  <!-- Sidebar for Desktop -->
-  <div class="admin-sidebar desktop-only" id="admin-sidebar">
-    <div style="padding: calc(24px + env(safe-area-inset-top)) 24px 24px; border-bottom: 1px solid #E5E7EB;">
-      <h2 class="serif" style="color: var(--gold-dark); font-size: 20px;">Admin Panel</h2>
-      <div style="font-size: 13px; color: var(--gray); margin-top: 4px;" id="admin-shop-name-sidebar">ร้านทองพรีเมียม</div>
-    </div>
-    <div style="padding: 16px 0; flex: 1; overflow-y: auto;">
-      <div class="admin-nav-item active nav-dashboard" onclick="navAdmin('dashboard')"><span style="font-size: 20px; width: 24px;">📊</span> ภาพรวม</div>
-      <div class="admin-nav-item nav-tx" onclick="navAdmin('transactions')"><span style="font-size: 20px; width: 24px;">📋</span> ธุรกรรม & อนุมัติ <span id="admin-badge-tx" class="badge bg-red hidden" style="margin-left:auto; font-size: 11px;">0</span></div>
-      <div class="admin-nav-item nav-users" onclick="navAdmin('users')"><span style="font-size: 20px; width: 24px;">👥</span> จัดการลูกค้า</div>
-      <div class="admin-nav-item nav-settings" id="nav-settings" onclick="navAdmin('settings')"><span style="font-size: 20px; width: 24px;">⚙️</span> ตั้งค่าร้านค้า</div>
-      <div class="admin-nav-item" onclick="switchToCustomerView()"><span style="font-size: 20px; width: 24px;">📱</span> มุมมองลูกค้า</div>
-    </div>
-    <div style="padding: 24px calc(24px + env(safe-area-inset-bottom)); border-top: 1px solid #E5E7EB;">
-      <button class="btn btn-outline" style="width: 100%; border-color: #E5E7EB; color: var(--gray-dark);" onclick="logout()">ออกจากระบบ</button>
-    </div>
-  </div>
-
-  <div class="admin-content" id="admin-content-area">
-    <!-- Topbar for Mobile -->
-    <div class="admin-topbar mobile-only">
-      <h2 class="serif" id="admin-page-title-mobile" style="font-size: 20px; margin: 0; color: var(--gold-dark);">ภาพรวมระบบ</h2>
-      <button class="btn btn-sm btn-outline" style="border-radius: 20px; font-size: 12px; padding: 6px 14px;" onclick="logout()">ออกจากระบบ</button>
-    </div>
-
-    <!-- Title for Desktop -->
-    <div class="flex items-center gap-3 mb-4 desktop-only" style="margin-bottom: 24px;">
-      <h2 class="serif" id="admin-page-title" style="font-size: 22px;">ภาพรวมระบบ</h2>
-    </div>
-
-    <!-- Admin Dashboard -->
-    <div id="admin-sec-dashboard" class="nav-dashboard">
-      <div class="grid">
-        <div class="card" style="border-left: 4px solid var(--gold);">
-          <div style="font-size: 14px; color: var(--gray); font-weight: 500;">ยอดเงินออมรวมในระบบ</div>
-          <div class="serif" style="font-size: 36px; font-weight: 700; margin-top: 8px;">฿<span id="stat-total-balance">0</span></div>
+    <!-- DASHBOARD USER -->
+    <div id="dashboardPage" class="page hidden">
+      <div class="page-title">สวัสดี, <span id="welcomeName">น้องๆ</span>! 👋</div>
+      <div class="page-sub">วันนี้พร้อมออกกำลังกายไหม?</div>
+      <div class="membership-card card-level-Basic" id="memCardBg">
+        <div class="card-top">
+          <div class="card-logo-txt">KID SPORT</div>
+          <div class="card-level-badge" id="memCardLevel">BASIC</div>
         </div>
-        <div class="card" style="border-left: 4px solid var(--black);">
-          <div style="font-size: 14px; color: var(--gray); font-weight: 500;">จำนวนสมาชิกทั้งหมด</div>
-          <div class="serif" style="font-size: 36px; font-weight: 700; margin-top: 8px;"><span id="stat-total-users">0</span> <span style="font-size: 16px; color: var(--gray); font-weight: 400; font-family: 'Sarabun', sans-serif;">คน</span></div>
+        <div class="card-avatar-wrap">
+          <div class="card-avatar" id="memCardAvatar">U</div>
+          <div>
+            <div class="card-points" id="memCardPoints" style="font-size:26px;font-weight:900;">0 <span style="font-size:13px;opacity:.8">Points</span></div>
+          </div>
         </div>
-        <div class="card" style="border-left: 4px solid var(--red);">
-          <div style="font-size: 14px; color: var(--gray); font-weight: 500;">รายการรออนุมัติ</div>
-          <div class="serif" style="font-size: 36px; font-weight: 700; margin-top: 8px; color: var(--red);"><span id="stat-pending">0</span> <span style="font-size: 16px; color: var(--gray); font-weight: 400; font-family: 'Sarabun', sans-serif;">รายการ</span></div>
+        <div class="card-bottom">
+          <div class="card-name" id="memCardName">Name</div>
+          <div class="card-id">ID: <span id="memCardId">0000</span></div>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card blue"><div class="stat-icon">📅</div><div class="stat-value" id="dashBookings">0</div><div class="stat-label">การจองของฉัน</div></div>
+        <div class="stat-card orange"><div class="stat-icon">⭐</div><div class="stat-value" id="dashLevel">Basic</div><div class="stat-label">ระดับสมาชิก</div></div>
+        <div class="stat-card green"><div class="stat-icon">🌟</div><div class="stat-value" id="dashPoints">0</div><div class="stat-label">คะแนนสะสม</div></div>
+        <div class="stat-card purple"><div class="stat-icon">🎁</div><div class="stat-value" id="dashRewards">0</div><div class="stat-label">ของรางวัลที่แลก</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;">📅 การจองถัดไป</h3>
+          <div class="history-list" id="upcomingList"><p style="font-size:12px;color:var(--gray-400)">ยังไม่มีการจอง</p></div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;">🎯 คลาสที่มีอยู่</h3>
+          <div class="history-list" id="popularClassList"><p style="font-size:12px;color:var(--gray-400)">ไม่มีข้อมูลคลาส</p></div>
         </div>
       </div>
     </div>
 
-    <!-- Admin Transactions -->
-    <div id="admin-sec-transactions" class="hidden nav-tx">
-      <div class="card" style="padding: 0;">
-        <div class="card-title" style="padding: 20px 20px 0;">
-          รายการฝาก-ถอน
-          <button class="btn btn-sm btn-outline" style="font-size: 12px; padding: 6px 12px;" onclick="exportData('transactions')">📥 Export Excel</button>
-        </div>
-        <div class="table-responsive" style="padding: 0 20px 20px;">
-          <table id="table-tx">
-            <thead>
-              <tr><th>วันที่</th><th>ลูกค้า</th><th>ประเภท</th><th>ยอดเงิน</th><th>หมายเหตุ</th><th>สถานะ</th><th>จัดการ</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
+    <!-- REWARDS USER -->
+    <div id="crmPage" class="page hidden">
+      <div class="page-title">🎁 แลกของรางวัล</div>
+      <div class="page-sub">ใช้คะแนนสะสมเพื่อแลกของรางวัลพิเศษ</div>
+      <div class="card" style="margin-bottom:20px;background:linear-gradient(90deg,var(--navy),var(--blue));color:white;">
+        <h3 style="margin-bottom:5px;">คะแนนของคุณ</h3>
+        <div style="font-size:32px;font-weight:900;">🌟 <span id="crmUserPoints">0</span> <span style="font-size:14px;font-weight:400">แต้ม</span></div>
       </div>
+      <div class="rewards-grid" id="crmRewardsGrid"></div>
     </div>
 
-    <!-- Admin Users -->
-    <div id="admin-sec-users" class="hidden nav-users">
-      <div class="card" style="padding: 0;">
-        <div class="card-title" style="padding: 20px 20px 0;">
-          รายชื่อผู้ใช้งาน
-          <button class="btn btn-sm btn-outline" style="font-size: 12px; padding: 6px 12px;" onclick="exportData('users')">📥 Export Excel</button>
-        </div>
-        <div class="table-responsive" style="padding: 0 20px 20px;">
-          <table id="table-users">
-            <thead>
-              <tr><th>โปรไฟล์</th><th>ชื่อ-นามสกุล</th><th>เบอร์โทร</th><th>สิทธิ์</th><th>ยอดสะสม</th><th>จัดการ</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Admin Settings -->
-    <div id="admin-sec-settings" class="hidden nav-settings">
-      <div class="card" style="max-width: 600px;">
-        <div class="card-title">ข้อมูลร้านค้า และ บัญชีรับโอน</div>
-        
-        <div class="form-group">
-          <label>อัปโหลดรูปร้านค้า (โลโก้)</label>
-          <input type="file" class="form-control" accept="image/*" style="padding: 10px;" id="set-shop-logo" onchange="previewImage(this, 'set-logo-preview')">
-          <img id="set-logo-preview" class="avatar-preview hidden">
-        </div>
-
-        <div class="form-group"><label>ชื่อร้าน</label><input type="text" id="set-shopname" class="form-control"></div>
-        <div class="form-group"><label>เบอร์โทรติดต่อ</label><input type="text" id="set-phone" class="form-control"></div>
-        
-        <div class="form-group"><label>Line ID (ไอดีไลน์ - แสดงเฉยๆ ไม่คลิก)</label><input type="text" id="set-line-id" class="form-control" placeholder="เช่น @goldshop"></div>
-        <div class="form-group"><label>ลิงก์เพิ่มเพื่อน Line (URL - สำหรับทำปุ่มคลิก)</label><input type="text" id="set-line-link" class="form-control" placeholder="เช่น https://line.me/ti/p/..."></div>
-        
-        <h4 class="mt-6 mb-4" style="color: var(--gold-dark); border-bottom: 1px solid #eee; padding-bottom: 8px;">บัญชีธนาคารรับฝากออม</h4>
-        <div class="form-group"><label>ชื่อธนาคาร</label><input type="text" id="set-bankname" class="form-control"></div>
-        <div class="form-group"><label>ชื่อบัญชี</label><input type="text" id="set-bankaccname" class="form-control"></div>
-        <div class="form-group"><label>เลขบัญชี</label><input type="text" id="set-bankaccno" class="form-control"></div>
-        
-        <div class="form-group">
-          <label>อัปโหลดรูป QR Code รับเงิน</label>
-          <input type="file" class="form-control" accept="image/*" style="padding: 10px;" id="set-qr-code" onchange="previewImage(this, 'set-qr-preview')">
-          <img id="set-qr-preview" class="img-preview hidden">
-        </div>
-
-        <h4 class="mt-6 mb-4" style="color: var(--gold-dark); border-bottom: 1px solid #eee; padding-bottom: 8px;">Telegram Backup & Notifications</h4>
-        <div class="form-group">
-          <label>Bot Token (ล็อกอัตโนมัติ ห้ามเปลี่ยน)</label>
-          <input type="text" id="set-tg-token" class="form-control" value="8731749401:AAEmA6wiK5o4NM0CcjJnmgt_827PbyMtPYw" readonly disabled style="opacity: 0.7;">
-        </div>
-        <div class="form-group"><label>Chat ID</label><input type="text" id="set-tg-chatid" class="form-control" value="-1003963635991"></div>
-        
-        <div class="grid gap-3 mt-6">
-          <button class="btn btn-primary" style="width: 100%;" onclick="saveSettings()">💾 บันทึกตั้งค่า</button>
-          <button class="btn btn-outline" style="width: 100%;" onclick="testTelegram()">ทดสอบแจ้งเตือน</button>
-          <button class="btn btn-outline" style="width: 100%; border-color:var(--green); color:var(--green);" onclick="backupToTelegram()">Backup ข้อมูลเดี๋ยวนี้</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bottom Nav for Admin -->
-  <div class="admin-bottom-nav mobile-only">
-    <div class="nav-item active nav-dashboard" onclick="navAdmin('dashboard')"><span class="nav-icon">📊</span>หน้าแรก</div>
-    <div class="nav-item nav-tx" onclick="navAdmin('transactions')">
-      <span class="nav-icon">📋</span>ธุรกรรม
-      <span id="admin-badge-tx-mobile" class="badge bg-red hidden" style="position: absolute; top: 0; right: 0; padding: 2px 6px; font-size: 9px; transform: translate(20%, -20%);">0</span>
-    </div>
-    <div class="nav-item nav-users" onclick="navAdmin('users')"><span class="nav-icon">👥</span>ลูกค้า</div>
-    <div class="nav-item nav-settings" id="nav-settings-mobile" onclick="navAdmin('settings')"><span class="nav-icon">⚙️</span>ตั้งค่า</div>
-    <div class="nav-item" onclick="switchToCustomerView()"><span class="nav-icon">📱</span>หน้าลูกค้า</div>
-  </div>
-</div>
-
-<!-- Modal: Edit Balance -->
-<div id="modal-edit-balance" class="modal-overlay">
-  <div class="modal">
-    <h3 class="serif mb-4">แก้ไขยอดเงินสะสม</h3>
-    <p style="font-size: 14px; color: var(--gray); margin-bottom: 20px;">ชื่อลูกค้า: <b id="meb-name" style="color: var(--black);"></b></p>
-    <div class="form-group">
-      <label>ยอดเงินสุทธิใหม่ (บาท)</label>
-      <input type="number" id="meb-amount" class="form-control" style="font-size: 20px; font-weight: bold; color: var(--gold-dark);">
-    </div>
-    <div class="flex gap-2 mt-6">
-      <button class="btn btn-outline" style="flex:1" onclick="closeModal('modal-edit-balance')">ยกเลิก</button>
-      <button class="btn btn-success" style="flex:1" onclick="confirmEditBalance()">บันทึกยอด</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal: Edit Withdraw Amount -->
-<div id="modal-edit-withdraw" class="modal-overlay">
-  <div class="modal">
-    <h3 class="serif mb-4">ตรวจสอบและแก้ไขยอดถอน</h3>
-    <p style="font-size: 14px; color: var(--gray); margin-bottom: 20px;">ยอดที่ลูกค้าขอถอน: <b id="mw-req-amt" style="color: var(--black); font-size: 16px;">0</b> บาท</p>
-    <div class="form-group">
-      <label>ยอดเงินสุทธิที่อนุมัติให้หัก (บาท)</label>
-      <input type="number" id="mw-app-amt" class="form-control" style="font-size: 20px; font-weight: bold; color: var(--gold-dark);">
-    </div>
-    <div class="flex gap-2 mt-6">
-      <button class="btn btn-outline" style="flex:1" onclick="closeModal('modal-edit-withdraw')">ยกเลิก</button>
-      <button class="btn btn-success" style="flex:1" onclick="confirmApproveWithdraw()">อนุมัติยอดนี้</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal: View Slip -->
-<div id="modal-view-slip" class="modal-overlay">
-  <div class="modal text-center" style="padding: 16px; background: transparent; box-shadow: none;">
-    <h3 class="serif mb-4" style="color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">หลักฐานการโอนเงิน</h3>
-    <img id="slip-image-full" src="" style="width: 100%; border-radius: 16px; margin-bottom: 16px; box-shadow: var(--shadow-md);">
-    <button class="btn btn-primary" style="width: 100%; background: white; color: var(--black);" onclick="closeModal('modal-view-slip')">ปิดรูปภาพ</button>
-  </div>
-</div>
-
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-  import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-  import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-  // System Helpers
-  const getEl = (id) => document.getElementById(id);
-  const hideEl = (id) => { const el = getEl(id); if(el) el.classList.add('hidden'); };
-  const showEl = (id) => { const el = getEl(id); if(el) el.classList.remove('hidden'); };
-  const getVal = (id) => { const el = getEl(id); return el ? el.value : ''; };
-  const setVal = (id, val) => { const el = getEl(id); if(el) el.value = val; };
-  const setText = (id, txt) => { const el = getEl(id); if(el) el.textContent = txt; };
-
-  const myFirebaseConfig = {
-    apiKey: "AIzaSyD1GnYInbXZHxjX91E25ki2WP-R0a9pWTU",
-    authDomain: "gold-savings-517d2.firebaseapp.com",
-    projectId: "gold-savings-517d2",
-    storageBucket: "gold-savings-517d2.firebasestorage.app",
-    messagingSenderId: "1039204885436",
-    appId: "1:1039204885436:web:046afe73cf7c98f556c1b9",
-    measurementId: "G-H6H6GL3NW6"
-  };
-  
-  const safeParseJSON = (str, fallback) => {
-    try { return str ? JSON.parse(str) : fallback; } catch (e) { return fallback; }
-  };
-  
-  const firebaseConfig = myFirebaseConfig;
-  const appId = 'gold-savings-app';
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  
-  const getCol = (name) => collection(db, name);
-  const getDocRef = (colName, docId) => doc(db, colName, docId);
-
-  window.appState = {
-    currentUser: null,
-    users: safeParseJSON(localStorage.getItem('cache_users'), []) || [],
-    transactions: safeParseJSON(localStorage.getItem('cache_txs'), []) || [],
-    settings: safeParseJSON(localStorage.getItem('cache_settings'), null) || {
-      shopName: 'ร้านทองพรีเมียม', phone: '', lineId: '', lineLink: '', bankName: '', bankAccName: '', bankAccNo: '', qrBase64: '', shopLogoBase64: '', 
-      tgToken: '8731749401:AAEmA6wiK5o4NM0CcjJnmgt_827PbyMtPYw', tgChatId: '-1003963635991', hasSuperAdmin: false
-    },
-  };
-
-  let pendingTxId = null;
-  let pendingEditUserId = null; 
-  let isListenersSetup = false;
-
-  window.showToast = (msg, isError = false) => {
-    const t = getEl('toast');
-    if(!t) return;
-    t.textContent = msg;
-    t.style.background = isError ? "var(--red)" : "var(--black)";
-    t.style.display = 'block';
-    setTimeout(() => { t.style.display = 'none'; }, 4000);
-  };
-  
-  window.showLoading = (show) => {
-    const el = getEl('loading');
-    if(el) {
-       el.style.display = show ? 'flex' : 'none';
-       const txt = getEl('loading-text');
-       if(txt) txt.textContent = "กำลังเชื่อมต่อระบบ...";
-    }
-  };
-  
-  window.closeModal = (id) => {
-    const el = getEl(id);
-    if(el) el.style.display = 'none';
-  };
-  
-  window.openModal = (id) => {
-    const el = getEl(id);
-    if(el) el.style.display = 'flex';
-  };
-  
-  const genId = () => Date.now().toString(36) + Math.random().toString(36).substr(2);
-
-  window.previewImage = (input, imgId) => {
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          const MAX_WIDTH = 800;
-          let width = img.width; let height = img.height;
-          if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-          canvas.width = width; canvas.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
-          const el = getEl(imgId);
-          if(el) {
-             el.src = dataUrl;
-             el.classList.remove('hidden');
-          }
-          input.dataset.base64 = dataUrl;
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  };
-
-  const ensureAuth = async () => {
-    if (auth.currentUser) return true;
-    return new Promise(resolve => {
-      const unsub = onAuthStateChanged(auth, user => {
-        if (user) { unsub(); resolve(true); }
-      });
-      setTimeout(() => { unsub(); resolve(!!auth.currentUser); }, 4000);
-    });
-  };
-
-  const initApp = async () => {
-    try {
-      const savedUserStr = localStorage.getItem('goldAppUser');
-      if (savedUserStr) {
-         window.appState.currentUser = JSON.parse(savedUserStr);
-      }
-    } catch(e) {}
-    
-    updateSettingsUI();
-    routeUser(); 
-
-    onAuthStateChanged(auth, (user) => {
-      if (user && !isListenersSetup) {
-        isListenersSetup = true;
-        setupListeners();
-      }
-    });
-
-    try {
-      if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-        await signInWithCustomToken(auth, __initial_auth_token);
-      } else {
-        await signInAnonymously(auth);
-      }
-    } catch (e) {
-      console.warn("Offline Mode");
-    }
-
-    setInterval(() => checkAndRunBackup(), 3600000);
-  };
-
-  const setupListeners = () => {
-    if(!auth.currentUser) return;
-    
-    onSnapshot(getDocRef('settings', 'global'), (doc) => {
-      if(doc.exists()) {
-        window.appState.settings = {...window.appState.settings, ...doc.data()};
-        try { localStorage.setItem('cache_settings', JSON.stringify(window.appState.settings)); } catch(e){}
-        updateSettingsUI();
-      }
-    }, (err) => console.warn("Sync paused"));
-
-    onSnapshot(getCol('appUsers'), (snap) => {
-      if (!snap.empty) {
-         window.appState.users = snap.docs.map(d => ({id: d.id, ...d.data()}));
-         try { localStorage.setItem('cache_users', JSON.stringify(window.appState.users)); } catch(e){}
-      }
-      
-      if(window.appState.currentUser) {
-        const updatedMe = window.appState.users.find(u => u.id === window.appState.currentUser.id);
-        if(updatedMe) {
-          window.appState.currentUser = updatedMe;
-          try { localStorage.setItem('goldAppUser', JSON.stringify(updatedMe)); } catch(e){}
-          updateProfileUI();
-        }
-      }
-      renderAdminUsers();
-      updateDashboardStats();
-    }, (err) => console.warn("Sync paused"));
-
-    onSnapshot(getCol('transactions'), (snap) => {
-      if (!snap.empty) {
-         window.appState.transactions = snap.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b) => b.date - a.date);
-         try { localStorage.setItem('cache_txs', JSON.stringify(window.appState.transactions)); } catch(e){}
-      }
-      
-      renderCustomerHistory();
-      renderAdminTransactions();
-      updateDashboardStats();
-    }, (err) => console.warn("Sync paused"));
-  };
-
-  window.switchAuthTab = (tab) => {
-    const formLogin = getEl('form-login');
-    if(formLogin) formLogin.classList.toggle('hidden', tab !== 'login');
-    
-    const formReg = getEl('form-register');
-    if(formReg) formReg.classList.toggle('hidden', tab !== 'register');
-    
-    const tabLog = getEl('tab-login');
-    if(tabLog) tabLog.style.background = tab === 'login' ? 'white' : 'transparent';
-    
-    const tabReg = getEl('tab-register');
-    if(tabReg) tabReg.style.background = tab === 'register' ? 'white' : 'transparent';
-    
-    if(tab === 'register') {
-      const secGroup = getEl('secret-code-group');
-      const s = window.appState.settings || {};
-      if(secGroup) secGroup.classList.toggle('hidden', s.hasSuperAdmin);
-    }
-  };
-
-  window.switchToCustomerView = () => {
-    hideEl('page-admin');
-    showEl('page-customer');
-    showEl('btn-switch-admin');
-    navCust('home');
-  };
-
-  window.switchToAdminView = () => {
-    hideEl('page-customer');
-    showEl('page-admin');
-    const role = window.appState.currentUser?.role;
-    if(role === 'superadmin') {
-       navAdmin('dashboard');
-    } else {
-       navAdmin('transactions');
-    }
-  };
-
-  const routeUser = () => {
-    hideEl('page-login');
-    hideEl('page-customer');
-    hideEl('page-admin');
-    
-    showLoading(false);
-
-    if(!window.appState.currentUser) {
-      showEl('page-login');
-      return;
-    }
-
-    const role = window.appState.currentUser.role;
-    updateProfileUI();
-
-    if(role === 'superadmin' || role === 'subadmin') {
-      showEl('page-admin');
-      
-      const isSuper = role === 'superadmin';
-      
-      document.querySelectorAll('.nav-dashboard, .nav-users, .nav-settings').forEach(el => {
-          if(el) el.classList.toggle('hidden', !isSuper);
-      });
-      
-      showEl('btn-switch-admin');
-      
-      if (isSuper) {
-         navAdmin('dashboard');
-      } else {
-         navAdmin('transactions');
-      }
-      
-    } else {
-      showEl('page-customer');
-      hideEl('btn-switch-admin');
-      navCust('home');
-    }
-  };
-
-  window.logout = () => {
-    window.appState.currentUser = null;
-    try { localStorage.removeItem('goldAppUser'); } catch(e){}
-    routeUser();
-  };
-
-  window.handleRegister = async () => {
-    const name = getVal('reg-name').trim();
-    const phone = getVal('reg-phone').trim();
-    const pass = getVal('reg-pass');
-    const secret = getVal('reg-secret').trim();
-
-    if(!name || !phone || !pass) return showToast("กรุณากรอกข้อมูลให้ครบถ้วน", true);
-    
-    let isUsed = false;
-    if(window.appState.users && window.appState.users.length > 0) {
-       for(let i=0; i<window.appState.users.length; i++) {
-          if(window.appState.users[i].phone === phone) isUsed = true;
-       }
-    }
-    if(isUsed) return showToast("เบอร์โทรนี้ถูกใช้งานแล้ว", true);
-
-    showLoading(true);
-    
-    let role = 'customer';
-    const s = window.appState.settings || {};
-    
-    if(secret === '9999') {
-      if(!s.hasSuperAdmin) {
-         role = 'superadmin';
-         window.appState.settings.hasSuperAdmin = true;
-         try { await setDoc(getDocRef('settings', 'global'), { hasSuperAdmin: true }, { merge: true }); } catch(e) {}
-      } else {
-         showToast("รหัสลับถูกใช้ไปแล้ว ไม่สามารถเป็น Super Admin ได้อีก", true);
-         showLoading(false);
-         return;
-      }
-    } else if (secret !== '') {
-       showToast("รหัสลับไม่ถูกต้อง (หากเป็นลูกค้าโปรดเว้นว่าง)", true);
-       showLoading(false);
-       return;
-    }
-
-    const docId = genId();
-    const newUser = { id: docId, phone: phone, password: pass, name: name, role: role, email: '', balance: 0, profilePicBase64: '', createdAt: Date.now() };
-    
-    try {
-      if(auth.currentUser) {
-         await setDoc(getDocRef('appUsers', docId), newUser);
-      }
-    } catch (err) {
-      console.warn("Saving offline...", err);
-    } 
-
-    window.appState.users.push(newUser);
-    try {
-       localStorage.setItem('cache_users', JSON.stringify(window.appState.users));
-       localStorage.setItem('goldAppUser', JSON.stringify(newUser));
-    } catch(e){}
-    
-    window.appState.currentUser = newUser;
-    showToast("สมัครสมาชิกสำเร็จ!");
-    routeUser();
-    
-    sendTgMsg(`🎉 <b>สมาชิกลงทะเบียนใหม่</b>\nชื่อ: ${name}\nเบอร์โทร: ${phone}\nสิทธิ์: ${role === 'superadmin' ? 'แอดมินหลัก' : 'ลูกค้า'}`);
-    
-    setTimeout(() => { showLoading(false); }, 200);
-  };
-
-  window.handleLogin = () => {
-    const phone = getVal('login-phone').trim();
-    const pass = getVal('login-pass');
-    
-    let user = null;
-    if(window.appState.users && window.appState.users.length > 0) {
-       for(let i=0; i<window.appState.users.length; i++) {
-          if(window.appState.users[i].phone === phone && window.appState.users[i].password === pass) {
-             user = window.appState.users[i];
-             break;
-          }
-       }
-    }
-    
-    if(user) {
-      window.appState.currentUser = user;
-      try { localStorage.setItem('goldAppUser', JSON.stringify(user)); } catch(e){}
-      showToast("เข้าสู่ระบบสำเร็จ");
-      routeUser();
-      
-      sendTgMsg(`🔐 <b>เข้าสู่ระบบ</b>\nผู้ใช้: ${user.name} (${user.phone})`);
-    } else {
-      showToast("เบอร์โทรหรือรหัสผ่านไม่ถูกต้อง", true);
-    }
-  };
-
-  const updateProfileUI = () => {
-    const u = window.appState.currentUser;
-    if(!u) return;
-    
-    const bal = u.balance || 0;
-    setText('pro-name', u.name);
-    setVal('edit-name', u.name);
-    setVal('edit-phone', u.phone);
-    setVal('edit-email', u.email || '');
-    
-    let rText = u.role === 'superadmin' ? 'ผู้ดูแลระบบหลัก' : (u.role === 'subadmin' ? 'แอดมินรอง' : 'ลูกค้า');
-    setText('pro-role', rText);
-    setText('cust-balance', bal.toLocaleString());
-    setText('cust-withdraw-max', bal.toLocaleString());
-
-    if(u.profilePicBase64) {
-      const img1 = getEl('pro-avatar-img');
-      if(img1) { img1.src = u.profilePicBase64; img1.style.display = 'block'; }
-      
-      const imgFallback = getEl('pro-avatar-fallback');
-      if(imgFallback) imgFallback.style.display = 'none';
-      
-      const imgPrev = getEl('profile-preview');
-      if(imgPrev) { imgPrev.src = u.profilePicBase64; imgPrev.classList.remove('hidden'); }
-    }
-  };
-
-  window.updateProfile = async () => {
-    const name = getVal('edit-name');
-    const email = getVal('edit-email');
-    const picInput = getEl('edit-profile-pic');
-    
-    showLoading(true);
-    
-    let updateData = { name: name, email: email };
-    if(picInput && picInput.dataset && picInput.dataset.base64) {
-      updateData.profilePicBase64 = picInput.dataset.base64;
-      window.appState.currentUser.profilePicBase64 = picInput.dataset.base64;
-    }
-    
-    window.appState.currentUser.name = name;
-    window.appState.currentUser.email = email;
-    
-    try {
-       if(auth.currentUser) await updateDoc(getDocRef('appUsers', window.appState.currentUser.id), updateData);
-       showToast("บันทึกโปรไฟล์สำเร็จ");
-       updateProfileUI();
-       
-       sendTgMsg(`👤 <b>อัปเดตโปรไฟล์</b>\nผู้ใช้: ${window.appState.currentUser.name}\nมีการอัปเดตข้อมูลส่วนตัว`);
-    } catch(e) {
-       console.error(e);
-       showToast("❌ บันทึกไม่สำเร็จ (ตรวจสอบสิทธิ์ Firebase)", true);
-    }
-    showLoading(false);
-  };
-
-  window.updatePassword = async () => {
-    const pass = getVal('edit-pass');
-    if(!pass) return showToast("กรุณากรอกรหัสผ่านใหม่", true);
-    
-    showLoading(true);
-    
-    window.appState.currentUser.password = pass;
-    try {
-       if(auth.currentUser) await updateDoc(getDocRef('appUsers', window.appState.currentUser.id), { password: pass });
-       showToast("เปลี่ยนรหัสผ่านสำเร็จ");
-       setVal('edit-pass', '');
-       
-       sendTgMsg(`🔑 <b>เปลี่ยนรหัสผ่าน</b>\nผู้ใช้: ${window.appState.currentUser.name} เปลี่ยนรหัสผ่านใหม่`);
-    } catch(e) {
-       showToast("❌ บันทึกไม่สำเร็จ", true);
-    }
-    showLoading(false);
-  };
-
-  window.navCust = (tab) => {
-    document.querySelectorAll('#page-customer .app-container').forEach(e => e.classList.add('hidden'));
-    document.querySelectorAll('#page-customer .bottom-nav .nav-item').forEach(e => e.classList.remove('active'));
-    
-    showEl(`cust-content-${tab}`);
-    const navItem = document.querySelector(`#page-customer .bottom-nav .nav-item[onclick="navCust('${tab}')"]`);
-    if(navItem) navItem.classList.add('active');
-    window.scrollTo(0, 0); 
-  };
-
-  window.submitDeposit = async () => {
-    const amtEl = getEl('dep-amount');
-    const amount = amtEl ? parseFloat(amtEl.value) : 0;
-    const remark = getVal('dep-remark');
-    const slipInput = getEl('dep-slip');
-    const slipBase64 = (slipInput && slipInput.dataset) ? slipInput.dataset.base64 : '';
-
-    if(!amount || amount <= 0) return showToast("กรุณาระบุยอดเงินที่ถูกต้อง", true);
-    if(!slipBase64) return showToast("กรุณาแนบสลิปโอนเงิน", true);
-
-    showLoading(true);
-
-    const tx = {
-      id: genId(), 
-      userId: window.appState.currentUser ? window.appState.currentUser.id : '', 
-      userName: window.appState.currentUser ? window.appState.currentUser.name : '',
-      type: 'deposit', 
-      amount: amount, 
-      remark: remark, 
-      slipBase64: slipBase64, 
-      status: 'pending', 
-      date: Date.now()
-    };
-    
-    try {
-      if(auth.currentUser) await setDoc(getDocRef('transactions', tx.id), tx);
-      
-      if(!window.appState.transactions) window.appState.transactions = [];
-      window.appState.transactions.unshift(tx);
-      try { localStorage.setItem('cache_txs', JSON.stringify(window.appState.transactions)); } catch(e){}
-      
-      sendTgMsg(`📥 <b>แจ้งเตือนฝากออม</b>\nจาก: ${tx.userName}\nยอดเงิน: ฿${amount.toLocaleString()}\nสถานะ: รอตรวจสอบ`);
-      
-      setVal('dep-amount', '');
-      setVal('dep-remark', '');
-      const prev = getEl('dep-preview');
-      if(prev) prev.classList.add('hidden');
-      if(slipInput) { slipInput.value = ''; slipInput.dataset.base64 = ''; }
-      
-      showToast("ส่งคำขอฝากออมสำเร็จ รอตรวจสอบ");
-      renderCustomerHistory();
-      navCust('history');
-    } catch(e) {
-      console.error(e);
-      showToast("ส่งคำขอเฉพาะในเครื่อง (โหมดออฟไลน์)", true);
-    }
-    showLoading(false);
-  };
-
-  window.submitWithdraw = async () => {
-    const amtEl = getEl('wit-amount');
-    const amount = amtEl ? parseFloat(amtEl.value) : 0;
-    const remark = getVal('wit-remark');
-    const max = (window.appState.currentUser && window.appState.currentUser.balance) ? window.appState.currentUser.balance : 0;
-
-    if(!amount || amount <= 0) return showToast("กรุณาระบุยอดเงินที่ถูกต้อง", true);
-    if(amount > max) return showToast("ยอดเงินออมไม่เพียงพอ", true);
-
-    showLoading(true);
-
-    const tx = {
-      id: genId(), 
-      userId: window.appState.currentUser ? window.appState.currentUser.id : '', 
-      userName: window.appState.currentUser ? window.appState.currentUser.name : '',
-      type: 'withdraw', 
-      amount: amount, 
-      remark: remark, 
-      status: 'pending', 
-      date: Date.now()
-    };
-    
-    try {
-      if(auth.currentUser) await setDoc(getDocRef('transactions', tx.id), tx);
-      
-      if(!window.appState.transactions) window.appState.transactions = [];
-      window.appState.transactions.unshift(tx);
-      try { localStorage.setItem('cache_txs', JSON.stringify(window.appState.transactions)); } catch(e){}
-      
-      sendTgMsg(`📤 <b>แจ้งเตือนขอถอนเงิน/แลกทอง</b>\nจาก: ${tx.userName}\nยอดเงิน: ฿${amount.toLocaleString()}\nหมายเหตุ: ${remark}\nสถานะ: รอตรวจสอบ`);
-      
-      setVal('wit-amount', '');
-      setVal('wit-remark', '');
-      
-      showToast("ส่งคำขอถอนสำเร็จ รอร้านยืนยัน");
-      renderCustomerHistory();
-      navCust('history');
-    } catch(e) {
-      console.error(e);
-      showToast("ส่งคำขอเฉพาะในเครื่อง (โหมดออฟไลน์)", true);
-    }
-    showLoading(false);
-  };
-
-  const renderCustomerHistory = () => {
-    let txs = [];
-    const myId = window.appState.currentUser ? window.appState.currentUser.id : null;
-    
-    if(window.appState.transactions) {
-       for(let i=0; i<window.appState.transactions.length; i++) {
-          if(window.appState.transactions[i].userId === myId) txs.push(window.appState.transactions[i]);
-       }
-    }
-
-    const renderList = (containerId, limit = 0) => {
-      const el = getEl(containerId);
-      if(!el) return;
-      el.innerHTML = '';
-      
-      let list = txs;
-      if(limit > 0 && txs.length > limit) {
-         list = txs.slice(0, limit);
-      }
-      
-      if(list.length === 0) { el.innerHTML = '<div style="text-align:center; padding:20px; color:gray;">ยังไม่มีรายการธุรกรรม</div>'; return; }
-
-      list.forEach(t => {
-        let icon = t.type==='deposit' ? '📥' : '📤';
-        let color = t.type==='deposit' ? 'var(--green)' : 'var(--red)';
-        let statusBadge = t.status==='approved' ? '<span class="badge bg-green">สำเร็จ</span>' : (t.status==='rejected' ? '<span class="badge bg-red">ถูกปฏิเสธ</span>' : '<span class="badge bg-yellow">รออนุมัติ</span>');
-        let d = new Date(t.date).toLocaleString('th-TH');
-        
-        let amt = t.amount ? t.amount : 0;
-        
-        el.innerHTML += `
-          <div class="flex justify-between items-center tx-item-history" style="padding: 14px 0; border-bottom: 1px solid #eee;">
-            <div class="flex items-center gap-3">
-              <div style="font-size: 20px; background:var(--gray-light); padding:12px; border-radius:14px; flex-shrink:0;">${icon}</div>
-              <div style="min-width: 0;">
-                <div style="font-weight:600; font-size:15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${t.type==='deposit' ? 'ฝากออม' : 'ถอนแลกทอง'}</div>
-                <div style="font-size:12px; color:var(--gray);">${d}</div>
-              </div>
+    <!-- BOOKING -->
+    <div id="bookingPage" class="page hidden">
+      <div class="page-title">📅 จองคลาส</div>
+      <div class="page-sub">เลือกประเภทคลาส วัน และเวลาที่ต้องการ</div>
+      <div class="calendar-wrapper">
+        <div>
+          <div class="calendar-card">
+            <div class="cal-header">
+              <div class="cal-month" id="calMonth">พฤษภาคม 2569</div>
+              <div class="cal-nav"><button onclick="changeMonth(-1)">‹</button><button onclick="changeMonth(1)">›</button></div>
             </div>
-            <div class="tx-amount-col">
-              <div style="font-weight:700; color:${color}; font-size:15px;">฿${amt.toLocaleString()}</div>
-              <div style="margin-top:4px;">${statusBadge}</div>
+            <div class="cal-grid" id="calGrid"></div>
+            <div class="time-slots" id="timeSlots" style="display:none;">
+              <h3>⏰ เลือกเวลา — <span id="selectedDateLabel" style="color:var(--blue)"></span></h3>
+              <div class="time-slot-grid" id="timeSlotGrid"></div>
             </div>
           </div>
-        `;
-      });
-    };
-    renderList('cust-recent-tx', 3);
-    renderList('cust-all-history', 0);
-  };
+          <div class="card" style="margin-top:20px;">
+            <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;">🏋️ เลือกประเภทคลาส</h3>
+            <div class="class-type-selector" id="classTypeSelector"></div>
+          </div>
+        </div>
+        <div>
+          <div class="card booking-panel">
+            <h3>🧾 สรุปการจอง</h3>
+            <div class="booking-summary">
+              <div class="booking-item"><span class="booking-item-label">ประเภทคลาส</span><span class="booking-item-val" id="sumClass">-</span></div>
+              <div class="booking-item"><span class="booking-item-label">วันที่เลือก</span><span class="booking-item-val" id="sumDates">-</span></div>
+              <div class="booking-item"><span class="booking-item-label">เวลาที่เลือก</span><span class="booking-item-val" id="sumTimes">-</span></div>
+              <div class="booking-item"><span class="booking-item-label">จำนวนครั้ง</span><span class="booking-item-val" id="sumCount">0 ครั้ง</span></div>
+            </div>
+            <div class="price-breakdown">
+              <div class="price-row"><span>ราคาต่อครั้ง</span><span id="pricePerClass">฿0</span></div>
+              <div class="price-row"><span>จำนวน</span><span id="priceCount">x 0</span></div>
+              <div class="price-row total"><span>รวมทั้งหมด</span><span id="priceTotal" style="color:var(--orange)">฿0</span></div>
+            </div>
+            <button class="btn btn-orange" style="width:100%;justify-content:center;" onclick="preparePayment('class')">💳 ดำเนินการชำระเงิน →</button>
+            <button class="btn btn-outline btn-sm" style="width:100%;justify-content:center;margin-top:8px;" onclick="clearBooking()">ล้างการเลือก</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  window.navAdmin = (sec) => {
-    const role = window.appState.currentUser?.role;
-    if (role !== 'superadmin' && (sec === 'dashboard' || sec === 'users' || sec === 'settings')) {
-        return; 
+    <!-- PAYMENT -->
+    <div id="paymentPage" class="page hidden">
+      <div class="page-title">💳 ชำระเงิน</div>
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:20px;">
+        <div>
+          <div class="card" style="margin-bottom:16px;">
+            <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;">ช่องทางการชำระเงิน</h3>
+            <div class="payment-methods">
+              <div class="payment-method selected" onclick="selectPayment(this)"><span class="pm-icon">🏦</span><div><div class="pm-name">โอนเงินธนาคาร / QR Code</div></div><div class="pm-radio"></div></div>
+            </div>
+            <div class="qr-box" id="qrBox">
+              <div class="qr-placeholder" id="dispPayQR">📲</div>
+              <p style="font-size:14px;font-weight:700;color:var(--navy);" id="dispPayBankName">ชื่อธนาคาร</p>
+              <p style="font-size:12px;color:var(--gray-600);" id="dispPayAccName">ชื่อบัญชี: -</p>
+              <p style="font-size:12px;color:var(--orange);font-weight:bold;margin-bottom:10px;" id="dispPayAccNo">เลขบัญชี: -</p>
+              <div style="margin-top:12px;text-align:left;">
+                <label class="form-label" style="color:var(--orange)">อัพโหลดสลิปการโอนเงิน (บังคับ)</label>
+                <input type="file" id="paySlipUpload" style="margin-top:6px;font-size:12px;" accept="image/*" onchange="handleSlipUpload(event)">
+                <div id="slipPreview" style="margin-top:8px;display:none;"><img id="slipPreviewImg" style="max-width:100%;max-height:200px;border-radius:8px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="height:fit-content;">
+          <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;">🧾 สรุปคำสั่งซื้อ</h3>
+          <div class="booking-summary">
+            <div class="booking-item"><span class="booking-item-label">รายการ</span><span class="booking-item-val" id="pay-class">-</span></div>
+            <div class="booking-item"><span class="booking-item-label">จำนวน</span><span class="booking-item-val" id="pay-count">0</span></div>
+          </div>
+          <div class="price-breakdown">
+            <div class="price-row total"><span>ยอดรวม</span><span id="pay-total" style="color:var(--orange)">฿0</span></div>
+          </div>
+          <button class="btn btn-orange" style="width:100%;justify-content:center;" onclick="confirmPayment()">✅ ยืนยันการชำระเงิน</button>
+          <button class="btn btn-outline btn-sm" style="width:100%;justify-content:center;margin-top:8px;" onclick="showPage('booking')">← กลับแก้ไข</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div id="packagesPage" class="page hidden">
+      <div class="page-title">💳 แพ็กเกจ & สมาชิก</div>
+      <div class="packages-grid" id="packagesGrid"></div>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="profilePage" class="page hidden">
+      <div class="page-title">👤 โปรไฟล์ของฉัน</div>
+      <div class="profile-header">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar-lg" id="profileAvatar">U</div>
+          <div class="avatar-edit-btn" onclick="document.getElementById('avatarFileInput').click()" title="เปลี่ยนรูปโปรไฟล์">✏️</div>
+        </div>
+        <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
+        <div class="profile-name" id="profileName">ชื่อ-นามสกุล</div>
+        <div style="font-size:13px;opacity:.7;margin-top:4px;" id="profileEmailPhone">email | phone</div>
+        <div class="profile-membership" id="profileLevel">⭐ Basic Member</div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;">แก้ไขข้อมูลส่วนตัว</h3>
+        <div class="form-group"><label class="form-label">ชื่อ-นามสกุล</label><input class="form-input" id="profEditName"></div>
+        <div class="form-group"><label class="form-label">อีเมล</label><input class="form-input" id="profEditEmail"></div>
+        <div class="form-group"><label class="form-label">รหัสผ่านใหม่ (ปล่อยว่างถ้าไม่เปลี่ยน)</label><input class="form-input" type="password" id="profEditPass"></div>
+        <div class="form-group"><label class="form-label">เบอร์โทร <span style="color:var(--danger)">(ติดต่อแอดมินเพื่อขอเปลี่ยน)</span></label><input class="form-input" id="profEditPhone" readonly style="background:#eee;cursor:not-allowed;"></div>
+        <button class="btn btn-primary btn-sm" onclick="saveProfile()">💾 บันทึกข้อมูล</button>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div id="historyPage" class="page hidden">
+      <div class="page-title">📋 ประวัติการสั่งซื้อและจอง</div>
+      <div class="card"><div class="history-list" id="myHistoryList"><p>ยังไม่มีประวัติ</p></div></div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="adminDashPage" class="page hidden">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;">
+        <div><div class="page-title">📊 แดชบอร์ดแอดมิน</div><div class="page-sub">ภาพรวมระบบ KidSport</div></div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-success btn-sm main-admin-only" onclick="downloadExcel()">📥 Export ลูกค้า</button>
+          <button class="btn btn-primary btn-sm main-admin-only" onclick="downloadBookingsExcel()">📥 Export การจอง</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card blue"><div class="stat-icon">👥</div><div class="stat-value" id="statUsers">0</div><div class="stat-label">สมาชิกทั้งหมด</div></div>
+        <div class="stat-card orange"><div class="stat-icon">📅</div><div class="stat-value" id="statBookings">0</div><div class="stat-label">การจองทั้งหมด</div></div>
+        <div class="stat-card green"><div class="stat-icon">⏳</div><div class="stat-value" id="statPending">0</div><div class="stat-label">รอยืนยันชำระ</div></div>
+        <div class="stat-card purple"><div class="stat-icon">✅</div><div class="stat-value" id="statConfirmed">0</div><div class="stat-label">ยืนยันแล้ว</div></div>
+      </div>
+    </div>
+
+    <!-- ADMIN PAY CONFIRM ★ NEW ★ -->
+    <div id="adminPayConfirmPage" class="page hidden">
+      <div class="page-title">✅ ยืนยันการชำระเงิน</div>
+      <div class="page-sub">รายการที่รอการตรวจสอบสลิป</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <button class="btn btn-primary btn-sm" onclick="filterPayConfirm('pending')" id="filterPending" style="background:var(--orange)">⏳ รอยืนยัน (<span id="pendingCount">0</span>)</button>
+        <button class="btn btn-outline btn-sm" onclick="filterPayConfirm('confirmed')" id="filterConfirmed">✅ ยืนยันแล้ว</button>
+        <button class="btn btn-outline btn-sm" onclick="filterPayConfirm('all')" id="filterAll">ทั้งหมด</button>
+      </div>
+      <div id="payConfirmList"></div>
+    </div>
+
+    <!-- ADMIN BOOKINGS -->
+    <div id="adminBookingsPage" class="page hidden">
+      <div class="page-title">📅 การจองแบบเรียลไทม์</div>
+      <div class="calendar-card" style="margin-bottom:20px;">
+        <div class="cal-header">
+          <div class="cal-month" id="adminCalMonth">พฤษภาคม 2569</div>
+          <div class="cal-nav"><button onclick="changeAdminMonth(-1)">‹</button><button onclick="changeAdminMonth(1)">›</button></div>
+        </div>
+        <div class="cal-grid" id="adminCalGrid"></div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;" id="adminBookingDetailTitle">กรุณาเลือกวันที่บนปฏิทิน</h3>
+        <div class="history-list" id="adminBookingDetailsList"><p style="font-size:12px;color:var(--gray-400)">-</p></div>
+      </div>
+    </div>
+
+    <!-- ADMIN MEMBERS -->
+    <div id="adminMembersPage" class="page hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div class="page-title">👥 ข้อมูลลูกค้าทั้งหมด</div>
+        <button class="btn btn-primary btn-sm" onclick="openAddDirectMemberModal()">+ เพิ่มสมาชิก</button>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>ID</th><th>สมาชิก</th><th>ติดต่อ</th><th>ระดับ</th><th>คะแนน</th><th>จัดการ</th></tr></thead>
+          <tbody id="membersTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ADMIN CLASSES -->
+    <div id="adminClassesPage" class="page hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div><div class="page-title">🏋️ จัดการคลาส / บริการ</div><div class="page-sub">เวลาลงปฏิทิน คั่นด้วย , เช่น 09:00, 14:00</div></div>
+        <button class="btn btn-primary" onclick="openClassModal()">+ เพิ่มคลาสใหม่</button>
+      </div>
+      <div class="class-setup-grid" id="adminClassesGrid"></div>
+    </div>
+
+    <!-- ADMIN PACKAGES -->
+    <div id="adminPackagesPage" class="page hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div class="page-title">📦 จัดการแพ็กเกจสมาชิก</div>
+        <button class="btn btn-primary" onclick="openPackageModal()">+ เพิ่มแพ็กเกจ</button>
+      </div>
+      <div class="table-wrapper">
+        <table><thead><tr><th>ชื่อแพ็กเกจ</th><th>ราคา</th><th>รายละเอียด</th><th>จัดการ</th></tr></thead>
+        <tbody id="adminPackagesTableBody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ADMIN CRM -->
+    <div id="adminCrmPage" class="page hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div class="page-title">🎁 จัดการของรางวัล</div>
+        <button class="btn btn-primary" onclick="openRewardModal()">+ เพิ่มของรางวัล</button>
+      </div>
+      <div class="table-wrapper">
+        <table><thead><tr><th>รูป</th><th>ชื่อ</th><th>คะแนน</th><th>คงเหลือ</th><th>จัดการ</th></tr></thead>
+        <tbody id="adminRewardsTableBody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ADMIN PROMO -->
+    <div id="adminPromoPage" class="page hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div class="page-title">🎟️ โปรโมชั่น</div>
+        <button class="btn btn-primary" onclick="openPromoModal()">+ สร้างโปรโมชั่น</button>
+      </div>
+      <div class="promo-grid" id="adminPromoGrid"></div>
+    </div>
+
+    <!-- ADMIN SETTINGS -->
+    <div id="adminSettingsPage" class="page hidden">
+      <div class="page-title">⚙️ ตั้งค่าระบบ</div>
+      <div class="settings-tabs">
+        <button class="settings-tab active" onclick="setSettingsTab(this,'setSys')">🔧 ระบบ & คะแนน</button>
+        <button class="settings-tab" onclick="setSettingsTab(this,'setNotif')">🔔 การแจ้งเตือน</button>
+        <button class="settings-tab main-admin-only" onclick="setSettingsTab(this,'setAdmins')">👤 จัดการแอดมิน</button>
+      </div>
+      <div id="setSys">
+        <div class="card" style="margin-bottom:20px;">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;">🌟 ระบบคะแนน & เลื่อนขั้น</h3>
+          <div class="info-grid">
+            <div class="form-group"><label class="form-label">คะแนนต้อนรับสมาชิกใหม่</label><input type="number" class="form-input" id="cfgAutoPoints"></div>
+            <div class="form-group"><label class="form-label">กี่บาท = 1 คะแนน</label><input type="number" class="form-input" id="cfgBahtRatio"></div>
+          </div>
+          <h4 style="font-size:13px;font-weight:700;margin:16px 0 8px;">เกณฑ์เลื่อนระดับอัตโนมัติ</h4>
+          <div class="info-grid">
+            <div class="form-group"><label class="form-label">ระดับ 2 (คะแนนขั้นต่ำ)</label><input type="number" class="form-input" id="cfgLvl2Pts"></div>
+            <div class="form-group"><label class="form-label">ระดับ 3 (คะแนนขั้นต่ำ)</label><input type="number" class="form-input" id="cfgLvl3Pts"></div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:20px;">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;">⏳ กฎการจอง</h3>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+            <div><div style="font-size:14px;font-weight:600;">อนุญาตจองบริการเดียวกันซ้ำเวลาเดิมได้</div><div style="font-size:11px;color:gray;">หลายคนจองเวลาเดิมคลาสเดิวได้</div></div>
+            <label class="toggle"><input type="checkbox" id="cfgSameOverlap"><span class="toggle-slider"></span></label>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div><div style="font-size:14px;font-weight:600;">อนุญาตจองต่างบริการเวลาซ้ำกันได้</div><div style="font-size:11px;color:gray;">จองสองคลาสพร้อมกันได้</div></div>
+            <label class="toggle"><input type="checkbox" id="cfgDiffOverlap"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;">🏅 ชื่อระดับสมาชิก</h3>
+          <div class="info-grid">
+            <div class="form-group"><label class="form-label">ระดับที่ 1</label><input class="form-input" id="cfgLvl1"></div>
+            <div class="form-group"><label class="form-label">ระดับที่ 2</label><input class="form-input" id="cfgLvl2"></div>
+            <div class="form-group"><label class="form-label">ระดับที่ 3</label><input class="form-input" id="cfgLvl3"></div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:10px;" onclick="saveSystemSettings()">💾 บันทึกตั้งค่า</button>
+        </div>
+      </div>
+      <div id="setNotif" class="hidden">
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:16px;">📲 Telegram Notification</h3>
+          <p style="font-size:12px;color:var(--gray-400);margin-bottom:10px;">Chat ID: <code>-1003968669934</code></p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-outline" onclick="testTelegram()">📩 ทดสอบส่งข้อความ</button>
+            <button class="btn btn-success" onclick="forceBackup()">💾 ส่ง Backup Report</button>
+          </div>
+        </div>
+      </div>
+      <div id="setAdmins" class="hidden main-admin-only">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h3 style="font-size:15px;font-weight:700;">บัญชีแอดมินทั้งหมด</h3>
+            <button class="btn btn-primary btn-sm" onclick="openAddAdminModal()">+ เพิ่มแอดมิน</button>
+          </div>
+          <div class="table-wrapper">
+            <table><thead><tr><th>ชื่อ</th><th>อีเมล</th><th>สิทธิ์</th><th>จัดการ</th></tr></thead>
+            <tbody id="adminsTableBody"></tbody></table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN STORE -->
+    <div id="adminStorePage" class="page hidden">
+      <div class="page-title">🏪 จัดการหน้าร้าน</div>
+      <div class="card">
+        <div class="form-group"><label class="form-label">ชื่อร้าน</label><input class="form-input" id="stName"></div>
+        <div class="form-group"><label class="form-label" style="color:var(--orange)">อัปโหลดโลโก้</label><input type="file" class="form-input" id="stLogoUpload" accept="image/*" onchange="handleLogoUpload(event)"></div>
+        <div class="form-group"><label class="form-label">เบอร์ติดต่อ</label><input class="form-input" id="stPhone"></div>
+        <div class="form-group"><label class="form-label">Line ID (แสดงผล)</label><input class="form-input" id="stLine"></div>
+        <div class="form-group"><label class="form-label">ลิงก์ Add Friend / ติดต่อ</label><input class="form-input" id="stLink" placeholder="https://line.me/ti/p/..."></div>
+        <button class="btn btn-primary" onclick="saveStoreSettings()">💾 บันทึก</button>
+      </div>
+    </div>
+
+    <!-- ADMIN PAYMENTS SETTINGS -->
+    <div id="adminPaymentsPage" class="page hidden">
+      <div class="page-title">💰 ตั้งค่าการชำระเงิน</div>
+      <div class="card">
+        <div class="form-group"><label class="form-label">ชื่อธนาคาร</label><input class="form-input" id="payBankNameInp" placeholder="เช่น กสิกรไทย"></div>
+        <div class="form-group"><label class="form-label">ชื่อบัญชี</label><input class="form-input" id="payAccNameInp" placeholder="เช่น บจก. คิดส์สปอร์ต"></div>
+        <div class="form-group"><label class="form-label">เลขบัญชี / พร้อมเพย์</label><input class="form-input" id="payAccNoInp"></div>
+        <div class="form-group" style="margin-top:16px;"><label class="form-label" style="color:var(--orange)">อัปโหลด QR Code</label><input type="file" class="form-input" accept="image/*" onchange="handleQRUpload(event)"></div>
+        <button class="btn btn-primary" style="margin-top:10px;" onclick="savePaySettings()">💾 บันทึก</button>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /appShell -->
+
+<!-- MODAL -->
+<div id="modalOverlay" class="modal-overlay hidden" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()" id="modalContent">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Modal</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// =====================================================
+// STATE — เก็บข้อมูลทั้งหมด (LocalStorage)
+// =====================================================
+let STATE = {
+  adminCodeUsed: false,
+  users: [],
+  classes: [
+    { id: 1, name: "ว่ายน้ำเด็กเล็ก", trainer: "ครูส้ม", slots: "09:00, 14:00", duration: "60 นาที", price: 350 },
+    { id: 2, name: "ฟุตบอลพื้นฐาน", trainer: "โค้ชเอก", slots: "15:00, 16:30", duration: "1.5 ชั่วโมง", price: 300 }
+  ],
+  packages: [
+    { id: 1, name: "แพ็กเกจเรียน 10 ครั้ง", price: 3000, note: "แถมฟรีเสื้อยืด 1 ตัว" }
+  ],
+  rewards: [
+    { id: 1, icon: "👕", name: "เสื้อกีฬา KidSport", points: 500, stock: 20 },
+    { id: 2, icon: "💧", name: "กระบอกน้ำ", points: 300, stock: 15 }
+  ],
+  promotions: [],
+  bookings: [],
+  settings: {
+    levels: ["Basic", "Gold", "Diamond"],
+    levelPoints: [0, 1000, 5000],
+    autoPoints: 50, bahtRatio: 10,
+    storeName: "KidSport Academy", storeLogo: null,
+    phone: "080-000-0000", line: "@kidsport", link: "https://lin.ee",
+    payBankName: "กสิกรไทย", payAccName: "บจก. คิดส์สปอร์ต", payAccNo: "098-XXX-XXXX", payQR: null,
+    allowSameOverlap: true, allowDiffOverlap: true
+  }
+};
+
+let currentUser = null;
+let isViewingAsCustomer = false;
+let currentPaymentContext = null;
+let currentSlipBase64 = null;
+let payConfirmFilter = 'pending';
+
+let selectedDates = [], selectedTimes = [], selectedClass = null;
+let calYear = 2026, calMonth = 4;
+let adminCalYear = 2026, adminCalMonth = 4;
+
+const THAI_MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+
+// =====================================================
+// LOCALSTORAGE — จำข้อมูลทุกอย่าง
+// =====================================================
+const LS_KEY = 'kidSportState_v3';
+const LS_USER_KEY = 'kidSportUser_v3';
+
+function saveState() {
+  try {
+    // Sync currentUser กลับเข้า users array ก่อนบันทึก
+    if (currentUser) {
+      const idx = STATE.users.findIndex(u => u.id === currentUser.id);
+      if (idx > -1) STATE.users[idx] = { ...currentUser };
     }
-
-    document.querySelectorAll('#admin-content-area > div').forEach(e => {
-       if(e.id !== 'admin-page-title' && e.id.indexOf('title') === -1 && !e.classList.contains('admin-topbar')) e.classList.add('hidden');
-    });
-    
-    document.querySelectorAll('.admin-nav-item, .admin-bottom-nav .nav-item').forEach(e => e.classList.remove('active'));
-    
-    showEl(`admin-sec-${sec}`);
-    
-    const elDesktop = document.querySelector(`.admin-sidebar .admin-nav-item[onclick="navAdmin('${sec}')"]`);
-    if(elDesktop) elDesktop.classList.add('active');
-
-    const elMobile = document.querySelector(`.admin-bottom-nav .nav-item[onclick="navAdmin('${sec}')"]`);
-    if(elMobile) elMobile.classList.add('active');
-    
-    const titles = { dashboard: 'ภาพรวมระบบ', transactions: 'รายการธุรกรรม', users: 'จัดการผู้ใช้งาน', settings: 'ตั้งค่าร้านค้า' };
-    const titleText = titles[sec] || sec;
-    setText('admin-page-title', titleText);
-    setText('admin-page-title-mobile', titleText);
-    
-    window.scrollTo(0, 0);
-  };
-
-  window.toggleAdminSidebar = () => {};
-
-  const updateDashboardStats = () => {
-    let bal = 0;
-    let usersCount = 0;
-    
-    if(window.appState.users) {
-       for(let i=0; i<window.appState.users.length; i++) {
-          bal += (window.appState.users[i].balance || 0);
-          if(window.appState.users[i].role !== 'superadmin') usersCount++;
-       }
-    }
-    
-    let pending = 0;
-    if(window.appState.transactions) {
-       for(let i=0; i<window.appState.transactions.length; i++) {
-          if(window.appState.transactions[i].status === 'pending') pending++;
-       }
-    }
-    
-    setText('stat-total-balance', bal.toLocaleString());
-    setText('stat-total-users', usersCount);
-    setText('stat-pending', pending);
-    
-    const badgeDesktop = getEl('admin-badge-tx');
-    if(badgeDesktop) {
-        badgeDesktop.textContent = pending;
-        badgeDesktop.classList.toggle('hidden', pending === 0);
-    }
-    const badgeMobile = getEl('admin-badge-tx-mobile');
-    if(badgeMobile) {
-        badgeMobile.textContent = pending;
-        badgeMobile.classList.toggle('hidden', pending === 0);
-    }
-  };
-
-  const renderAdminTransactions = () => {
-    const tbody = document.querySelector('#table-tx tbody');
-    if(!tbody) return;
-    tbody.innerHTML = '';
-
-    if(!window.appState.transactions) return;
-
-    window.appState.transactions.forEach(t => {
-      let tr = document.createElement('tr');
-      let statusStr = t.status==='approved' ? '<span class="badge bg-green">สำเร็จ</span>' : (t.status==='rejected' ? '<span class="badge bg-red">ปฏิเสธ</span>' : '<span class="badge bg-yellow">รอตรวจสอบ</span>');
-      let d = new Date(t.date).toLocaleString('th-TH');
-      let slipBtn = t.slipBase64 ? `<button class="btn btn-sm btn-outline" style="padding:6px 10px; font-size:12px;" onclick="viewSlip('${t.id}')">รูปสลิป</button>` : '-';
-      
-      let actionBtns = '-';
-      let amt = t.amount ? t.amount : 0;
-      let rm = t.remark ? t.remark : '-';
-
-      if(t.status === 'pending') {
-        if(t.type === 'deposit') {
-          actionBtns = `<button class="btn btn-sm btn-success" onclick="approveTx('${t.id}')">✓ อนุมัติ</button> <button class="btn btn-sm btn-danger" onclick="rejectTx('${t.id}')">✗ ปฏิเสธ</button>`;
-        } else {
-          actionBtns = `<button class="btn btn-sm btn-success" onclick="openEditWithdraw('${t.id}', ${amt})">พิจารณาถอน</button> <button class="btn btn-sm btn-danger" onclick="rejectTx('${t.id}')">ปฏิเสธ</button>`;
-        }
-      }
-
-      tr.innerHTML = `
-        <td style="color:var(--gray); font-size:13px;">${d}</td>
-        <td><b>${t.userName}</b></td>
-        <td><span class="badge ${t.type==='deposit'?'bg-green':'bg-red'}">${t.type==='deposit'?'ฝากออม':'ถอนทอง'}</span></td>
-        <td style="font-weight:bold; color:${t.type==='deposit'?'var(--green)':'var(--red)'}; font-size:15px;">฿${amt.toLocaleString()}</td>
-        <td><div style="font-size:13px; max-width: 150px; overflow:hidden; text-overflow:ellipsis;" title="${rm}">${rm}</div>${slipBtn}</td>
-        <td>${statusStr}</td>
-        <td><div class="flex gap-2">${actionBtns}</div></td>
-      `;
-      tbody.appendChild(tr);
-    });
-  };
-
-  const renderAdminUsers = () => {
-    const tbody = document.querySelector('#table-users tbody');
-    if(!tbody) return;
-    tbody.innerHTML = '';
-    const myRole = window.appState.currentUser ? window.appState.currentUser.role : '';
-    const myId = window.appState.currentUser ? window.appState.currentUser.id : '';
-
-    if(!window.appState.users) return;
-
-    window.appState.users.forEach(u => {
-      let tr = document.createElement('tr');
-      let rText = u.role === 'superadmin' ? '<span class="badge bg-gold">แอดมินหลัก</span>' : (u.role === 'subadmin' ? '<span class="badge bg-green">แอดมินรอง</span>' : '<span class="badge" style="background:#eee; color:var(--black)">ลูกค้า</span>');
-      
-      let actionBtns = '-';
-      if(myRole === 'superadmin' && u.id !== myId) {
-        let roleBtns = '';
-        if (u.role === 'customer') {
-            roleBtns = `<button class="btn btn-sm btn-outline" style="border-color:var(--green); color:var(--green); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'subadmin')">+แอดมินรอง</button>
-                        <button class="btn btn-sm btn-outline" style="border-color:var(--gold-dark); color:var(--gold-dark); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'superadmin')">+แอดมินหลัก</button>`;
-        } else if (u.role === 'subadmin') {
-            roleBtns = `<button class="btn btn-sm btn-outline" style="border-color:var(--gold-dark); color:var(--gold-dark); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'superadmin')">เลื่อนเป็นหลัก</button>
-                        <button class="btn btn-sm btn-outline" style="border-color:var(--gray); color:var(--gray); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'customer')">ปลดแอดมิน</button>`;
-        } else if (u.role === 'superadmin') {
-            roleBtns = `<button class="btn btn-sm btn-outline" style="border-color:var(--green); color:var(--green); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'subadmin')">ลดเป็นรอง</button>
-                        <button class="btn btn-sm btn-outline" style="border-color:var(--gray); color:var(--gray); padding: 4px 8px; font-size: 12px;" onclick="changeRole('${u.id}', 'customer')">ปลดแอดมิน</button>`;
-        }
-        
-        let deleteBtn = `<button class="btn btn-sm btn-danger" style="padding: 4px 10px; font-size: 12px;" onclick="deleteUser('${u.id}')">ลบ</button>`;
-        
-        actionBtns = `<div class="flex gap-1" style="flex-wrap: wrap; max-width: 200px;">${roleBtns} ${deleteBtn}</div>`;
-      }
-      
-      let userAvatar = u.profilePicBase64 ? `<img src="${u.profilePicBase64}" style="width:36px; height:36px; border-radius:50%; object-fit:cover;">` : `<div style="width:36px; height:36px; border-radius:50%; background:var(--gray-light); display:flex; align-items:center; justify-content:center; font-size:16px;">👤</div>`;
-      let bal = u.balance ? u.balance : 0;
-      
-      let balHtml = `฿${bal.toLocaleString()}`;
-      if(myRole === 'superadmin') {
-         balHtml += ` <button class="btn btn-sm btn-outline" style="padding: 2px 6px; font-size: 11px; margin-left: 8px; border-color:var(--gold); color:var(--gold);" onclick="openEditBalance('${u.id}', ${bal}, '${u.name}')">✏️ แก้ไข</button>`;
-      }
-
-      tr.innerHTML = `
-        <td>${userAvatar}</td>
-        <td><b style="font-size:15px;">${u.name}</b></td>
-        <td style="color:var(--gray);">${u.phone}</td>
-        <td>${rText}</td>
-        <td style="font-weight:bold; color:var(--gold-dark); font-size:15px;">${balHtml}</td>
-        <td>${actionBtns}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  };
-
-  window.changeRole = async (uid, newRole) => {
-    let roleNameTh = newRole === 'superadmin' ? 'แอดมินหลัก' : (newRole === 'subadmin' ? 'แอดมินรอง' : 'ลูกค้า');
-    if(confirm(`ต้องการเปลี่ยนสิทธิ์ผู้ใช้นี้เป็น ${roleNameTh} ใช่หรือไม่?`)) {
-      showLoading(true);
-      
-      let targetUser = null;
-      for(let i=0; i<window.appState.users.length; i++){
-         if(window.appState.users[i].id === uid) targetUser = window.appState.users[i];
-      }
-      
-      if(targetUser) targetUser.role = newRole;
-      
-      try {
-         if(auth.currentUser) await updateDoc(getDocRef('appUsers', uid), { role: newRole });
-         renderAdminUsers();
-         showToast("เปลี่ยนสิทธิ์สำเร็จ");
-         
-         // แจ้งเตือน Telegram
-         sendTgMsg(`🛡️ <b>เปลี่ยนสิทธิ์ผู้ใช้งาน</b>\nแอดมิน: ${window.appState.currentUser.name}\nเปลี่ยนสิทธิ์ ${targetUser ? targetUser.name : 'Unknown'} เป็น ${roleNameTh}`);
-      } catch(e) {
-         console.error(e);
-         showToast("❌ เปลี่ยนสิทธิ์ไม่สำเร็จ", true);
-      }
-      showLoading(false);
-    }
-  };
-
-  window.deleteUser = async (uid) => {
-    if(confirm('ต้องการลบผู้ใช้งานนี้อย่างถาวรใช่หรือไม่? (ข้อมูลจะหายไปทั้งหมด)')) {
-      showLoading(true);
-      
-      let targetUser = null;
-      if(window.appState.users) {
-          for(let i=0; i<window.appState.users.length; i++){
-             if(window.appState.users[i].id === uid) targetUser = window.appState.users[i];
-          }
-      }
-
-      try {
-         const { deleteDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-         await deleteDoc(getDocRef('appUsers', uid));
-         
-         window.appState.users = window.appState.users.filter(x => x.id !== uid);
-         try { localStorage.setItem('cache_users', JSON.stringify(window.appState.users)); } catch(e){}
-         
-         renderAdminUsers();
-         updateDashboardStats();
-         showToast("ลบผู้ใช้งานสำเร็จ");
-         
-         sendTgMsg(`🗑️ <b>ลบผู้ใช้งาน</b>\nแอดมิน: ${window.appState.currentUser.name}\nลบผู้ใช้: ${targetUser ? targetUser.name : uid}`);
-      } catch(e) {
-         console.error(e);
-         showToast("❌ ลบผู้ใช้งานไม่สำเร็จ (ตรวจสอบสิทธิ์ Firebase)", true);
-      }
-      showLoading(false);
-    }
-  };
-
-  window.openEditBalance = (uid, currentBal, userName) => {
-    pendingEditUserId = uid;
-    setText('meb-name', userName);
-    setVal('meb-amount', currentBal);
-    openModal('modal-edit-balance');
-  };
-
-  window.confirmEditBalance = async () => {
-    const el = getEl('meb-amount');
-    const newBal = el ? parseFloat(el.value) : 0;
-    if(isNaN(newBal) || newBal < 0) return showToast("ยอดเงินไม่ถูกต้อง (ต้องมากกว่าหรือเท่ากับ 0)", true);
-
-    showLoading(true);
-
-    try {
-       await updateDoc(getDocRef('appUsers', pendingEditUserId), { balance: newBal });
-
-       for(let i=0; i<window.appState.users.length; i++){
-          if(window.appState.users[i].id === pendingEditUserId) {
-              window.appState.users[i].balance = newBal;
-              break;
-          }
-       }
-
-       try { localStorage.setItem('cache_users', JSON.stringify(window.appState.users)); } catch(e){}
-
-       renderAdminUsers();
-       updateDashboardStats();
-
-       closeModal('modal-edit-balance');
-       showToast("อัปเดตยอดเงินเรียบร้อยแล้ว");
-       
-       sendTgMsg(`🔧 <b>แจ้งเตือนแอดมินแก้ไขยอดเงิน</b>\nลูกค้า: ${getEl('meb-name').textContent}\nยอดสุทธิใหม่: ฿${newBal.toLocaleString()}\nแก้ไขโดย: ${window.appState.currentUser.name}`);
-
-    } catch(e) {
-       console.error(e);
-       showToast("❌ อัปเดตไม่สำเร็จ (ตรวจสอบสิทธิ์ Firebase)", true);
-    }
-    showLoading(false);
-  };
-
-  window.viewSlip = (txId) => {
-    let tx = null;
-    for(let i=0; i<window.appState.transactions.length; i++){
-       if(window.appState.transactions[i].id === txId) tx = window.appState.transactions[i];
-    }
-    
-    if(tx && tx.slipBase64) {
-      const img = getEl('slip-image-full');
-      if(img) { img.src = tx.slipBase64; openModal('modal-view-slip'); }
-    }
-  };
-
-  window.openEditWithdraw = (txId, reqAmount) => {
-    pendingTxId = txId;
-    setText('mw-req-amt', (reqAmount || 0).toLocaleString());
-    setVal('mw-app-amt', reqAmount || 0);
-    openModal('modal-edit-withdraw');
-  };
-
-  window.confirmApproveWithdraw = () => {
-    const el = getEl('mw-app-amt');
-    const appAmt = el ? parseFloat(el.value) : 0;
-    if(isNaN(appAmt) || appAmt <= 0) return showToast("ยอดเงินไม่ถูกต้อง", true);
-    closeModal('modal-edit-withdraw');
-    processTx(pendingTxId, 'approved', appAmt);
-  };
-
-  window.approveTx = (txId) => {
-    if(confirm("ยืนยันการอนุมัติรายการนี้?")) {
-      processTx(txId, 'approved');
-    }
-  };
-
-  window.rejectTx = (txId) => {
-    const reason = prompt("ระบุเหตุผลที่ปฏิเสธ (ถ้ามี):");
-    if(reason !== null) {
-      processTx(txId, 'rejected', null, reason);
-    }
-  };
-
-  const processTx = async (txId, status, overrideAmount = null, rejectReason = "") => {
-    showLoading(true);
-    
-    let tx = null;
-    if(window.appState.transactions) {
-       for(let i=0; i<window.appState.transactions.length; i++) {
-          if(window.appState.transactions[i].id === txId) tx = window.appState.transactions[i];
-       }
-    }
-    
-    if(!tx) { showLoading(false); return; }
-
-    let user = null;
-    if(window.appState.users) {
-       for(let i=0; i<window.appState.users.length; i++) {
-          if(window.appState.users[i].id === tx.userId) user = window.appState.users[i];
-       }
-    }
-
-    let finalAmount = overrideAmount !== null ? overrideAmount : (tx.amount ? tx.amount : 0);
-
-    try {
-      if(status === 'approved' && user) {
-        let newBalance = user.balance ? user.balance : 0;
-        if(tx.type === 'deposit') newBalance += finalAmount;
-        else if(tx.type === 'withdraw') {
-          if(finalAmount > newBalance) {
-            showToast("ลูกค้ามียอดไม่พอให้หัก", true);
-            showLoading(false);
-            return;
-          }
-          newBalance -= finalAmount;
-        }
-        user.balance = newBalance;
-        if(auth.currentUser) await updateDoc(getDocRef('appUsers', user.id), { balance: newBalance });
-      }
-
-      tx.status = status;
-      let updateData = { status: status };
-      if(overrideAmount !== null) { tx.amount = overrideAmount; updateData.amount = overrideAmount; }
-      if(rejectReason) {
-        const rm = tx.remark ? tx.remark : '';
-        tx.remark = rm + ` [ปฏิเสธ: ${rejectReason}]`;
-        updateData.remark = tx.remark;
-      }
-
-      if(auth.currentUser) await updateDoc(getDocRef('transactions', txId), updateData);
-      
-      try {
-        localStorage.setItem('cache_users', JSON.stringify(window.appState.users));
-        localStorage.setItem('cache_txs', JSON.stringify(window.appState.transactions));
-      } catch(e){}
-      
-      renderAdminTransactions();
-      renderAdminUsers();
-      updateDashboardStats();
-      
-      let statTh = status==='approved'?'✅ อนุมัติสำเร็จ':'❌ ถูกปฏิเสธ';
-      sendTgMsg(`อัปเดตสถานะธุรกรรม\nผู้ใช้: ${tx.userName}\nประเภท: ${tx.type==='deposit'?'ฝาก':'ถอน'}\nยอด: ฿${finalAmount.toLocaleString()}\nสถานะ: ${statTh}`);
-      
-      showToast("ดำเนินการสำเร็จ");
-    } catch(e) {
-      console.error(e);
-      showToast("❌ ดำเนินการไม่สำเร็จ (ตรวจสอบสิทธิ์ Firebase)", true);
-    }
-    showLoading(false);
-  };
-
-  const updateSettingsUI = () => {
-    const s = window.appState.settings || {};
-    
-    const sName = s.shopName ? s.shopName : 'พรีเมียมออมทอง';
-    setText('cust-header-name', sName);
-    setText('admin-shop-name', sName);
-    setText('admin-shop-name-sidebar', sName);
-    setText('login-shop-name', sName); 
-    
-    setText('cust-bank-name', s.bankName ? s.bankName : '-');
-    setText('cust-bank-accname', s.bankAccName ? s.bankAccName : '-');
-    setText('cust-bank-accno', s.bankAccNo ? s.bankAccNo : '-');
-    
-    const lineIdVal = s.lineId ? s.lineId : '';
-    const lineLinkVal = s.lineLink ? s.lineLink : '';
-    const phoneVal = s.phone ? s.phone : '';
-    
-    let contactHtml = '';
-    if (phoneVal) contactHtml += `<div style="margin-bottom:8px;">📞 โทร: <a href="tel:${phoneVal}" style="color:var(--gold-dark); text-decoration:none; font-weight:700;">${phoneVal}</a></div>`;
-    if (lineIdVal) contactHtml += `<div style="margin-bottom:12px;">💬 Line ID: <span style="color:var(--gold-dark); font-weight:700;">${lineIdVal}</span></div>`;
-    
-    const elDetails = getEl('cust-shop-contact-details');
-    if (elDetails) elDetails.innerHTML = contactHtml ? contactHtml : '-';
-    
-    const elBtn = getEl('cust-shop-contact-btn');
-    if (elBtn) {
-        if (lineLinkVal) {
-            let safeLink = lineLinkVal.startsWith('http') ? lineLinkVal : `https://${lineLinkVal}`;
-            elBtn.innerHTML = `<a href="${safeLink}" target="_blank" class="btn btn-success" style="display:inline-flex; width:100%; text-decoration:none; padding:12px 16px; font-size:15px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">✅ คลิกเพิ่มเพื่อน Line ติดต่อร้าน</a>`;
-        } else {
-            elBtn.innerHTML = '';
-        }
-    }
-    
-    if(s.shopLogoBase64) {
-      const lg = getEl('cust-header-logo');
-      if(lg) { lg.src = s.shopLogoBase64; lg.style.display = 'block'; }
-      const lfb = getEl('cust-header-logo-fallback');
-      if(lfb) lfb.style.display = 'none';
-      const lp = getEl('set-logo-preview');
-      if(lp) { lp.src = s.shopLogoBase64; lp.classList.remove('hidden'); }
-      
-      const logImg = getEl('login-logo-img');
-      if(logImg) { logImg.src = s.shopLogoBase64; logImg.style.display = 'block'; }
-      const logFb = getEl('login-logo-fallback');
-      if(logFb) logFb.style.display = 'none';
-    }
-
-    if(s.qrBase64) {
-      const qg = getEl('cust-qr-img');
-      if(qg) { qg.src = s.qrBase64; qg.style.display = 'block'; }
-      const qfb = getEl('cust-qr-placeholder');
-      if(qfb) qfb.style.display = 'none';
-      const qp = getEl('set-qr-preview');
-      if(qp) { qp.src = s.qrBase64; qp.classList.remove('hidden'); }
-    }
-
-    setVal('set-shopname', s.shopName ? s.shopName : '');
-    setVal('set-phone', s.phone ? s.phone : '');
-    setVal('set-line-id', s.lineId ? s.lineId : '');
-    setVal('set-line-link', s.lineLink ? s.lineLink : '');
-    setVal('set-bankname', s.bankName ? s.bankName : '');
-    setVal('set-bankaccname', s.bankAccName ? s.bankAccName : '');
-    setVal('set-bankaccno', s.bankAccNo ? s.bankAccNo : '');
-  };
-
-  window.saveSettings = async () => {
-    showLoading(true);
-    
-    const newData = {
-      shopName: getVal('set-shopname'),
-      phone: getVal('set-phone'),
-      lineId: getVal('set-line-id'),
-      lineLink: getVal('set-line-link'),
-      bankName: getVal('set-bankname'),
-      bankAccName: getVal('set-bankaccname'),
-      bankAccNo: getVal('set-bankaccno'),
-      tgToken: "8731749401:AAEmA6wiK5o4NM0CcjJnmgt_827PbyMtPYw", // FIXED
-      tgChatId: getVal('set-tg-chatid')
-    };
-    
-    const qrInput = getEl('set-qr-code');
-    if(qrInput && qrInput.dataset && qrInput.dataset.base64) newData.qrBase64 = qrInput.dataset.base64;
-
-    const logoInput = getEl('set-shop-logo');
-    if(logoInput && logoInput.dataset && logoInput.dataset.base64) newData.shopLogoBase64 = logoInput.dataset.base64;
-
-    window.appState.settings = {...(window.appState.settings||{}), ...newData};
-    try { localStorage.setItem('cache_settings', JSON.stringify(window.appState.settings)); } catch(e){}
-    updateSettingsUI();
-
-    try {
-      if(auth.currentUser) await setDoc(getDocRef('settings', 'global'), newData, {merge:true});
-      showToast("บันทึกการตั้งค่าสำเร็จ");
-      sendTgMsg(`⚙️ <b>อัปเดตการตั้งค่าร้านค้า</b>\nโดยแอดมิน: ${window.appState.currentUser ? window.appState.currentUser.name : 'Unknown'}`);
-    } catch(e) {
-      console.error(e);
-      showToast("❌ บันทึกไม่สำเร็จ (ตรวจสิทธิ์ Firebase)", true);
-    }
-    showLoading(false);
-  };
-
-  const sendTgMsg = async (text) => {
-    const s = window.appState.settings || {};
-    if(!s.tgToken || !s.tgChatId) return;
-    try {
-      await fetch(`https://api.telegram.org/bot${s.tgToken}/sendMessage`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ chat_id: s.tgChatId, text: text, parse_mode: 'HTML' })
-      });
-    } catch(e) { console.log('TG Error:', e); }
-  };
-
-  window.testTelegram = () => {
-    showToast("กำลังส่งข้อความทดสอบ...");
-    sendTgMsg("🔔 ข้อความทดสอบจากระบบออมทองพรีเมียม");
-  };
-
-  window.exportData = (type) => {
-    let data = window.appState[type];
-    if(!data || data.length === 0) return showToast("ไม่มีข้อมูลให้ Export", true);
-    
-    let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-    if(type === 'users') {
-      csvContent += "Name,Phone,Role,Balance\n";
-      data.forEach(u => { 
-        let b = u.balance ? u.balance : 0;
-        csvContent += `"${u.name}","${u.phone}","${u.role}","${b}"\n`; 
-      });
+    localStorage.setItem(LS_KEY, JSON.stringify(STATE));
+    if (currentUser) {
+      localStorage.setItem(LS_USER_KEY, JSON.stringify(currentUser));
     } else {
-      csvContent += "Date,UserName,Type,Amount,Status,Remark\n";
-      data.forEach(t => { 
-        let d = new Date(t.date).toLocaleString('th-TH');
-        let amt = t.amount ? t.amount : 0;
-        let rm = t.remark ? t.remark : '';
-        csvContent += `"${d}","${t.userName}","${t.type}","${amt}","${t.status}","${rm}"\n`; 
+      localStorage.removeItem(LS_USER_KEY);
+    }
+  } catch(e) { console.warn('LocalStorage error:', e); }
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(LS_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Deep merge ป้องกัน settings หาย
+      STATE = {
+        ...STATE,
+        ...parsed,
+        settings: { ...STATE.settings, ...(parsed.settings || {}) }
+      };
+      if (!STATE.settings.levelPoints) STATE.settings.levelPoints = [0, 1000, 5000];
+    }
+    const savedUser = localStorage.getItem(LS_USER_KEY);
+    if (savedUser) {
+      currentUser = JSON.parse(savedUser);
+      // Refresh จาก users array เพื่อให้ข้อมูลล่าสุด
+      const fresh = STATE.users.find(u => u.id === currentUser.id);
+      if (fresh) currentUser = { ...fresh };
+    }
+  } catch(e) { console.warn('LocalStorage error:', e); }
+}
+
+// =====================================================
+// STARTUP
+// =====================================================
+window.addEventListener('load', () => {
+  loadState();
+  setTimeout(() => {
+    document.getElementById('loader').style.opacity = '0';
+    setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 400);
+    applyStoreConfigUI();
+    if (currentUser) {
+      enterApp();
+    } else {
+      document.getElementById('loginPage').style.display = 'flex';
+    }
+  }, 700);
+});
+
+// =====================================================
+// AUTH
+// =====================================================
+function setLoginTab(tab) {
+  document.getElementById('loginForm').classList.toggle('hidden', tab !== 'user');
+  document.getElementById('registerForm').classList.toggle('hidden', tab !== 'register');
+  document.querySelectorAll('.login-tab').forEach((t, i) => {
+    t.classList.toggle('active', (tab === 'user' && i === 0) || (tab === 'register' && i === 1));
+  });
+}
+
+function doRegister() {
+  const firstName = document.getElementById('regFirst').value.trim();
+  const lastName = document.getElementById('regLast').value.trim();
+  const name = (firstName + ' ' + lastName).trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const pass = document.getElementById('regPass').value;
+  const adminCode = document.getElementById('regAdminCode').value.trim();
+
+  if (!name || !email || !pass) return toast('กรุณากรอกข้อมูลให้ครบ', 'error');
+  if (STATE.users.find(u => u.email === email)) return toast('อีเมลนี้ถูกใช้แล้ว', 'error');
+
+  let role = 'Customer';
+  if (adminCode === '9999') {
+    if (!STATE.adminCodeUsed) {
+      role = 'Main Admin'; STATE.adminCodeUsed = true;
+      toast('คุณคือแอดมินหลักคนแรก!', 'success');
+    } else {
+      toast('รหัสแอดมินถูกใช้แล้ว สมัครเป็นลูกค้า', 'error');
+    }
+  }
+
+  const newUser = {
+    id: Date.now(), name, email, phone, pass, role,
+    points: STATE.settings.autoPoints, level: STATE.settings.levels[0],
+    avatar: null
+  };
+  STATE.users.push(newUser);
+  currentUser = newUser;
+  if (role === 'Customer') toast(`สมัครสำเร็จ! รับ ${STATE.settings.autoPoints} คะแนนฟรี 🎉`, 'success');
+  saveState(); enterApp();
+}
+
+function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const user = STATE.users.find(u => (u.email === email || u.phone === email) && u.pass === pass);
+  if (user) {
+    currentUser = { ...user };
+    saveState(); toast('เข้าสู่ระบบสำเร็จ 👋', 'success'); enterApp();
+  } else {
+    toast('อีเมล/รหัสผ่านไม่ถูกต้อง', 'error');
+  }
+}
+
+function doLogout() {
+  saveState();
+  currentUser = null; isViewingAsCustomer = false;
+  localStorage.removeItem(LS_USER_KEY);
+  document.getElementById('appShell').classList.add('hidden');
+  document.getElementById('loginPage').style.display = 'flex';
+}
+
+// =====================================================
+// APP ENTER & VIEW MODE
+// =====================================================
+function enterApp() {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('appShell').classList.remove('hidden');
+
+  const isAdmin = currentUser.role && currentUser.role.includes('Admin');
+  const isMainAdmin = currentUser.role === 'Main Admin';
+
+  document.querySelectorAll('.main-admin-only').forEach(el => el.classList.toggle('hidden', !isMainAdmin));
+
+  if (isAdmin) document.getElementById('btnSwitchView').classList.remove('hidden');
+  else document.getElementById('btnSwitchView').classList.add('hidden');
+
+  isViewingAsCustomer = false;
+  applyViewMode();
+}
+
+function toggleAdminViewMode() {
+  if (!currentUser.role.includes('Admin')) return;
+  isViewingAsCustomer = !isViewingAsCustomer;
+  applyViewMode();
+}
+
+function applyViewMode() {
+  const isAdminMode = currentUser.role.includes('Admin') && !isViewingAsCustomer;
+  document.getElementById('userMenu').classList.toggle('hidden', isAdminMode);
+  document.getElementById('adminMenu').classList.toggle('hidden', !isAdminMode);
+
+  if (isAdminMode) {
+    document.getElementById('btnSwitchView').innerText = '👀 ดูมุมมองลูกค้า';
+    document.getElementById('userPointsBadge').classList.add('hidden');
+    renderAdminTables();
+    showPage('adminDash');
+  } else {
+    if (currentUser.role.includes('Admin')) {
+      document.getElementById('btnSwitchView').innerText = '🔙 กลับมุมมองแอดมิน';
+    }
+    document.getElementById('userPointsBadge').classList.remove('hidden');
+    refreshUserUI();
+    renderClassTypes(); renderCustomerPackages(); renderCustomerRewards(); renderCustomerHistory();
+    showPage('dashboard');
+  }
+}
+
+function refreshUserUI() {
+  // Sync currentUser จาก STATE.users
+  const fresh = STATE.users.find(u => u.id === currentUser.id);
+  if (fresh) currentUser = { ...fresh };
+  checkAutoLevelUp(currentUser);
+
+  // Topbar
+  setAvatarUI(document.getElementById('topAvatar'), currentUser);
+  document.getElementById('topName').textContent = currentUser.name;
+  document.getElementById('topRole').textContent = currentUser.role;
+  document.getElementById('userPointsBadge').textContent = `🌟 ${currentUser.points} แต้ม`;
+
+  // Dashboard stats
+  document.getElementById('welcomeName').textContent = currentUser.name;
+  document.getElementById('dashPoints').textContent = currentUser.points;
+  document.getElementById('dashLevel').textContent = currentUser.level;
+
+  // Membership card
+  document.getElementById('memCardLevel').textContent = currentUser.level.toUpperCase();
+  document.getElementById('memCardName').textContent = currentUser.name;
+  document.getElementById('memCardId').textContent = 'KS' + currentUser.id.toString().slice(-4);
+  document.getElementById('memCardPoints').innerHTML = `${currentUser.points} <span style="font-size:13px;opacity:.8">Points</span>`;
+  document.getElementById('memCardBg').className = `membership-card card-level-${currentUser.level}`;
+  setAvatarUI(document.getElementById('memCardAvatar'), currentUser);
+
+  // Profile page
+  setAvatarUI(document.getElementById('profileAvatar'), currentUser);
+  document.getElementById('profileName').textContent = currentUser.name;
+  document.getElementById('profileEmailPhone').textContent = `${currentUser.email} | ${currentUser.phone}`;
+  document.getElementById('profileLevel').textContent = `⭐ ${currentUser.level} Member`;
+  document.getElementById('profEditName').value = currentUser.name;
+  document.getElementById('profEditEmail').value = currentUser.email;
+  document.getElementById('profEditPhone').value = currentUser.phone;
+
+  // CRM points
+  if (document.getElementById('crmUserPoints')) document.getElementById('crmUserPoints').textContent = currentUser.points;
+}
+
+// Helper: set avatar (image or text)
+function setAvatarUI(el, user) {
+  if (!el) return;
+  if (user && user.avatar) {
+    el.innerHTML = `<img src="${user.avatar}" alt="avatar">`;
+  } else {
+    el.innerHTML = (user ? user.name.charAt(0).toUpperCase() : 'U');
+  }
+}
+
+// =====================================================
+// ROUTING
+// =====================================================
+const pageMap = {
+  dashboard: 'dashboardPage', booking: 'bookingPage', payment: 'paymentPage',
+  packages: 'packagesPage', profile: 'profilePage', history: 'historyPage', crm: 'crmPage',
+  adminDash: 'adminDashPage', adminPayConfirm: 'adminPayConfirmPage',
+  adminBookings: 'adminBookingsPage', adminMembers: 'adminMembersPage',
+  adminClasses: 'adminClassesPage', adminPackages: 'adminPackagesPage',
+  adminSettings: 'adminSettingsPage', adminPromo: 'adminPromoPage',
+  adminCrm: 'adminCrmPage', adminStore: 'adminStorePage', adminPayments: 'adminPaymentsPage'
+};
+
+function showPage(page) {
+  Object.values(pageMap).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('hidden');
+  });
+  const target = document.getElementById(pageMap[page]);
+  if (target) target.classList.remove('hidden');
+
+  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+  const active = document.querySelector(`.sidebar-item[onclick="showPage('${page}')"]`);
+  if (active) active.classList.add('active');
+
+  if (page === 'adminBookings') renderAdminBookingCalendar();
+  if (page === 'adminPayConfirm') renderPayConfirmList();
+  if (page === 'adminSettings') applyStoreConfigUI();
+  if (page === 'dashboard') renderPopularClasses();
+  if (page === 'profile') refreshUserUI();
+}
+
+// =====================================================
+// LEVEL UP
+// =====================================================
+function checkAutoLevelUp(u) {
+  if (u.role !== 'Customer') return;
+  const t2 = parseInt(STATE.settings.levelPoints[1]);
+  const t3 = parseInt(STATE.settings.levelPoints[2]);
+  if (u.points >= t3) u.level = STATE.settings.levels[2];
+  else if (u.points >= t2) u.level = STATE.settings.levels[1];
+  else u.level = STATE.settings.levels[0];
+}
+
+// =====================================================
+// AVATAR UPLOAD (FIX #4)
+// =====================================================
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    currentUser.avatar = e.target.result;
+    // Sync กลับ users array
+    const idx = STATE.users.findIndex(u => u.id === currentUser.id);
+    if (idx > -1) STATE.users[idx].avatar = e.target.result;
+    saveState();
+    refreshUserUI();
+    toast('เปลี่ยนรูปโปรไฟล์เรียบร้อย ✅', 'success');
+  };
+  reader.readAsDataURL(file);
+}
+
+// =====================================================
+// BOOKING
+// =====================================================
+function renderClassTypes() {
+  const container = document.getElementById('classTypeSelector');
+  if (!container) return;
+  container.innerHTML = STATE.classes.map(c => `
+    <button class="class-type-btn" onclick="selectClassType(this,${c.id})">
+      <span class="type-icon">🏋️</span>
+      <span class="type-name">${c.name}</span>
+      <span class="type-price">฿${c.price}/ครั้ง</span>
+    </button>
+  `).join('');
+}
+
+function selectClassType(btn, id) {
+  document.querySelectorAll('.class-type-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedClass = STATE.classes.find(x => x.id === id);
+  updateBookingSummary(); renderTimeSlots();
+}
+
+function renderCustomerBookingCalendar() {
+  const grid = document.getElementById('calGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  ['อา','จ','อ','พ','พฤ','ศ','ส'].forEach(d => {
+    const el = document.createElement('div'); el.className = 'cal-dow'; el.textContent = d; grid.appendChild(el);
+  });
+  document.getElementById('calMonth').textContent = `${THAI_MONTHS[calMonth]} ${calYear + 543}`;
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const today = new Date();
+
+  for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
+  for (let d = 1; d <= daysInMonth; d++) {
+    const el = document.createElement('div'); el.className = 'cal-day'; el.textContent = d;
+    const dateStr = `${calYear}-${(calMonth+1).toString().padStart(2,'0')}-${d.toString().padStart(2,'0')}`;
+    if (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear()) el.classList.add('today');
+    if (selectedDates.includes(dateStr)) el.classList.add('selected');
+    el.onclick = () => {
+      if (selectedDates.includes(dateStr)) {
+        selectedDates = selectedDates.filter(x => x !== dateStr); el.classList.remove('selected');
+      } else {
+        selectedDates.push(dateStr); el.classList.add('selected');
+      }
+      document.getElementById('selectedDateLabel').textContent = dateStr;
+      renderTimeSlots(); updateBookingSummary();
+    };
+    grid.appendChild(el);
+  }
+}
+
+function changeMonth(dir) {
+  calMonth += dir;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  selectedDates = []; selectedTimes = [];
+  renderCustomerBookingCalendar();
+  document.getElementById('timeSlots').style.display = 'none';
+  updateBookingSummary();
+}
+
+function renderTimeSlots() {
+  const container = document.getElementById('timeSlots');
+  const grid = document.getElementById('timeSlotGrid');
+  if (selectedDates.length === 0 || !selectedClass) { container.style.display = 'none'; return; }
+  container.style.display = 'block'; grid.innerHTML = '';
+  selectedClass.slots.split(',').map(s => s.trim()).forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'time-slot' + (selectedTimes.includes(t) ? ' selected' : '');
+    el.innerHTML = `<div>${t}</div>`;
+    el.onclick = () => {
+      if (selectedTimes.includes(t)) { selectedTimes = selectedTimes.filter(x => x !== t); el.classList.remove('selected'); }
+      else { selectedTimes.push(t); el.classList.add('selected'); }
+      updateBookingSummary();
+    };
+    grid.appendChild(el);
+  });
+}
+
+function updateBookingSummary() {
+  const total = selectedDates.length * selectedTimes.length;
+  document.getElementById('sumClass').textContent = selectedClass ? selectedClass.name : '-';
+  document.getElementById('sumDates').textContent = selectedDates.length + ' วัน';
+  document.getElementById('sumTimes').textContent = selectedTimes.join(', ') || '-';
+  document.getElementById('sumCount').textContent = total + ' ครั้ง';
+  const price = selectedClass ? selectedClass.price : 0;
+  document.getElementById('pricePerClass').textContent = `฿${price}`;
+  document.getElementById('priceCount').textContent = `x ${total}`;
+  document.getElementById('priceTotal').textContent = `฿${total * price}`;
+}
+
+function clearBooking() {
+  selectedDates = []; selectedTimes = []; selectedClass = null;
+  document.querySelectorAll('.class-type-btn').forEach(b => b.classList.remove('selected'));
+  renderCustomerBookingCalendar();
+  document.getElementById('timeSlots').style.display = 'none';
+  updateBookingSummary();
+}
+
+function preparePayment(type, pkgId = null) {
+  currentSlipBase64 = null;
+  const slipInput = document.getElementById('paySlipUpload');
+  if (slipInput) slipInput.value = '';
+  const prev = document.getElementById('slipPreview');
+  if (prev) prev.style.display = 'none';
+
+  if (type === 'class') {
+    if (!selectedClass || selectedDates.length === 0 || selectedTimes.length === 0)
+      return toast('กรุณาเลือกคลาส วัน และเวลาก่อน', 'error');
+    const totalCount = selectedDates.length * selectedTimes.length;
+    const total = selectedClass.price * totalCount;
+    currentPaymentContext = { type: 'class', item: selectedClass, totalCount, total };
+    document.getElementById('pay-class').textContent = selectedClass.name;
+    document.getElementById('pay-count').textContent = totalCount + ' ครั้ง';
+    document.getElementById('pay-total').textContent = `฿${total}`;
+  } else if (type === 'package') {
+    const pkg = STATE.packages.find(p => p.id === pkgId);
+    currentPaymentContext = { type: 'package', item: pkg, totalCount: 1, total: pkg.price };
+    document.getElementById('pay-class').textContent = 'แพ็กเกจ: ' + pkg.name;
+    document.getElementById('pay-count').textContent = '1 รายการ';
+    document.getElementById('pay-total').textContent = `฿${pkg.price}`;
+  }
+  showPage('payment');
+}
+
+function handleSlipUpload(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      currentSlipBase64 = e.target.result;
+      const prev = document.getElementById('slipPreview');
+      const img = document.getElementById('slipPreviewImg');
+      if (prev && img) { img.src = e.target.result; prev.style.display = 'block'; }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function confirmPayment() {
+  if (!currentPaymentContext) return toast('เกิดข้อผิดพลาด', 'error');
+  if (!currentSlipBase64) return toast('กรุณาอัปโหลดสลิปก่อน', 'error');
+
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2,'0')}-${now.getDate().toString().padStart(2,'0')}`;
+
+  if (currentPaymentContext.type === 'class') {
+    selectedDates.forEach(date => {
+      selectedTimes.forEach(time => {
+        STATE.bookings.push({
+          id: Date.now() + Math.floor(Math.random() * 1000),
+          userId: currentUser.id, userName: currentUser.name, phone: currentUser.phone,
+          className: currentPaymentContext.item.name, date, time,
+          price: currentPaymentContext.item.price, status: 'รอตรวจสอบ',
+          slip: currentSlipBase64, createdAt: dateStr
+        });
       });
+    });
+  } else {
+    STATE.bookings.push({
+      id: Date.now() + Math.floor(Math.random() * 1000),
+      userId: currentUser.id, userName: currentUser.name, phone: currentUser.phone,
+      className: 'ซื้อแพ็กเกจ: ' + currentPaymentContext.item.name, date: dateStr, time: '-',
+      price: currentPaymentContext.item.price, status: 'รอตรวจสอบ',
+      slip: currentSlipBase64, createdAt: dateStr
+    });
+  }
+
+  const earnedPts = Math.floor(currentPaymentContext.total / STATE.settings.bahtRatio);
+  currentUser.points += earnedPts;
+  checkAutoLevelUp(currentUser);
+
+  saveState();
+  toast('ส่งสลิปเรียบร้อย! รอแอดมินตรวจสอบ ✅', 'success');
+  clearBooking(); refreshUserUI(); renderCustomerHistory();
+  showPage('dashboard');
+}
+
+// =====================================================
+// RENDER CUSTOMER
+// =====================================================
+function renderCustomerHistory() {
+  const list = document.getElementById('myHistoryList');
+  const upList = document.getElementById('upcomingList');
+  if (!list) return;
+  const myBookings = STATE.bookings.filter(b => b.userId === currentUser.id).reverse();
+  document.getElementById('dashBookings').textContent = myBookings.length;
+
+  if (myBookings.length === 0) {
+    list.innerHTML = '<p>ยังไม่มีประวัติ</p>';
+    upList.innerHTML = '<p style="font-size:12px;color:var(--gray-400)">ยังไม่มีการจอง</p>';
+    return;
+  }
+  list.innerHTML = myBookings.map(b => `
+    <div class="history-item">
+      <div class="history-dot ${b.className.includes('แพ็กเกจ') ? 'orange' : 'blue'}">${b.className.includes('แพ็กเกจ') ? '📦' : '📅'}</div>
+      <div class="history-info"><h4>${b.className}</h4><p>${b.date} ${b.time !== '-' ? '· ' + b.time : ''}</p></div>
+      <span class="badge ${b.status === 'รอตรวจสอบ' ? 'badge-orange' : 'badge-green'}">${b.status}</span>
+    </div>
+  `).join('');
+  const upcoming = myBookings.filter(b => !b.className.includes('แพ็กเกจ')).slice(0, 3);
+  upList.innerHTML = upcoming.length > 0 ? upcoming.map(b => `
+    <div class="history-item">
+      <div class="history-dot blue">📅</div>
+      <div class="history-info"><h4>${b.className}</h4><p>${b.date} · ${b.time}</p></div>
+    </div>
+  `).join('') : '<p style="font-size:12px;color:var(--gray-400)">ยังไม่มีการจองที่กำลังจะมาถึง</p>';
+}
+
+function renderPopularClasses() {
+  const el = document.getElementById('popularClassList');
+  if (!el) return;
+  if (STATE.classes.length === 0) { el.innerHTML = '<p style="font-size:12px;color:var(--gray-400)">ไม่มีข้อมูลคลาส</p>'; return; }
+  el.innerHTML = STATE.classes.slice(0, 4).map(c => `
+    <div class="history-item">
+      <div class="history-dot blue">🏋️</div>
+      <div class="history-info"><h4>${c.name}</h4><p>โค้ช: ${c.trainer} · เวลา: ${c.slots}</p></div>
+      <button class="btn btn-primary btn-sm" onclick="showPage('booking')">จอง</button>
+    </div>
+  `).join('');
+}
+
+function renderCustomerPackages() {
+  const grid = document.getElementById('packagesGrid');
+  if (!grid) return;
+  grid.innerHTML = STATE.packages.length === 0
+    ? '<p style="color:var(--gray-400)">ยังไม่มีแพ็กเกจ</p>'
+    : STATE.packages.map((p, i) => `
+      <div class="pkg-card ${i === 1 ? 'featured' : ''}">
+        <div class="pkg-name">📦 ${p.name}</div>
+        <div class="pkg-price">฿${p.price.toLocaleString()}</div>
+        <div class="pkg-features"><div class="pkg-feature">${p.note || 'ไม่มีรายละเอียด'}</div></div>
+        <button class="btn ${i === 1 ? 'btn-primary' : 'btn-outline'}" style="width:100%;justify-content:center;margin-top:12px;" onclick="preparePayment('package',${p.id})">เลือกซื้อแพ็กเกจ</button>
+      </div>
+    `).join('');
+}
+
+// =====================================================
+// REWARDS — FIX #3 (ยืนยันก่อนแลก + ปุ่มติดต่อแอดมิน)
+// =====================================================
+function renderCustomerRewards() {
+  const grid = document.getElementById('crmRewardsGrid');
+  if (!grid) return;
+  if (document.getElementById('crmUserPoints')) document.getElementById('crmUserPoints').textContent = currentUser.points;
+  grid.innerHTML = STATE.rewards.map(r => `
+    <div class="reward-card">
+      <div class="reward-img">${r.icon}</div>
+      <div style="font-weight:700;font-size:14px;margin-bottom:4px;">${r.name}</div>
+      <div style="font-size:12px;color:gray;margin-bottom:6px;">เหลือ ${r.stock} ชิ้น</div>
+      <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:10px;">ใช้ ${r.points} แต้ม</div>
+      <button class="btn btn-outline btn-sm" style="width:100%;justify-content:center;" onclick="confirmRedeemReward(${r.id})">แลกรับของรางวัล</button>
+    </div>
+  `).join('');
+}
+
+function confirmRedeemReward(id) {
+  const reward = STATE.rewards.find(r => r.id === id);
+  if (!reward) return;
+  if (reward.stock <= 0) return toast('ของรางวัลหมดแล้ว', 'error');
+  if (currentUser.points < reward.points) return toast(`แต้มไม่พอ (มี ${currentUser.points} / ต้องการ ${reward.points})`, 'error');
+
+  // แสดง Modal ยืนยัน
+  document.getElementById('modalTitle').textContent = '⚠️ ยืนยันการแลกรางวัล';
+  document.getElementById('modalBody').innerHTML = `
+    <div style="text-align:center;padding:10px 0 20px;">
+      <div style="font-size:48px;margin-bottom:12px;">${reward.icon}</div>
+      <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">${reward.name}</div>
+      <div style="font-size:14px;color:var(--gray-600);margin-bottom:16px;">ใช้ <strong style="color:var(--orange)">${reward.points} แต้ม</strong> แลกรับ</div>
+      <div style="background:var(--gray-50);border-radius:10px;padding:12px;font-size:12px;color:var(--gray-600);margin-bottom:20px;">
+        คะแนนหลังแลก: <strong style="color:var(--navy)">${currentUser.points - reward.points} แต้ม</strong>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-outline" style="flex:1;justify-content:center;" onclick="closeModal()">ยกเลิก</button>
+        <button class="btn btn-orange" style="flex:1;justify-content:center;" onclick="doRedeemReward(${id})">✅ ยืนยันแลกรับ</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function doRedeemReward(id) {
+  const reward = STATE.rewards.find(r => r.id === id);
+  if (!reward || reward.stock <= 0 || currentUser.points < reward.points) return;
+
+  currentUser.points -= reward.points;
+  reward.stock -= 1;
+  checkAutoLevelUp(currentUser);
+
+  const idx = STATE.users.findIndex(u => u.id === currentUser.id);
+  if (idx > -1) STATE.users[idx] = { ...currentUser };
+
+  saveState();
+  refreshUserUI();
+  renderCustomerRewards();
+
+  const lineLink = STATE.settings.link || '#';
+
+  // Modal แสดงผลสำเร็จ + ปุ่มติดต่อแอดมิน
+  document.getElementById('modalTitle').textContent = '🎉 ขอแสดงความยินดี!';
+  document.getElementById('modalBody').innerHTML = `
+    <div style="text-align:center;padding:10px 0;">
+      <div style="font-size:52px;margin-bottom:12px;">${reward.icon}</div>
+      <div style="font-size:17px;font-weight:800;color:var(--navy);margin-bottom:8px;">คุณได้รับ: ${reward.name}</div>
+      <div style="background:linear-gradient(135deg,#FFF3E8,#FFF8F0);border:2px dashed var(--orange);border-radius:12px;padding:14px;margin:16px 0;font-size:13px;color:var(--gray-600);line-height:1.6;">
+        <div style="font-size:16px;margin-bottom:6px;">⚠️ วิธีรับของรางวัล</div>
+        <strong style="color:var(--danger)">กรุณาแคปหน้าจอนี้</strong> แล้วติดต่อแอดมินเพื่อยืนยันรับของ<br>
+        <span style="font-size:12px;color:var(--gray-400);">(คะแนนโดนหักอัตโนมัติแล้ว)</span>
+      </div>
+      <div style="background:var(--gray-50);border-radius:10px;padding:10px;font-size:12px;margin-bottom:16px;">
+        🌟 คะแนนคงเหลือ: <strong style="color:var(--orange);font-size:15px;">${currentUser.points} แต้ม</strong>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="${lineLink}" target="_blank" class="btn btn-orange" style="width:100%;justify-content:center;text-decoration:none;">
+          💬 ติดต่อแอดมิน (Line)
+        </a>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="closeModal()">ปิด</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+// =====================================================
+// PROFILE SAVE
+// =====================================================
+function saveProfile() {
+  currentUser.name = document.getElementById('profEditName').value;
+  currentUser.email = document.getElementById('profEditEmail').value;
+  const p = document.getElementById('profEditPass').value;
+  if (p) currentUser.pass = p;
+  const idx = STATE.users.findIndex(u => u.id === currentUser.id);
+  if (idx > -1) STATE.users[idx] = { ...currentUser };
+  saveState(); refreshUserUI();
+  toast('บันทึกโปรไฟล์เรียบร้อย ✅', 'success');
+}
+
+// =====================================================
+// ADMIN — PAY CONFIRM ★ NEW ★ (FIX #5)
+// =====================================================
+function renderPayConfirmList() {
+  const container = document.getElementById('payConfirmList');
+  const pending = STATE.bookings.filter(b => b.status === 'รอตรวจสอบ');
+  const confirmed = STATE.bookings.filter(b => b.status === 'ยืนยันแล้ว');
+
+  document.getElementById('pendingCount').textContent = pending.length;
+  document.getElementById('statPending').textContent = pending.length;
+  document.getElementById('statConfirmed').textContent = confirmed.length;
+
+  let list = [];
+  if (payConfirmFilter === 'pending') list = pending;
+  else if (payConfirmFilter === 'confirmed') list = confirmed;
+  else list = [...STATE.bookings].reverse();
+
+  ['filterPending','filterConfirmed','filterAll'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.remove('btn-primary','btn-orange'); el.classList.add('btn-outline'); }
+  });
+  const activeBtn = payConfirmFilter === 'pending' ? 'filterPending' : payConfirmFilter === 'confirmed' ? 'filterConfirmed' : 'filterAll';
+  const ab = document.getElementById(activeBtn);
+  if (ab) { ab.classList.remove('btn-outline'); ab.classList.add(payConfirmFilter === 'pending' ? 'btn-orange' : 'btn-primary'); }
+
+  if (list.length === 0) {
+    container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--gray-400);">✅ ไม่มีรายการ${payConfirmFilter === 'pending' ? 'รอยืนยัน' : ''}</div>`;
+    return;
+  }
+
+  container.innerHTML = list.map(b => `
+    <div class="pay-confirm-item">
+      <div style="font-size:28px;">📋</div>
+      <div class="pay-confirm-info">
+        <h4>${b.className} ${b.time !== '-' ? '— ' + b.time : ''}</h4>
+        <p>👤 ${b.userName} · 📞 ${b.phone}</p>
+        <p>📅 ${b.date} · 💰 ฿${b.price}</p>
+      </div>
+      <div class="pay-confirm-actions">
+        ${b.slip ? `<button class="btn btn-outline btn-sm" onclick="viewSlip(${b.id})">🖼 ดูสลิป</button>` : '<span style="font-size:11px;color:var(--gray-400)">ไม่มีสลิป</span>'}
+        ${b.status === 'รอตรวจสอบ' ? `
+          <button class="btn btn-success btn-sm" onclick="confirmBookingStatus(${b.id})">✓ ยืนยัน</button>
+          <button class="btn btn-danger btn-sm" onclick="rejectBooking(${b.id})">✗ ปฏิเสธ</button>
+        ` : `<span class="badge badge-green">ยืนยันแล้ว</span>`}
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterPayConfirm(f) {
+  payConfirmFilter = f;
+  renderPayConfirmList();
+}
+
+function rejectBooking(id) {
+  if (!confirm('ยืนยันการปฏิเสธรายการนี้?')) return;
+  const b = STATE.bookings.find(x => x.id === id);
+  if (b) {
+    STATE.bookings = STATE.bookings.filter(x => x.id !== id);
+    saveState();
+    toast('ปฏิเสธรายการแล้ว', 'error');
+    renderPayConfirmList();
+    renderAdminTables();
+  }
+}
+
+// =====================================================
+// ADMIN TABLES
+// =====================================================
+function renderAdminTables() {
+  const pending = STATE.bookings.filter(b => b.status === 'รอตรวจสอบ').length;
+  const confirmed = STATE.bookings.filter(b => b.status === 'ยืนยันแล้ว').length;
+  if (document.getElementById('statUsers')) document.getElementById('statUsers').textContent = STATE.users.filter(u => u.role === 'Customer').length;
+  if (document.getElementById('statBookings')) document.getElementById('statBookings').textContent = STATE.bookings.length;
+  if (document.getElementById('statPending')) document.getElementById('statPending').textContent = pending;
+  if (document.getElementById('statConfirmed')) document.getElementById('statConfirmed').textContent = confirmed;
+
+  // Members table
+  const memHtml = STATE.users.map(u => `
+    <tr>
+      <td style="font-family:monospace;font-size:11px;">KS${u.id.toString().slice(-4)}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="member-avatar" style="background:linear-gradient(135deg,var(--blue),var(--orange));flex-shrink:0;">
+            ${u.avatar ? `<img src="${u.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">` : u.name.charAt(0).toUpperCase()}
+          </div>
+          <div><div style="font-weight:600;">${u.name}</div><div style="font-size:11px;color:gray;">${u.role}</div></div>
+        </div>
+      </td>
+      <td><div style="font-size:12px;">${u.email}</div><div style="font-size:11px;color:gray;">${u.phone}</div></td>
+      <td><span class="badge ${u.role.includes('Admin') ? 'badge-blue' : 'badge-orange'}">${u.role.includes('Admin') ? u.role : u.level}</span></td>
+      <td><strong style="color:var(--blue)">${u.points}</strong></td>
+      <td><button class="btn btn-outline btn-sm" onclick="openEditMember(${u.id})">จัดการ</button></td>
+    </tr>
+  `).join('');
+  if (document.getElementById('membersTableBody')) document.getElementById('membersTableBody').innerHTML = memHtml || '<tr><td colspan="6" style="text-align:center">ยังไม่มีข้อมูล</td></tr>';
+
+  // Classes
+  const clsHtml = STATE.classes.map(c => `
+    <div class="class-row">
+      <div class="class-info"><h4>${c.name}</h4><p>เทรนเนอร์: ${c.trainer} | เวลา: ${c.slots} | ${c.duration}</p></div>
+      <div style="margin-right:15px;font-weight:bold;">฿${c.price}</div>
+      <div style="display:flex;gap:6px;">
+        <button class="btn btn-outline btn-sm" onclick="openClassModal(${c.id})">แก้ไข</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteClass(${c.id})">ลบ</button>
+      </div>
+    </div>
+  `).join('');
+  if (document.getElementById('adminClassesGrid')) document.getElementById('adminClassesGrid').innerHTML = clsHtml || '<p style="color:var(--gray-400)">ยังไม่มีคลาส</p>';
+
+  // Packages
+  const pkgHtml = STATE.packages.map(p => `
+    <tr>
+      <td style="font-weight:bold">${p.name}</td><td>฿${p.price.toLocaleString()}</td>
+      <td style="font-size:12px;color:gray;">${p.note || '-'}</td>
+      <td>
+        <button class="btn btn-outline btn-sm" onclick="openPackageModal(${p.id})">แก้ไข</button>
+        <button class="btn btn-danger btn-sm" onclick="deletePackage(${p.id})">ลบ</button>
+      </td>
+    </tr>
+  `).join('');
+  if (document.getElementById('adminPackagesTableBody')) document.getElementById('adminPackagesTableBody').innerHTML = pkgHtml || '<tr><td colspan="4" style="text-align:center">ยังไม่มีแพ็กเกจ</td></tr>';
+
+  // Rewards
+  const rwdHtml = STATE.rewards.map(r => `
+    <tr>
+      <td style="font-size:24px;">${r.icon}</td><td style="font-weight:bold">${r.name}</td>
+      <td>${r.points} แต้ม</td><td>${r.stock} ชิ้น</td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteReward(${r.id})">ลบ</button></td>
+    </tr>
+  `).join('');
+  if (document.getElementById('adminRewardsTableBody')) document.getElementById('adminRewardsTableBody').innerHTML = rwdHtml || '<tr><td colspan="5" style="text-align:center">ยังไม่มีของรางวัล</td></tr>';
+
+  // Promos
+  const proHtml = STATE.promotions.map(p => `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <h3 style="font-size:15px;font-weight:700">${p.name}</h3>
+        <span class="badge ${p.show ? 'badge-green' : 'badge-red'}">${p.show ? 'แสดง' : 'ซ่อน'}</span>
+      </div>
+      <p style="font-size:12px;color:gray;">หมดอายุ: ${p.exp}<br>แต้มที่ใช้: ${p.pointsReq}</p>
+    </div>
+  `).join('');
+  if (document.getElementById('adminPromoGrid')) document.getElementById('adminPromoGrid').innerHTML = proHtml || '<p style="color:var(--gray-400)">ยังไม่มีโปรโมชั่น</p>';
+
+  // Admins
+  const admHtml = STATE.users.filter(u => u.role.includes('Admin')).map(u => `
+    <tr>
+      <td>${u.name}</td><td>${u.email}</td>
+      <td><span class="badge badge-blue">${u.role}</span></td>
+      <td>${u.id !== currentUser.id ? `<button class="btn btn-danger btn-sm" onclick="deleteAdmin(${u.id})">ลบ</button>` : '-'}</td>
+    </tr>
+  `).join('');
+  if (document.getElementById('adminsTableBody')) document.getElementById('adminsTableBody').innerHTML = admHtml;
+}
+
+// Admin Booking Calendar
+function renderAdminBookingCalendar() {
+  const grid = document.getElementById('adminCalGrid'); if (!grid) return;
+  grid.innerHTML = '';
+  ['อา','จ','อ','พ','พฤ','ศ','ส'].forEach(d => { const el = document.createElement('div'); el.className='cal-dow'; el.textContent=d; grid.appendChild(el); });
+  document.getElementById('adminCalMonth').textContent = `${THAI_MONTHS[adminCalMonth]} ${adminCalYear + 543}`;
+  const firstDay = new Date(adminCalYear, adminCalMonth, 1).getDay();
+  const daysInMonth = new Date(adminCalYear, adminCalMonth+1, 0).getDate();
+  for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
+  for (let d = 1; d <= daysInMonth; d++) {
+    const el = document.createElement('div'); el.className = 'cal-day'; el.textContent = d;
+    const dateStr = `${adminCalYear}-${(adminCalMonth+1).toString().padStart(2,'0')}-${d.toString().padStart(2,'0')}`;
+    const bToday = STATE.bookings.filter(b => b.date === dateStr);
+    if (bToday.length > 0) {
+      el.classList.add('has-class');
+      const s = document.createElement('span'); s.style.cssText = 'font-size:9px;color:var(--orange);'; s.textContent = bToday.length + ' จอง'; el.appendChild(s);
     }
-    
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `export_${type}_${Date.now()}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+    el.onclick = () => {
+      document.querySelectorAll('#adminCalGrid .cal-day').forEach(x => x.classList.remove('selected'));
+      el.classList.add('selected');
+      showAdminBookingDetails(dateStr, bToday);
+    };
+    grid.appendChild(el);
+  }
+}
 
-  window.backupToTelegram = async () => {
-    showLoading(true);
-    let userCount = window.appState.users ? window.appState.users.length : 0;
-    
-    let totalBal = 0;
-    if(window.appState.users) {
-       for(let i=0; i<window.appState.users.length; i++){
-          totalBal += (window.appState.users[i].balance ? window.appState.users[i].balance : 0);
-       }
-    }
-    
-    let txCount = window.appState.transactions ? window.appState.transactions.length : 0;
-    
-    let msg = `📦 <b>Weekly Backup Report</b>\n` +
-              `วันที่: ${new Date().toLocaleString('th-TH')}\n\n` +
-              `👥 จำนวนสมาชิกรวม: ${userCount}\n` +
-              `💰 ยอดเงินออมในระบบรวม: ฿${totalBal.toLocaleString()}\n` +
-              `📋 จำนวนธุรกรรมทั้งหมด: ${txCount}\n\n` +
-              `<i>หมายเหตุ: แอดมินสามารถโหลดข้อมูลแบบละเอียด(Excel) ได้จากระบบหลังบ้าน</i>`;
-    
-    await sendTgMsg(msg);
-    try { localStorage.setItem('goldAppLastBackup', Date.now().toString()); } catch(e){}
-    showToast("ส่ง Backup เข้า Telegram สำเร็จ");
-    setTimeout(() => { showLoading(false); }, 200);
-  };
+function changeAdminMonth(dir) {
+  adminCalMonth += dir;
+  if (adminCalMonth > 11) { adminCalMonth = 0; adminCalYear++; }
+  if (adminCalMonth < 0) { adminCalMonth = 11; adminCalYear--; }
+  renderAdminBookingCalendar();
+  document.getElementById('adminBookingDetailsList').innerHTML = '<p style="font-size:12px;color:var(--gray-400)">-</p>';
+  document.getElementById('adminBookingDetailTitle').textContent = 'กรุณาเลือกวันที่บนปฏิทิน';
+}
 
-  const checkAndRunBackup = () => {
-    let last = null;
-    try { last = localStorage.getItem('goldAppLastBackup'); } catch(e){}
-    const now = Date.now();
-    if(!last || (now - parseInt(last)) > 604800000) {
-       backupToTelegram();
-    }
-  };
+function showAdminBookingDetails(dateStr, bookings) {
+  document.getElementById('adminBookingDetailTitle').textContent = `รายละเอียดการจอง: ${dateStr}`;
+  const list = document.getElementById('adminBookingDetailsList');
+  if (bookings.length === 0) { list.innerHTML = '<p style="font-size:12px;color:var(--gray-400)">ไม่มีการจองในวันนี้</p>'; return; }
+  list.innerHTML = bookings.map(b => `
+    <div class="history-item">
+      <div class="history-dot blue">👤</div>
+      <div class="history-info" style="flex:1">
+        <h4>${b.className} ${b.time !== '-' ? '— ' + b.time : ''}</h4>
+        <p>${b.userName} · โทร: ${b.phone} · ฿${b.price}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
+        <span class="badge ${b.status === 'รอตรวจสอบ' ? 'badge-orange' : 'badge-green'}">${b.status}</span>
+        ${b.slip ? `<button class="btn btn-outline btn-sm" onclick="viewSlip(${b.id})">ดูสลิป</button>` : ''}
+        ${b.status === 'รอตรวจสอบ' ? `<button class="btn btn-success btn-sm" onclick="confirmBookingStatus(${b.id});renderAdminBookingCalendar()">✓ ยืนยัน</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
 
-  document.addEventListener('DOMContentLoaded', initApp);
+function viewSlip(id) {
+  const b = STATE.bookings.find(x => x.id == id);
+  if (b && b.slip) {
+    document.getElementById('modalTitle').textContent = '🖼 หลักฐานการชำระเงิน';
+    document.getElementById('modalBody').innerHTML = `
+      <div style="text-align:center;">
+        <img src="${b.slip}" class="slip-img">
+        <p style="font-size:12px;color:gray;margin-top:8px;">${b.userName} · ${b.className} · ${b.date}</p>
+        ${b.status === 'รอตรวจสอบ' ? `
+          <div style="display:flex;gap:8px;margin-top:12px;">
+            <button class="btn btn-success" style="flex:1;justify-content:center;" onclick="confirmBookingStatus(${b.id});closeModal()">✓ ยืนยัน</button>
+            <button class="btn btn-danger" style="flex:1;justify-content:center;" onclick="rejectBooking(${b.id});closeModal()">✗ ปฏิเสธ</button>
+          </div>` : `<div class="badge badge-green" style="margin-top:10px;font-size:13px;">ยืนยันแล้ว</div>`}
+      </div>`;
+    document.getElementById('modalOverlay').classList.remove('hidden');
+  }
+}
 
+function confirmBookingStatus(id) {
+  const b = STATE.bookings.find(x => x.id === id);
+  if (b) { b.status = 'ยืนยันแล้ว'; saveState(); toast('ยืนยันรายการเรียบร้อย ✅', 'success'); renderAdminTables(); renderPayConfirmList(); }
+}
+
+// =====================================================
+// ADMIN EDIT MEMBER — FIX #1 (ปุ่มแต่งตั้งแอดมิน)
+// =====================================================
+function openEditMember(id) {
+  const u = STATE.users.find(x => x.id === id);
+  const lvlOptions = STATE.settings.levels.map(l => `<option ${u.level === l ? 'selected' : ''}>${l}</option>`).join('');
+
+  let html = `
+    <div class="form-group"><label class="form-label">ระดับสมาชิก</label><select class="form-input" id="editLvl">${lvlOptions}</select></div>
+    <button class="btn btn-primary btn-sm" style="margin-bottom:16px;" onclick="saveMemberLvl(${id})">บันทึกระดับ</button>
+    <div class="section-divider"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <h4 style="font-size:14px;font-weight:700;">จัดการคะแนน</h4>
+      <span style="font-size:12px;color:gray;">ปัจจุบัน: <strong style="color:var(--orange)">${u.points} แต้ม</strong></span>
+    </div>
+    <div class="info-grid" style="margin-bottom:10px;">
+      <select class="form-input" id="ptsAction"><option value="add">+ เพิ่ม</option><option value="deduct">- ลด</option></select>
+      <input type="number" class="form-input" id="ptsAmount" placeholder="จำนวนแต้ม" value="0">
+    </div>
+    <button class="btn btn-outline" style="width:100%;justify-content:center;margin-bottom:16px;" onclick="updatePointsManual(${id})">ยืนยันอัปเดตคะแนน</button>
+    <div class="section-divider"></div>
+    <div style="margin-bottom:10px;">
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">คำนวณแต้มจากยอดชำระ</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="number" class="form-input" id="payAmountCalc" placeholder="ยอดเงิน (บาท)" oninput="document.getElementById('calcPtsResult').textContent=Math.floor(this.value/${STATE.settings.bahtRatio}||0)">
+        <span style="white-space:nowrap;font-size:12px;">= <strong id="calcPtsResult" style="color:var(--orange)">0</strong> แต้ม</span>
+      </div>
+      <button class="btn btn-outline" style="width:100%;justify-content:center;margin-top:8px;" onclick="addPointsFromPay(${id})">เพิ่มแต้มจากยอดชำระ</button>
+    </div>
+  `;
+
+  // FIX #1 — แสดงปุ่มแต่งตั้งแอดมินเฉพาะ Main Admin เท่านั้น
+  if (currentUser.role === 'Main Admin' && u.id !== currentUser.id) {
+    html += `
+      <div class="section-divider"></div>
+      <h4 style="font-size:14px;font-weight:700;color:var(--danger);margin-bottom:10px;">🔐 จัดการสิทธิ์ผู้ใช้</h4>
+      <select class="form-input" id="roleChange" style="margin-bottom:10px;">
+        <option value="Customer" ${u.role==='Customer'?'selected':''}>ลูกค้าปกติ (Customer)</option>
+        <option value="Sub Admin" ${u.role==='Sub Admin'?'selected':''}>แอดมินรอง (Sub Admin)</option>
+        <option value="Main Admin" ${u.role==='Main Admin'?'selected':''}>แอดมินหลัก (Main Admin)</option>
+      </select>
+      <button class="btn btn-danger" style="width:100%;justify-content:center;" onclick="changeUserRole(${id})">
+        🔐 แต่งตั้ง / เปลี่ยนสิทธิ์
+      </button>
+    `;
+  }
+
+  document.getElementById('modalTitle').textContent = `จัดการลูกค้า: ${u.name}`;
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function updatePointsManual(id) {
+  const u = STATE.users.find(x => x.id === id);
+  const action = document.getElementById('ptsAction').value;
+  let amt = parseInt(document.getElementById('ptsAmount').value || 0);
+  if (amt <= 0) return toast('กรุณาใส่ตัวเลขให้ถูกต้อง', 'error');
+  if (action === 'deduct') amt = -amt;
+  u.points += amt;
+  if (u.id === currentUser.id) currentUser.points += amt;
+  checkAutoLevelUp(u);
+  saveState(); renderAdminTables();
+  toast(`${amt > 0 ? 'เพิ่ม' : 'ลด'} ${Math.abs(amt)} แต้มให้ ${u.name} เรียบร้อย`, 'success');
+  openEditMember(id);
+}
+
+function addPointsFromPay(id) {
+  const u = STATE.users.find(x => x.id === id);
+  const baht = parseInt(document.getElementById('payAmountCalc').value || 0);
+  if (baht <= 0) return toast('กรุณาใส่ยอดชำระที่ถูกต้อง', 'error');
+  const pts = Math.floor(baht / STATE.settings.bahtRatio);
+  u.points += pts;
+  if (u.id === currentUser.id) currentUser.points += pts;
+  checkAutoLevelUp(u);
+  saveState(); renderAdminTables();
+  toast(`ยอด ฿${baht} = +${pts} แต้ม`, 'success');
+  openEditMember(id);
+}
+
+function changeUserRole(id) {
+  const u = STATE.users.find(x => x.id === id);
+  const newRole = document.getElementById('roleChange').value;
+  u.role = newRole;
+  saveState(); renderAdminTables();
+  toast(`เปลี่ยนสิทธิ์ ${u.name} เป็น ${newRole} เรียบร้อย`, 'success');
+  closeModal();
+}
+
+function saveMemberLvl(id) {
+  const u = STATE.users.find(x => x.id === id);
+  u.level = document.getElementById('editLvl').value;
+  saveState(); renderAdminTables();
+  toast('บันทึกระดับสมาชิกเรียบร้อย', 'success');
+}
+
+// Add member directly
+function openAddDirectMemberModal() {
+  document.getElementById('modalTitle').textContent = '➕ เพิ่มสมาชิกใหม่';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="info-grid">
+      <div class="form-group"><label class="form-label">ชื่อ</label><input class="form-input" id="dmFirst" placeholder="ชื่อ"></div>
+      <div class="form-group"><label class="form-label">นามสกุล</label><input class="form-input" id="dmLast" placeholder="นามสกุล"></div>
+    </div>
+    <div class="form-group"><label class="form-label">อีเมล</label><input class="form-input" id="dmEmail" placeholder="email@example.com"></div>
+    <div class="form-group"><label class="form-label">เบอร์โทร</label><input class="form-input" id="dmPhone" placeholder="08x-xxx-xxxx"></div>
+    <div class="form-group"><label class="form-label">รหัสผ่าน</label><input type="password" class="form-input" id="dmPass" placeholder="ตั้งรหัสผ่าน"></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="saveDirectMember()">บันทึกสมาชิก</button>
+  `;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function saveDirectMember() {
+  const name = (document.getElementById('dmFirst').value + ' ' + document.getElementById('dmLast').value).trim();
+  const email = document.getElementById('dmEmail').value.trim();
+  const phone = document.getElementById('dmPhone').value.trim();
+  const pass = document.getElementById('dmPass').value;
+  if (!name || !email) return toast('กรุณากรอกข้อมูลให้ครบ', 'error');
+  if (STATE.users.find(u => u.email === email)) return toast('อีเมลนี้ถูกใช้แล้ว', 'error');
+  STATE.users.push({ id: Date.now(), name, email, phone, pass: pass || '1234', role: 'Customer', points: STATE.settings.autoPoints, level: STATE.settings.levels[0], avatar: null });
+  saveState(); renderAdminTables();
+  toast('เพิ่มสมาชิกเรียบร้อย ✅', 'success'); closeModal();
+}
+
+// =====================================================
+// ADMIN CRUD — Class, Package, Reward, Promo, Admin
+// =====================================================
+function openClassModal(editId = null) {
+  let c = { name:'', trainer:'', slots:'', duration:'', price: 0 };
+  if (editId) c = STATE.classes.find(x => x.id === editId);
+  document.getElementById('modalTitle').textContent = editId ? 'แก้ไขคลาส' : 'เพิ่มคลาสใหม่';
+  document.getElementById('modalBody').innerHTML = `
+    <input type="hidden" id="clsId" value="${editId || ''}">
+    <div class="form-group"><label class="form-label">ชื่อคลาส</label><input class="form-input" id="clsName" value="${c.name}"></div>
+    <div class="form-group"><label class="form-label">เทรนเนอร์</label><input class="form-input" id="clsTrainer" value="${c.trainer}"></div>
+    <div class="info-grid">
+      <div class="form-group"><label class="form-label">เวลา (คั่นด้วย ,)</label><input class="form-input" id="clsSlots" value="${c.slots}" placeholder="09:00, 14:00"></div>
+      <div class="form-group"><label class="form-label">ระยะเวลา</label><input class="form-input" id="clsDuration" value="${c.duration||''}" placeholder="60 นาที"></div>
+    </div>
+    <div class="form-group"><label class="form-label">ราคา (บาท)</label><input type="number" class="form-input" id="clsPrice" value="${c.price}"></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="saveClass()">💾 บันทึก</button>
+  `;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function saveClass() {
+  const idStr = document.getElementById('clsId').value;
+  const obj = { name: document.getElementById('clsName').value, trainer: document.getElementById('clsTrainer').value, slots: document.getElementById('clsSlots').value, duration: document.getElementById('clsDuration').value, price: parseInt(document.getElementById('clsPrice').value || 0) };
+  if (idStr) { Object.assign(STATE.classes.find(x => x.id === parseInt(idStr)), obj); toast('แก้ไขคลาสสำเร็จ', 'success'); }
+  else { STATE.classes.push({ id: Date.now(), ...obj }); toast('เพิ่มคลาสสำเร็จ', 'success'); }
+  renderAdminTables(); renderClassTypes(); saveState(); closeModal();
+}
+
+function deleteClass(id) {
+  if (confirm('ต้องการลบคลาสนี้?')) { STATE.classes = STATE.classes.filter(x => x.id !== id); renderAdminTables(); renderClassTypes(); saveState(); toast('ลบแล้ว', 'error'); }
+}
+
+function openPackageModal(editId = null) {
+  let p = { name:'', price: 0, note:'' };
+  if (editId) p = STATE.packages.find(x => x.id === editId);
+  document.getElementById('modalTitle').textContent = editId ? 'แก้ไขแพ็กเกจ' : 'เพิ่มแพ็กเกจใหม่';
+  document.getElementById('modalBody').innerHTML = `
+    <input type="hidden" id="pkgId" value="${editId || ''}">
+    <div class="form-group"><label class="form-label">ชื่อแพ็กเกจ</label><input class="form-input" id="pkgName" value="${p.name}"></div>
+    <div class="form-group"><label class="form-label">ราคา</label><input type="number" class="form-input" id="pkgPrice" value="${p.price}"></div>
+    <div class="form-group"><label class="form-label">รายละเอียด</label><textarea class="form-input" id="pkgNote" rows="3">${p.note}</textarea></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="savePackage()">💾 บันทึก</button>
+  `;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function savePackage() {
+  const idStr = document.getElementById('pkgId').value;
+  const obj = { name: document.getElementById('pkgName').value, price: parseInt(document.getElementById('pkgPrice').value || 0), note: document.getElementById('pkgNote').value };
+  if (idStr) { Object.assign(STATE.packages.find(x => x.id === parseInt(idStr)), obj); toast('แก้ไขแพ็กเกจสำเร็จ', 'success'); }
+  else { STATE.packages.push({ id: Date.now(), ...obj }); toast('เพิ่มแพ็กเกจสำเร็จ', 'success'); }
+  renderAdminTables(); renderCustomerPackages(); saveState(); closeModal();
+}
+
+function deletePackage(id) {
+  if (confirm('ต้องการลบแพ็กเกจนี้?')) { STATE.packages = STATE.packages.filter(x => x.id !== id); renderAdminTables(); saveState(); toast('ลบแล้ว', 'error'); }
+}
+
+function openRewardModal() {
+  document.getElementById('modalTitle').textContent = 'เพิ่มของรางวัล';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="info-grid">
+      <div class="form-group"><label class="form-label">ชื่อรางวัล</label><input class="form-input" id="rwdName"></div>
+      <div class="form-group"><label class="form-label">ไอคอน (Emoji)</label><input class="form-input" id="rwdIcon" value="🎁"></div>
+    </div>
+    <div class="info-grid">
+      <div class="form-group"><label class="form-label">คะแนนแลก</label><input type="number" class="form-input" id="rwdPts" value="0"></div>
+      <div class="form-group"><label class="form-label">จำนวน</label><input type="number" class="form-input" id="rwdStock" value="10"></div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:10px;" onclick="saveReward()">💾 บันทึก</button>
+  `;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function saveReward() {
+  STATE.rewards.push({ id: Date.now(), name: document.getElementById('rwdName').value, icon: document.getElementById('rwdIcon').value || '🎁', points: parseInt(document.getElementById('rwdPts').value || 0), stock: parseInt(document.getElementById('rwdStock').value || 0) });
+  renderAdminTables(); saveState(); toast('เพิ่มของรางวัลสำเร็จ', 'success'); closeModal();
+}
+
+function deleteReward(id) {
+  if (confirm('ต้องการลบของรางวัลนี้?')) { STATE.rewards = STATE.rewards.filter(x => x.id !== id); renderAdminTables(); saveState(); toast('ลบแล้ว', 'error'); }
+}
+
+function openPromoModal() {
+  document.getElementById('modalTitle').textContent = 'สร้างโปรโมชั่น';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-group"><label class="form-label">ชื่อโปรโมชั่น</label><input class="form-input" id="proName"></div>
+    <div class="info-grid">
+      <div class="form-group"><label class="form-label">วันหมดอายุ</label><input type="date" class="form-input" id="proExp"></div>
+      <div class="form-group"><label class="form-label">ใช้แต้มแลก</label><input type="number" class="form-input" id="proPts" value="0"></div>
+    </div>
+    <div class="info-grid">
+      <div class="form-group"><label class="form-label">จำกัดรวม</label><input type="number" class="form-input" id="proTotal" value="100"></div>
+      <div class="form-group"><label class="form-label">ต่อวัน (ระบบ)</label><input type="number" class="form-input" id="proDay" value="10"></div>
+    </div>
+    <div class="form-group"><label class="form-label">แสดงหน้าลูกค้า</label>
+      <select class="form-input" id="proShow"><option value="true">แสดง</option><option value="false">ซ่อน</option></select>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:10px;" onclick="savePromo()">💾 บันทึก</button>
+  `;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function savePromo() {
+  STATE.promotions.push({ id: Date.now(), name: document.getElementById('proName').value, exp: document.getElementById('proExp').value, pointsReq: parseInt(document.getElementById('proPts').value || 0), proTotalLimit: parseInt(document.getElementById('proTotal').value || 0), proPerTxDay: parseInt(document.getElementById('proDay').value || 0), show: document.getElementById('proShow').value === 'true' });
+  renderAdminTables(); saveState(); toast('สร้างโปรโมชั่นสำเร็จ', 'success'); closeModal();
+}
+
+function openAddAdminModal() {
+  document.getElementById('modalTitle').textContent = '+ เพิ่มแอดมิน';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-group"><label class="form-label">ชื่อ-นามสกุล</label><input class="form-input" id="admName"></div>
+    <div class="form-group"><label class="form-label">อีเมล</label><input class="form-input" id="admEmail"></div>
+    <div class="form-group"><label class="form-label">รหัสผ่าน</label><input type="password" class="form-input" id="admPass"></div>
+    <div class="form-group"><label class="form-label">สิทธิ์</label>
+      <select class="form-input" id="admRole"><option value="Sub Admin">แอดมินรอง (Sub Admin)</option><option value="Main Admin">แอดมินหลัก (Main Admin)</option></select>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="saveNewAdmin()">💾 บันทึก</button>
+  `;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function saveNewAdmin() {
+  const name = document.getElementById('admName').value;
+  const email = document.getElementById('admEmail').value;
+  const pass = document.getElementById('admPass').value;
+  const role = document.getElementById('admRole').value;
+  if (!name || !email || !pass) return toast('กรุณากรอกข้อมูลให้ครบ', 'error');
+  if (STATE.users.find(u => u.email === email)) return toast('อีเมลนี้ถูกใช้แล้ว', 'error');
+  STATE.users.push({ id: Date.now(), name, email, phone: '-', pass, role, points: 0, level: 'Admin', avatar: null });
+  renderAdminTables(); saveState(); toast('เพิ่มแอดมินสำเร็จ', 'success'); closeModal();
+}
+
+function deleteAdmin(id) {
+  if (confirm('ต้องการลบแอดมินท่านนี้?')) { STATE.users = STATE.users.filter(u => u.id !== id); renderAdminTables(); saveState(); toast('ลบแอดมินแล้ว', 'error'); }
+}
+
+// =====================================================
+// SETTINGS
+// =====================================================
+function setSettingsTab(btn, targetId) {
+  document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active')); btn.classList.add('active');
+  ['setSys','setNotif','setAdmins'].forEach(id => { const el = document.getElementById(id); if(el) el.classList.toggle('hidden', id !== targetId); });
+}
+
+function saveSystemSettings() {
+  STATE.settings.allowSameOverlap = document.getElementById('cfgSameOverlap').checked;
+  STATE.settings.allowDiffOverlap = document.getElementById('cfgDiffOverlap').checked;
+  STATE.settings.autoPoints = parseInt(document.getElementById('cfgAutoPoints').value || 0);
+  STATE.settings.bahtRatio = parseInt(document.getElementById('cfgBahtRatio').value || 10);
+  STATE.settings.levels = [document.getElementById('cfgLvl1').value || 'Basic', document.getElementById('cfgLvl2').value || 'Gold', document.getElementById('cfgLvl3').value || 'Diamond'];
+  STATE.settings.levelPoints = [0, parseInt(document.getElementById('cfgLvl2Pts').value || 1000), parseInt(document.getElementById('cfgLvl3Pts').value || 5000)];
+  STATE.users.forEach(u => { if (u.role === 'Customer') checkAutoLevelUp(u); });
+  saveState(); toast('บันทึกตั้งค่าระบบเรียบร้อย ✅', 'success');
+}
+
+function saveStoreSettings() {
+  STATE.settings.storeName = document.getElementById('stName').value;
+  STATE.settings.phone = document.getElementById('stPhone').value;
+  STATE.settings.line = document.getElementById('stLine').value;
+  STATE.settings.link = document.getElementById('stLink').value;
+  applyStoreConfigUI(); saveState(); toast('บันทึกหน้าร้านเรียบร้อย ✅', 'success');
+}
+
+function savePaySettings() {
+  STATE.settings.payBankName = document.getElementById('payBankNameInp').value;
+  STATE.settings.payAccName = document.getElementById('payAccNameInp').value;
+  STATE.settings.payAccNo = document.getElementById('payAccNoInp').value;
+  applyStoreConfigUI(); saveState(); toast('บันทึกการชำระเงินเรียบร้อย ✅', 'success');
+}
+
+function handleLogoUpload(event) {
+  const file = event.target.files[0];
+  if (file) { const r = new FileReader(); r.onload = e => { STATE.settings.storeLogo = e.target.result; applyStoreConfigUI(); saveState(); toast('อัปโหลดโลโก้สำเร็จ', 'success'); }; r.readAsDataURL(file); }
+}
+
+function handleQRUpload(event) {
+  const file = event.target.files[0];
+  if (file) { const r = new FileReader(); r.onload = e => { STATE.settings.payQR = e.target.result; applyStoreConfigUI(); saveState(); toast('อัปโหลด QR สำเร็จ', 'success'); }; r.readAsDataURL(file); }
+}
+
+function applyStoreConfigUI() {
+  const s = STATE.settings;
+  // Topbar & Login logo
+  const topEl = document.getElementById('dispStoreName');
+  const loginEl = document.getElementById('dispLoginLogo');
+  if (topEl) topEl.innerHTML = s.storeLogo ? `<img src="${s.storeLogo}" alt="logo"> ${s.storeName}` : `KID <span>SPORT</span>`;
+  if (loginEl) loginEl.innerHTML = s.storeLogo ? `<h1><img src="${s.storeLogo}" alt="logo"> ${s.storeName}</h1>` : `<h1>KID <span>SPORT</span></h1><p>Strong Body · Bright Future</p>`;
+  // Contact bar
+  ['dispPhone','dispLine'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = id === 'dispPhone' ? s.phone : s.line; });
+  const lnk = document.getElementById('dispLink'); if (lnk) lnk.href = s.link;
+  // Payment info
+  ['dispPayBankName','dispPayAccName','dispPayAccNo'].forEach((id, i) => {
+    const el = document.getElementById(id); if (!el) return;
+    el.textContent = [s.payBankName, `ชื่อบัญชี: ${s.payAccName}`, `เลขบัญชี: ${s.payAccNo}`][i];
+  });
+  const qrEl = document.getElementById('dispPayQR'); if (qrEl) qrEl.innerHTML = s.payQR ? `<img src="${s.payQR}">` : '📲';
+  // Settings inputs
+  const ids = ['cfgSameOverlap','cfgDiffOverlap','cfgAutoPoints','cfgBahtRatio','cfgLvl1','cfgLvl2','cfgLvl3','cfgLvl2Pts','cfgLvl3Pts','stName','stPhone','stLine','stLink','payBankNameInp','payAccNameInp','payAccNoInp'];
+  const vals = [s.allowSameOverlap,s.allowDiffOverlap,s.autoPoints,s.bahtRatio,s.levels[0],s.levels[1],s.levels[2],s.levelPoints[1],s.levelPoints[2],s.storeName,s.phone,s.line,s.link,s.payBankName,s.payAccName,s.payAccNo];
+  ids.forEach((id, i) => {
+    const el = document.getElementById(id); if (!el) return;
+    if (el.type === 'checkbox') el.checked = vals[i]; else el.value = vals[i];
+  });
+}
+
+// =====================================================
+// EXPORT CSV
+// =====================================================
+function downloadExcel() {
+  let csv = 'data:text/csv;charset=utf-8,\uFEFFID,Name,Email,Phone,Role,Level,Points\n';
+  STATE.users.forEach(u => { csv += `${u.id},${u.name},${u.email},${u.phone},${u.role},${u.level},${u.points}\n`; });
+  const a = document.createElement('a'); a.href = encodeURI(csv); a.download = 'KidSport_Customers.csv'; document.body.appendChild(a); a.click(); a.remove();
+  toast('ดาวน์โหลด Export เรียบร้อย', 'success');
+}
+
+function downloadBookingsExcel() {
+  let csv = 'data:text/csv;charset=utf-8,\uFEFFID,Name,Class,Date,Time,Price,Status\n';
+  STATE.bookings.forEach(b => { csv += `${b.id},${b.userName},${b.className},${b.date},${b.time},${b.price},${b.status}\n`; });
+  const a = document.createElement('a'); a.href = encodeURI(csv); a.download = 'KidSport_Bookings.csv'; document.body.appendChild(a); a.click(); a.remove();
+  toast('ดาวน์โหลด Export เรียบร้อย', 'success');
+}
+
+// =====================================================
+// TELEGRAM
+// =====================================================
+const TG_TOKEN = '8787590241:AAFmUMT2LxSguqb69m7U0cy2Ew4NluuvVAE';
+const TG_CHAT_ID = '-1003968669934';
+function sendTelegram(msg) {
+  fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(msg)}`)
+    .then(() => toast('ส่ง Telegram เรียบร้อย ✅', 'success')).catch(() => toast('Telegram Error', 'error'));
+}
+function testTelegram() { sendTelegram(`🔔 [KidSport Test]\nทดสอบระบบแจ้งเตือน\nเวลา: ${new Date().toLocaleString('th-TH')}`); }
+function forceBackup() { sendTelegram(`💾 [KidSport Backup]\nสมาชิก: ${STATE.users.length} คน\nการจอง: ${STATE.bookings.length} รายการ\nรอตรวจสอบ: ${STATE.bookings.filter(b=>b.status==='รอตรวจสอบ').length} รายการ`); }
+
+// =====================================================
+// UTILS
+// =====================================================
+function selectPayment(el) {
+  document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
+
+function toast(msg, type = 'info') {
+  const c = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast ' + (type === 'success' ? 'success' : type === 'error' ? 'error' : '');
+  el.innerText = msg; c.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateX(60px)'; el.style.transition = '.3s'; setTimeout(() => el.remove(), 300); }, 3000);
+}
+
+// Init calendar on booking page show
+const _origShowPage = showPage;
 </script>
 </body>
 </html>
